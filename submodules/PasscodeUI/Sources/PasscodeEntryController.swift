@@ -58,13 +58,16 @@ public final class PasscodeEntryController: ViewController {
     private var inBackground: Bool = false
     private var inBackgroundDisposable: Disposable?
     
-    public init(applicationBindings: TelegramApplicationBindings, accountManager: AccountManager, appLockContext: AppLockContext, presentationData: PresentationData, presentationDataSignal: Signal<PresentationData, NoError>, challengeData: PostboxAccessChallengeData, biometrics: PasscodeEntryControllerBiometricsMode, arguments: PasscodeEntryControllerPresentationArguments) {
+    private let hiddenAccountsAccessChallengeData: [AccountRecordId:PostboxAccessChallengeData]
+    
+    public init(applicationBindings: TelegramApplicationBindings, accountManager: AccountManager, appLockContext: AppLockContext, presentationData: PresentationData, presentationDataSignal: Signal<PresentationData, NoError>, challengeData: PostboxAccessChallengeData, hiddenAccountsAccessChallengeData: [AccountRecordId:PostboxAccessChallengeData], biometrics: PasscodeEntryControllerBiometricsMode, arguments: PasscodeEntryControllerPresentationArguments) {
         self.applicationBindings = applicationBindings
         self.accountManager = accountManager
         self.appLockContext = appLockContext
         self.presentationData = presentationData
         self.presentationDataSignal = presentationDataSignal
         self.challengeData = challengeData
+        self.hiddenAccountsAccessChallengeData = hiddenAccountsAccessChallengeData
         self.biometrics = biometrics
         self.arguments = arguments
         
@@ -139,19 +142,45 @@ public final class PasscodeEntryController: ViewController {
             strongSelf.controllerNode.updateInvalidAttempts(attempts)
         })
         
+        func check(passcode: String, challengeData: PostboxAccessChallengeData) -> Bool {
+            switch challengeData {
+            case .none:
+                return true
+            case let .numericalPassword(code):
+                return passcode == normalizeArabicNumeralString(code, type: .western)
+            case let .plaintextPassword(code):
+                return passcode == code
+            }
+        }
+        
+        self.controllerNode.didEnter4Digits = { [weak self] passcode, completion in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            for (id, challengeData) in strongSelf.hiddenAccountsAccessChallengeData {
+                if check(passcode: passcode, challengeData: challengeData) {
+                    completion()
+                    break
+                }
+            }
+        }
+        
         self.controllerNode.checkPasscode = { [weak self] passcode in
             guard let strongSelf = self else {
                 return
             }
-    
-            var succeed = false
-            switch strongSelf.challengeData {
-                case .none:
-                    succeed = true
-                case let .numericalPassword(code):
-                    succeed = passcode == normalizeArabicNumeralString(code, type: .western)
-                case let .plaintextPassword(code):
-                    succeed = passcode == code
+            
+            var succeed = check(passcode: passcode, challengeData: strongSelf.challengeData)
+            
+            if !succeed {
+                for (id, challengeData) in strongSelf.hiddenAccountsAccessChallengeData {
+                    if check(passcode: passcode, challengeData: challengeData) {
+                        strongSelf.appLockContext.unlockedHiddenAccountRecordId.set(id)
+                        succeed = true
+                        break
+                    }
+                }
             }
             
             if succeed {

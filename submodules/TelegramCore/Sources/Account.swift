@@ -74,6 +74,8 @@ public class UnauthorizedAccount {
     
     public let shouldBeServiceTaskMaster = Promise<AccountServiceTaskMasterMode>()
     
+    public var continueFalseBottomFlowAccountRecordId: AccountRecordId?
+    
     init(networkArguments: NetworkInitializationArguments, id: AccountRecordId, rootPath: String, basePath: String, testingEnvironment: Bool, postbox: Postbox, network: Network, shouldKeepAutoConnection: Bool = true) {
         self.networkArguments = networkArguments
         self.id = id
@@ -284,6 +286,32 @@ public func accountWithId(accountManager: AccountManager, networkArguments: Netw
                 }
         }
     }
+}
+
+public func setAccountRecordAccessChallengeData(transaction: AccountManagerModifier, id: AccountRecordId, accessChallengeData: PostboxAccessChallengeData) {
+    transaction.updateRecord(id) { record in
+        guard let record = record else { return nil }
+        
+        var attributes = record.attributes
+        let isHidden = accessChallengeData != .none
+        let wasHidden = attributes.contains { $0 is HiddenAccountAttribute } ?? false
+        if wasHidden, !isHidden {
+            attributes.removeAll { $0 is HiddenAccountAttribute }
+        } else if !wasHidden, isHidden {
+            attributes.append(HiddenAccountAttribute(accessChallengeData: accessChallengeData))
+        }
+        return AccountRecord(id: id, attributes: attributes, temporarySessionId: record.temporarySessionId)
+    }
+}
+
+public func changeChatsAndChannelsNotifications(unmute: Bool, atAccount account: Account) {
+    let _ = updateGlobalNotificationSettingsInteractively(postbox: account.postbox, { settings in
+        var settings = settings
+        settings.privateChats.enabled = unmute
+        settings.groupChats.enabled = unmute
+        settings.channels.enabled = unmute
+        return settings
+    }).start()
 }
 
 public enum TwoStepPasswordDerivation {

@@ -544,7 +544,8 @@ public final class SharedAccountContextImpl: SharedAccountContext {
                 }
                 
                 if self.activeAccountsValue!.primary == nil && self.activeAccountsValue!.currentAuth == nil {
-                    self.beginNewAuth(testingEnvironment: false)
+                    // TODO: -- only for development, change to false
+                    self.beginNewAuth(testingEnvironment: true)
                 }
             }))
         })
@@ -867,7 +868,22 @@ public final class SharedAccountContextImpl: SharedAccountContext {
         }).start()
     }
     
+    public func beginNewAuthAndContinueFalseBottomFlow(testingEnvironment: Bool) {
+        let _ = self.accountManager.transaction({ transaction -> Void in
+            var attributes: [AccountRecordAttribute] = [AccountEnvironmentAttribute(environment: testingEnvironment ? .test : .production)]
+            if let accountRecordId = transaction.getCurrent()?.0 {
+                attributes.append(ContinueFalseBottomFlowAttribute(accountRecordId: accountRecordId))
+            }
+            let _ = transaction.createAuth(attributes)
+        }).start()
+    }
+    
     public func switchToAccount(id: AccountRecordId, fromSettingsController settingsController: ViewController? = nil, withChatListController chatListController: ViewController? = nil) {
+        
+        if let unlockedHiddenAccountRecordId = accountManager.displayedAccountsFilter.unlockedHiddenAccountRecordId, unlockedHiddenAccountRecordId != id {
+            appLockContext.unlockedHiddenAccountRecordId.set(nil)
+        }
+        
         if self.activeAccountsValue?.primary?.id == id {
             return
         }

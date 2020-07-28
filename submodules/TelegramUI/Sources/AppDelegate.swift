@@ -39,6 +39,8 @@ import PresentationDataUtils
 import TelegramIntents
 import AccountUtils
 import CoreSpotlight
+import PasscodeUI
+import LocalAuth
 
 #if canImport(BackgroundTasks)
 import BackgroundTasks
@@ -199,6 +201,8 @@ final class SharedApplicationContext {
     private let openNotificationSettingsWhenReadyDisposable = MetaDisposable()
     private let openChatWhenReadyDisposable = MetaDisposable()
     private let openUrlWhenReadyDisposable = MetaDisposable()
+    private let showFalseBottomAlertDisposable = MetaDisposable()
+    private let continueFalseBottomFlowDisposable = MetaDisposable()
     
     private let badgeDisposable = MetaDisposable()
     private let quickActionsDisposable = MetaDisposable()
@@ -669,8 +673,9 @@ final class SharedApplicationContext {
             }
         })
         
+        let displayedAccountsFilter = DisplayedAccountsFilterImpl()
         let accountManagerSignal = Signal<AccountManager, NoError> { subscriber in
-            let accountManager = AccountManager(basePath: rootPath + "/accounts-metadata")
+            let accountManager = AccountManager(basePath: rootPath + "/accounts-metadata", displayedAccountsFilter: displayedAccountsFilter)
             return (upgradedAccounts(accountManager: accountManager, rootPath: rootPath, encryptionParameters: encryptionParameters)
             |> deliverOnMainQueue).start(next: { progress in
                 if self.dataImportSplash == nil {
@@ -688,6 +693,7 @@ final class SharedApplicationContext {
                         self.mainWindow.coveringView = nil
                     }
                 }
+                updateHiddenAccountsAccessChallengeData(manager: accountManager)
                 subscriber.putNext(accountManager)
                 subscriber.putCompletion()
             })
@@ -782,9 +788,11 @@ final class SharedApplicationContext {
             let legacyCache = LegacyCache(path: legacyBasePath + "/Caches")
             
             let presentationDataPromise = Promise<PresentationData>()
-            let appLockContext = AppLockContextImpl(rootPath: rootPath, window: self.mainWindow!, rootController: self.window?.rootViewController, applicationBindings: applicationBindings, accountManager: accountManager, presentationDataSignal: presentationDataPromise.get(), lockIconInitialFrame: {
+            let appLockContext = AppLockContextImpl(rootPath: rootPath, window: self.mainWindow!, rootController: self.window?.rootViewController, applicationBindings: applicationBindings, accountManager: accountManager, presentationDataSignal: presentationDataPromise.get(), displayedAccountsFilter: displayedAccountsFilter, applicationIsActive: self.isActivePromise.get(), lockIconInitialFrame: {
                 return (self.mainWindow?.viewController as? TelegramRootController)?.chatListController?.lockViewFrame
             })
+            
+            displayedAccountsFilter.unlockedHiddenAccountRecordIdPromise.set(appLockContext.unlockedHiddenAccountRecordId.get())
             
             var setPresentationCall: ((PresentationCall?) -> Void)?
             let sharedContext = SharedAccountContextImpl(mainWindow: self.mainWindow, basePath: rootPath, encryptionParameters: encryptionParameters, accountManager: accountManager, appLockContext: appLockContext, applicationBindings: applicationBindings, initialPresentationDataAndSettings: initialPresentationDataAndSettings, networkArguments: networkArguments, rootPath: rootPath, legacyBasePath: legacyBasePath, legacyCache: legacyCache, apsNotificationToken: self.notificationTokenPromise.get() |> map(Optional.init), voipNotificationToken: self.voipTokenPromise.get() |> map(Optional.init), setNotificationCall: { call in
@@ -1202,9 +1210,16 @@ final class SharedApplicationContext {
                     }
                     |> take(1)
                     |> timeout(4.0, queue: .mainQueue(), alternate: .complete())
-                    |> deliverOnMainQueue).start(completed: {
+                    |> deliverOnMainQueue).start(completed: { [weak self] in
                         authContextValue.rootController.view.endEditing(true)
                         authContextValue.rootController.dismiss()
+                        if let strongSelf = self {
+                            if let accountRecordId = authContextValue.account.continueFalseBottomFlowAccountRecordId {
+                                strongSelf.continueFalseBottomFlow(hideAccountWithId: accountRecordId)
+                            } else {
+                                strongSelf.showFalseBottomAlert()
+                            }
+                        }
                     })
                 } else {
                     authContextValue.rootController.view.endEditing(true)
@@ -1305,7 +1320,16 @@ final class SharedApplicationContext {
                     return activeAccountsAndPeers(context: context.context)
                     |> take(1)
                     |> map { primaryAndAccounts -> (Account, Peer, Int32)? in
-                        return primaryAndAccounts.1.first
+                        let accounts = primaryAndAccounts.1
+                        if context.context.sharedContext.appLockContext.unlockedHiddenAccountRecordId != nil {
+                            if accounts.count > 1 {
+                                return accounts.first
+                            } else {
+                                return nil
+                            }
+                        } else {
+                            return accounts.first
+                        }
                     }
                     |> map { accountAndPeer -> String? in
                         if let (_, peer, _) = accountAndPeer {
@@ -1986,6 +2010,188 @@ final class SharedApplicationContext {
         }))
     }
     
+    private func showFalseBottomAlert() {
+        self.showFalseBottomAlertDisposable.set((self.authorizedContext()
+        |> take(1)
+        |> delay(1.0, queue: .mainQueue())).start(next: { context in
+            let presentationData = context.context.sharedContext.currentPresentationData.with { $0 }
+            
+            let replaceTopControllerImpl: (ViewController, Bool) -> Void = { c, animated in
+                context.rootController.replaceTopController(c, animated: animated)
+            }
+            
+            let showSplashScreen: (FalseBottomSplashMode, Bool, @escaping () -> Void) -> Void = { mode, push, action in
+                let presentationData = context.context.sharedContext.currentPresentationData.with { $0 }
+                let controller = FalseBottomSplashScreen(presentationData: presentationData, mode: mode)
+                controller.buttonPressed = action
+                if push {
+                    context.rootController.pushViewController(controller, animated: true)
+                } else {
+                    replaceTopControllerImpl(controller, true)
+                }
+            }
+            
+            let showOtherAccountScreenIfNeeded: (@escaping () -> Void) -> Void = { completion in
+                let checkOtherAccounts: (@escaping (Bool) -> Void) -> Void = { completion in
+                    let _ = (context.sharedApplicationContext.sharedContext.accountManager.transaction { transaction -> Bool in
+                        return transaction.getRecords().count > 1
+                    } |> deliverOnMainQueue).start(next: { result in
+                        completion(result)
+                    })
+                }
+                
+                checkOtherAccounts({ hasOtherAccounts in
+                    if hasOtherAccounts {
+                        completion()
+                    } else {
+                        showSplashScreen(.addOneMoreAccount, true, {
+                            let isTestingEnvironment = context.context.account.testingEnvironment
+                            context.sharedApplicationContext.sharedContext.beginNewAuthAndContinueFalseBottomFlow(testingEnvironment: isTestingEnvironment)
+                        })
+                    }
+                })
+            }
+                                                         
+            context.rootController.chatListController?.present(UndoOverlayController(presentationData: presentationData, content: .falseBottom(title: presentationData.strings.FalseBottom_Toast_HideAccount, cancel: presentationData.strings.Common_Cancel), elevatedLayout: true, animateInAsReplacement: false, action: { value in
+                    guard value != .undo else { return false }
+                
+                    showSplashScreen(.hideAccount, true, {
+                        showOtherAccountScreenIfNeeded { [weak self] in
+                            guard let strongSelf = self else { return }
+                            
+                            strongSelf.continueFalseBottomFlow()
+                        }
+                    })
+                    return true
+                }
+            ), in: .window(.root))
+        }))
+    }
+    
+    private func continueFalseBottomFlow(hideAccountWithId: AccountRecordId? = nil) {
+        self.continueFalseBottomFlowDisposable.set((self.authorizedContext()
+        |> take(1)
+        |> deliverOnMainQueue).start(next: { context in
+            let presentationData = context.context.sharedContext.currentPresentationData.with { $0 }
+            
+            let replaceTopControllerImpl: (ViewController, Bool) -> Void = { c, animated in
+                context.rootController.replaceTopController(c, animated: animated)
+            }
+            
+            let showSplashScreen: (FalseBottomSplashMode, Bool, @escaping () -> Void) -> Void = { mode, push, action in
+                let presentationData = context.context.sharedContext.currentPresentationData.with { $0 }
+                let controller = FalseBottomSplashScreen(presentationData: presentationData, mode: mode)
+                controller.buttonPressed = action
+                if push {
+                    context.rootController.pushViewController(controller, animated: true)
+                } else {
+                    replaceTopControllerImpl(controller, true)
+                }
+            }
+                
+            let showMasterPasscodeScreenIfNeeded: (@escaping () -> Void) -> Void = { completion in
+                let checkMasterPassode: (@escaping (Bool) -> Void) -> Void = { completion in
+                    let _ = (context.sharedApplicationContext.sharedContext.accountManager.transaction { transaction -> Bool in
+                        return transaction.getAccessChallengeData() != .none
+                    } |> deliverOnMainQueue).start(next: { result in
+                        completion(result)
+                    })
+                }
+                
+                let setupMasterPasscode: (@escaping () -> Void) -> Void = { innerCompletion in
+                    let accountContext = context.sharedApplicationContext.sharedContext
+                    let setupController = PasscodeSetupController(context: accountContext, mode: .setup(change: false, .digits6))
+                    setupController.complete = { passcode, numerical in
+                        let _ = (accountContext.accountManager.transaction({ transaction -> Void in
+                            var data = transaction.getAccessChallengeData()
+                            if numerical {
+                                data = PostboxAccessChallengeData.numericalPassword(value: passcode)
+                            } else {
+                                data = PostboxAccessChallengeData.plaintextPassword(value: passcode)
+                            }
+                            
+                            transaction.setAccessChallengeData(data)
+                            
+                            updatePresentationPasscodeSettingsInternal(transaction: transaction, { $0.withUpdatedAutolockTimeout(1 * 60 * 60).withUpdatedBiometricsDomainState(LocalAuth.evaluatedPolicyDomainState) })
+                        }) |> deliverOnMainQueue).start(next: { _ in
+                        }, error: { _ in
+                        }, completed: {
+                            innerCompletion()
+                        })
+                    }
+                    context.rootController.pushViewController(setupController, animated: true)
+                }
+                
+                checkMasterPassode({ isMasterPasscodeSet in
+                    if isMasterPasscodeSet {
+                        completion()
+                    } else {
+                        showSplashScreen(.setMasterPasscode, true, {
+                            setupMasterPasscode(completion)
+                        })
+                    }
+                })
+            }
+            
+            let showSecretPasscodeScreen: () -> Void = {
+                let addFalseBottomToCurrentAccount: () -> Void = {
+                    let accountContext = context.sharedApplicationContext.sharedContext
+                    
+                    let popToRoot: () -> Void = {
+                        context.rootController.popToRoot(animated: true)
+                    }
+                    
+                    let setupController = PasscodeSetupController(context: accountContext, mode: .setup(change: false, .digits4), isChangeModeAllowed: false)
+                    setupController.complete = { passcode, numerical in
+                        let _ = (accountContext.accountManager.transaction({ transaction -> Void in
+                            var data = transaction.getAccessChallengeData()
+                            if numerical {
+                                data = PostboxAccessChallengeData.numericalPassword(value: passcode)
+                            } else {
+                                data = PostboxAccessChallengeData.plaintextPassword(value: passcode)
+                            }
+                            
+                            var id = hideAccountWithId
+                            if id == nil, let (currentId, _) = transaction.getCurrent() {
+                                id = currentId
+                            }
+                            
+                            if let id = id {
+                                let _ = (accountContext.activeAccounts
+                                |> map { _, accounts, _ -> [Account] in
+                                        let activeAccounts = accounts.map { $0.1 }
+                                    
+                                        if let account = activeAccounts.first(where: { $0.id == id }) {
+                                            changeChatsAndChannelsNotifications(unmute: false, atAccount: account)
+                                        }
+                                    
+                                        return activeAccounts
+                                    }
+                                ).start()
+                                
+                                setAccountRecordAccessChallengeData(transaction: transaction, id: id, accessChallengeData: data)
+                            }
+
+                        }) |> deliverOnMainQueue).start(next: { _ in
+                        }, error: { _ in
+                        }, completed: {
+                            updateHiddenAccountsAccessChallengeData(manager: accountContext.accountManager)
+                            showSplashScreen(.accountWasHidden, false, {
+                                accountContext.appLockContext.lock()
+                                popToRoot()
+                            })
+                        })
+                    }
+                    replaceTopControllerImpl(setupController, false)
+                }
+                
+                showSplashScreen(.setSecretPasscode, true, addFalseBottomToCurrentAccount)
+            }
+
+            showMasterPasscodeScreenIfNeeded(showSecretPasscodeScreen)
+        }))
+    }
+    
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let _ = (accountIdFromNotification(response.notification, sharedContext: self.sharedContextPromise.get())
@@ -2200,10 +2406,13 @@ final class SharedApplicationContext {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let _ = (accountIdFromNotification(notification, sharedContext: self.sharedContextPromise.get())
         |> deliverOnMainQueue).start(next: { accountId in
-            if let context = self.contextValue {
-                if let accountId = accountId, context.context.account.id != accountId {
-                    completionHandler([.alert])
-                }
+            if let context = self.contextValue, let accountId = accountId, context.context.account.id != accountId {
+                let _ = context.context.sharedContext.accountManager.transaction { transaction in
+                    if let record = transaction.getAllRecords().first(where: { $0.id == accountId }),
+                        !record.attributes.contains(where: { $0 is HiddenAccountAttribute }) {
+                        completionHandler([.alert])
+                    }
+                }.start()
             }
         })
     }

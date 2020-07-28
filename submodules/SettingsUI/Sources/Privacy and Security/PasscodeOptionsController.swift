@@ -244,13 +244,37 @@ func passcodeOptionsController(context: AccountContext) -> ViewController {
                     transaction.setAccessChallengeData(challenge)
                 }).start()
                 
+                let _ = context.sharedContext.accountManager.transaction({
+                    transaction -> Void in
+                    let records = transaction.getAllRecords()
+                    let hiddenRecords = records.filter {
+                        var attributes = $0.attributes
+                        return attributes.contains { $0 is HiddenAccountAttribute } ?? false
+                    }
+                    
+                    let _ = (context.sharedContext.activeAccounts
+                    |> map { _, accounts, _ -> [Account] in
+                            let activeAccounts = accounts.map { $0.1 }
+                        
+                            for record in hiddenRecords {
+                                if let account = activeAccounts.first(where: { $0.id == record.id }) {
+                                    changeChatsAndChannelsNotifications(unmute: true, atAccount: account)
+                                }
+                            }
+                        
+                            return activeAccounts
+                        }
+                    ).start()
+                    
+                }).start()
+                                
                 let _ = (passcodeOptionsDataPromise.get() |> take(1)).start(next: { [weak passcodeOptionsDataPromise] data in
                     passcodeOptionsDataPromise?.set(.single(data.withUpdatedAccessChallenge(challenge)))
                 })
                 
                 var innerReplaceTopControllerImpl: ((ViewController, Bool) -> Void)?
-                let controller = PrivacyIntroController(context: context, mode: .passcode, proceedAction: {
-                    let setupController = PasscodeSetupController(context: context, mode: .setup(change: false, .digits6))
+                let controller = PrivacyIntroController(context: context.sharedContext, mode: .passcode, proceedAction: {
+                    let setupController = PasscodeSetupController(context: context.sharedContext, mode: .setup(change: false, .digits6))
                     setupController.complete = { passcode, numerical in
                         let _ = (context.sharedContext.accountManager.transaction({ transaction -> Void in
                             var data = transaction.getAccessChallengeData()
@@ -294,7 +318,7 @@ func passcodeOptionsController(context: AccountContext) -> ViewController {
             }
         })
         |> deliverOnMainQueue).start(next: { isSimple in
-            let setupController = PasscodeSetupController(context: context, mode: .setup(change: true, .digits6))
+            let setupController = PasscodeSetupController(context: context.sharedContext, mode: .setup(change: true, .digits6))
             setupController.complete = { passcode, numerical in
                 let _ = (context.sharedContext.accountManager.transaction({ transaction -> Void in
                     var data = transaction.getAccessChallengeData()
@@ -398,8 +422,8 @@ public func passcodeOptionsAccessController(context: AccountContext, animateIn: 
     |> deliverOnMainQueue
     |> map { challenge -> ViewController? in
         if case .none = challenge {
-            let controller = PrivacyIntroController(context: context, mode: .passcode, proceedAction: {
-                let setupController = PasscodeSetupController(context: context, mode: .setup(change: false, .digits6))
+            let controller = PrivacyIntroController(context: context.sharedContext, mode: .passcode, proceedAction: {
+                let setupController = PasscodeSetupController(context: context.sharedContext, mode: .setup(change: false, .digits6))
                 setupController.complete = { passcode, numerical in
                     let _ = (context.sharedContext.accountManager.transaction({ transaction -> Void in
                         var data = transaction.getAccessChallengeData()
@@ -422,7 +446,7 @@ public func passcodeOptionsAccessController(context: AccountContext, animateIn: 
             })
             return controller
         } else {
-            let controller = PasscodeSetupController(context: context, mode: .entry(challenge))
+            let controller = PasscodeSetupController(context: context.sharedContext, mode: .entry(challenge))
             controller.check = { passcode in
                 var succeed = false
                 switch challenge {
@@ -469,7 +493,7 @@ public func passcodeEntryController(context: AccountContext, animateIn: Bool = t
                 biometrics = .none
             }
             #endif
-            let controller = PasscodeEntryController(applicationBindings: context.sharedContext.applicationBindings, accountManager: context.sharedContext.accountManager, appLockContext: context.sharedContext.appLockContext, presentationData: context.sharedContext.currentPresentationData.with { $0 }, presentationDataSignal: context.sharedContext.presentationData, challengeData: challenge, biometrics: biometrics, arguments: PasscodeEntryControllerPresentationArguments(animated: false, fadeIn: true, cancel: {
+            let controller = PasscodeEntryController(applicationBindings: context.sharedContext.applicationBindings, accountManager: context.sharedContext.accountManager, appLockContext: context.sharedContext.appLockContext, presentationData: context.sharedContext.currentPresentationData.with { $0 }, presentationDataSignal: context.sharedContext.presentationData, challengeData: challenge, hiddenAccountsAccessChallengeData: context.sharedContext.appLockContext.hiddenAccountsAccessChallengeData, biometrics: biometrics, arguments: PasscodeEntryControllerPresentationArguments(animated: false, fadeIn: true, cancel: {
                 completion(false)
             }, modalPresentation: modalPresentation))
             controller.presentationCompleted = { [weak controller] in

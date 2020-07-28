@@ -17,6 +17,7 @@ import SettingsUI
 import PhoneNumberFormat
 import LegacyComponents
 import LegacyMediaPickerUI
+import PasscodeUI
 
 private enum InnerState: Equatable {
     case state(UnauthorizedAccountStateContents)
@@ -164,6 +165,11 @@ public final class AuthorizationSequenceController: NavigationController, MFMail
                 }
                 strongSelf.account = updatedAccount
             }
+            
+            let replaceTopControllerImpl: ((ViewController, Bool) -> Void)? = { [weak controller] c, animated in
+                (controller?.navigationController as? NavigationController)?.replaceTopController(c, animated: animated)
+            }
+            
             controller.loginWithNumber = { [weak self, weak controller] number, syncContacts in
                 if let strongSelf = self {
                     controller?.inProgress = true

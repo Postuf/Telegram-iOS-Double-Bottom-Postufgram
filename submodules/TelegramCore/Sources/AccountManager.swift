@@ -75,6 +75,8 @@ private var declaredEncodables: Void = {
     declareEncodable(LoggedOutAccountAttribute.self, f: { LoggedOutAccountAttribute(decoder: $0) })
     declareEncodable(AccountEnvironmentAttribute.self, f: { AccountEnvironmentAttribute(decoder: $0) })
     declareEncodable(AccountSortOrderAttribute.self, f: { AccountSortOrderAttribute(decoder: $0) })
+    declareEncodable(HiddenAccountAttribute.self, f: { HiddenAccountAttribute(decoder: $0) })
+    declareEncodable(ContinueFalseBottomFlowAttribute.self, f: { ContinueFalseBottomFlowAttribute(decoder: $0) })
     declareEncodable(CloudChatClearHistoryOperation.self, f: { CloudChatClearHistoryOperation(decoder: $0) })
     declareEncodable(OutgoingContentInfoMessageAttribute.self, f: { OutgoingContentInfoMessageAttribute(decoder: $0) })
     declareEncodable(ConsumableContentMessageAttribute.self, f: { ConsumableContentMessageAttribute(decoder: $0) })
@@ -184,6 +186,116 @@ public func performAppGroupUpgrades(appGroupPath: String, rootPath: String) {
         try mutableUrl.setResourceValues(resourceValues)
     } catch let e {
         print("\(e)")
+    }
+}
+
+public func getHiddenAccountsAccessChallengeData(transaction: AccountManagerModifier) -> [AccountRecordId:PostboxAccessChallengeData] {
+    var result = [AccountRecordId:PostboxAccessChallengeData]()
+    let recordsWithOrder: [(AccountRecord, Int32)] = transaction.getAllRecords().map { record in
+        var order: Int32 = 0
+        for attribute in record.attributes {
+            if let attribute = attribute as? AccountSortOrderAttribute {
+                order = attribute.order
+                break
+            }
+        }
+        return (record, order)
+    }
+    let records = recordsWithOrder.sorted(by: { $0.1 > $1.1 })
+        .map { $0.0 }
+    for record in records {
+        guard !record.attributes.contains(where: { $0 is LoggedOutAccountAttribute }) else { continue }
+        
+        var accessChallengeData = PostboxAccessChallengeData.none
+        for attribute in record.attributes {
+            if let attribute = attribute as? HiddenAccountAttribute {
+                accessChallengeData = attribute.accessChallengeData
+                break
+            }
+        }
+        if accessChallengeData != .none {
+            result[record.id] = accessChallengeData
+        }
+    }
+    return result
+}
+
+public func getHiddenAccountsAccessChallengeData(manager: AccountManager) -> Signal<[AccountRecordId:PostboxAccessChallengeData], NoError> {
+    manager.transaction { transaction in
+        return getHiddenAccountsAccessChallengeData(transaction: transaction)
+    }
+}
+
+public func updateHiddenAccountsAccessChallengeData(manager: AccountManager) {
+    manager.displayedAccountsFilter.getHiddenAccountsAccessChallengeDataPromise.set(getHiddenAccountsAccessChallengeData(manager: manager))
+}
+
+public final class DisplayedAccountsFilterImpl: DisplayedAccountsFilter {
+    public let unlockedHiddenAccountRecordIdPromise = Promise<AccountRecordId?>()
+    public var unlockedHiddenAccountRecordId: AccountRecordId?
+    private var unlockedHiddenAccountRecordIdDisposable: Disposable?
+    
+    public let accountManagerRecordIdPromise = ValuePromise<AccountRecordId?>()
+    public let getHiddenAccountsAccessChallengeDataPromise = Promise<[AccountRecordId:PostboxAccessChallengeData]>()
+    public let didFinishChangingAccountPromise = Promise<Void>()
+    
+    public init() {
+        unlockedHiddenAccountRecordIdDisposable = (unlockedHiddenAccountRecordIdPromise.get()
+            |> deliverOnMainQueue).start(next: { [weak self] value in
+                guard let strongSelf = self else { return }
+                
+                strongSelf.unlockedHiddenAccountRecordId = value
+                strongSelf.accountManagerRecordIdPromise.set(value)
+            })
+    }
+    
+    public func filterDisplayed(_ records: [AccountRecord]) -> [AccountRecord] {
+        let recordsWithOrder: [(AccountRecord, Int32)] = records.map { record in
+            var order: Int32 = 0
+            for attribute in record.attributes {
+                if let attribute = attribute as? AccountSortOrderAttribute {
+                    order = attribute.order
+                    break
+                }
+            }
+            return (record, order)
+        }
+        let sortedRecords = recordsWithOrder.sorted(by: { $0.1 > $1.1 })
+            .map { $0.0 }
+        
+        var result = [AccountRecord]()
+        var containHidden = false
+        
+        for record in records {
+            var isVisible = true
+            for attribute in record.attributes {
+                if let attribute = attribute as? HiddenAccountAttribute {
+                    if record.id == unlockedHiddenAccountRecordId, !containHidden {
+                        containHidden = true
+                    } else {
+                        isVisible = false
+                    }
+                    break
+                }
+            }
+            if isVisible {
+                result.append(record)
+            }
+        }
+        return result
+    }
+    
+    public func filterHidden(_ records: [AccountRecord]) -> [AccountRecord] {
+        var result = records
+        let displayed = filterDisplayed(records)
+        for record in displayed {
+            result.removeAll { $0.id == record.id }
+        }
+        return result
+    }
+    
+    deinit {
+        unlockedHiddenAccountRecordIdDisposable?.dispose()
     }
 }
 
@@ -302,6 +414,8 @@ public func logoutFromAccount(id: AccountRecordId, accountManager: AccountManage
                 return nil
             }
         })
+        let hiddenAccountsAccessChallengeData = getHiddenAccountsAccessChallengeData(transaction: transaction)
+        accountManager.displayedAccountsFilter.getHiddenAccountsAccessChallengeDataPromise.set(.single(hiddenAccountsAccessChallengeData))
     }
 }
 
