@@ -14,3 +14,5 @@
 "FalseBottom.AccountWasHidden.Title" = "Аккаунт Скрыт";
 "FalseBottom.AccountWasHidden.Text" = "Теперь вы можете, вводя первый или второй код-пароль, зайти в нужный вам аккаунт.";
 "FalseBottom.AccountWasHidden.Button" = "Ввести Код-Пароль";
+
+"PasscodeSettings.AutoLock.IfAwayFor_1minute" = "Мгновенно";
