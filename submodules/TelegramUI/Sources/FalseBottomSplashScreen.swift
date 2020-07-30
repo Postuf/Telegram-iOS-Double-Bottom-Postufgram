@@ -74,7 +74,7 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
     
     private var animationSize: CGSize = CGSize()
     private var animationOffset: CGPoint = CGPoint()
-    private let animationNode: AnimatedStickerNode
+    private let animationNode: ASDisplayNode
     private let titleNode: ImmediateTextNode
     private let textNode: ImmediateTextNode
     let buttonNode: SolidRoundedButtonNode
@@ -90,8 +90,6 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
         self.presentationData = presentationData
         self.mode = mode
         
-        self.animationNode = AnimatedStickerNode()
-        
         let title: String
         let text: NSAttributedString
         let buttonText: String
@@ -105,53 +103,88 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
             text = NSAttributedString(string: presentationData.strings.FalseBottom_HideAccount_Text, font: textFont, textColor: textColor)
             buttonText = presentationData.strings.FalseBottom_HideAccount_Button
             
-            if let path = getAppBundle().path(forResource: "TwoFactorSetupIntro", ofType: "tgs") {
-                self.animationNode.setup(source: AnimatedStickerNodeLocalFileSource(path: path), width: 248, height: 248, playbackMode: .once, mode: .direct)
-                self.animationSize = CGSize(width: 124.0, height: 124.0)
-                self.animationNode.visibility = true
+            if let path = getAppBundle().path(forResource: "FalseBottom_1", ofType: "gif") {
+                let size = CGSize(width: 265, height: 174.5)
+                self.animationSize = size
+
+                self.animationNode = ASDisplayNode(viewBlock: {
+                    var view = UIImageView(frame: CGRect(origin: .zero, size:size))
+                    view.image = UIImage.gif(url: path)
+                    return view
+                })
+            } else {
+                self.animationNode = ASDisplayNode()
             }
         case .addOneMoreAccount:
             title = presentationData.strings.FalseBottom_AddOneMoreAccount_Title
             text = NSAttributedString(string: presentationData.strings.FalseBottom_AddOneMoreAccount_Text, font: textFont, textColor: textColor)
             buttonText = presentationData.strings.FalseBottom_AddOneMoreAccount_Button
-            
-            if let path = getAppBundle().path(forResource: "TwoFactorSetupIntro", ofType: "tgs") {
-                self.animationNode.setup(source: AnimatedStickerNodeLocalFileSource(path: path), width: 248, height: 248, playbackMode: .once, mode: .direct)
-                self.animationSize = CGSize(width: 124.0, height: 124.0)
-                self.animationNode.visibility = true
-        }
+
+            if let path = getAppBundle().path(forResource: "FalseBottom_1", ofType: "gif") {
+                let size = CGSize(width: 265, height: 174.5)
+                self.animationSize = size
+
+                self.animationNode = ASDisplayNode(viewBlock: {
+                    var view = UIImageView(frame: CGRect(origin: .zero, size:size))
+                    view.image = UIImage.gif(url: path)
+                    return view
+                })
+            } else {
+                self.animationNode = ASDisplayNode()
+            }
             
         case .setMasterPasscode:
             title = presentationData.strings.FalseBottom_SetMasterPasscode_Title
             text = NSAttributedString(string: presentationData.strings.FalseBottom_SetMasterPasscode_Text, font: textFont, textColor: textColor)
             buttonText = presentationData.strings.FalseBottom_SetMasterPasscode_Button
-            
-            if let path = getAppBundle().path(forResource: "TwoFactorSetupIntro", ofType: "tgs") {
-                self.animationNode.setup(source: AnimatedStickerNodeLocalFileSource(path: path), width: 248, height: 248, playbackMode: .once, mode: .direct)
-                self.animationSize = CGSize(width: 124.0, height: 124.0)
-                self.animationNode.visibility = true
+
+            if let path = getAppBundle().path(forResource: "FalseBottom_1", ofType: "gif") {
+                let size = CGSize(width: 265, height: 174.5)
+                self.animationSize = size
+
+                self.animationNode = ASDisplayNode(viewBlock: {
+                    var view = UIImageView(frame: CGRect(origin: .zero, size:size))
+                    view.image = UIImage.gif(url: path)
+                    return view
+                })
+            } else {
+                self.animationNode = ASDisplayNode()
             }
             
         case .setSecretPasscode:
             title = presentationData.strings.FalseBottom_SetSecretPasscode_Title
             text = NSAttributedString(string: presentationData.strings.FalseBottom_SetSecretPasscode_Text, font: textFont, textColor: textColor)
             buttonText = presentationData.strings.FalseBottom_SetSecretPasscode_Button
-            
-            if let path = getAppBundle().path(forResource: "TwoFactorSetupIntro", ofType: "tgs") {
-                self.animationNode.setup(source: AnimatedStickerNodeLocalFileSource(path: path), width: 248, height: 248, playbackMode: .once, mode: .direct)
-                self.animationSize = CGSize(width: 124.0, height: 124.0)
-                self.animationNode.visibility = true
+
+            if let path = getAppBundle().path(forResource: "FalseBottom_1", ofType: "gif") {
+                let size = CGSize(width: 265, height: 174.5)
+                self.animationSize = size
+
+                self.animationNode = ASDisplayNode(viewBlock: {
+                    var view = UIImageView(frame: CGRect(origin: .zero, size:size))
+                    view.image = UIImage.gif(url: path)
+                    return view
+                })
+            } else {
+                self.animationNode = ASDisplayNode()
             }
 
         case .accountWasHidden:
             title = presentationData.strings.FalseBottom_AccountWasHidden_Title
             text = NSAttributedString(string: presentationData.strings.FalseBottom_AccountWasHidden_Text, font: textFont, textColor: textColor)
             buttonText = presentationData.strings.FalseBottom_AccountWasHidden_Button
-            
-            if let path = getAppBundle().path(forResource: "TwoFactorSetupDone", ofType: "tgs") {
-                self.animationNode.setup(source: AnimatedStickerNodeLocalFileSource(path: path), width: 248, height: 248, mode: .direct)
-                self.animationSize = CGSize(width: 124.0, height: 124.0)
-                self.animationNode.visibility = true
+
+            if let path = getAppBundle().path(forResource: "FalseBottom_1", ofType: "gif") {
+                let size = CGSize(width: 265, height: 174.5)
+                self.animationSize = size
+
+                self.animationNode = ASDisplayNode(viewBlock: {
+                    var view = UIImageView(frame: CGRect(origin: .zero, size:size))
+                    view.image = UIImage.gif(url: path)
+                    return view
+                })
+            } else {
+                self.animationNode = ASDisplayNode()
             }
         }
         
@@ -225,11 +258,203 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
         contentVerticalOrigin = min(contentVerticalOrigin, maxContentVerticalOrigin)
         
         let iconFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - iconSize.width) / 2.0) + self.animationOffset.x, y: contentVerticalOrigin + self.animationOffset.y), size: iconSize).offsetBy(dx: iconOffset.x, dy: iconOffset.y)
-        self.animationNode.updateLayout(size: iconFrame.size)
         transition.updateFrameAdditive(node: self.animationNode, frame: iconFrame)
         let titleFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - titleSize.width) / 2.0), y: iconFrame.maxY + iconSpacing), size: titleSize)
         transition.updateFrameAdditive(node: self.titleNode, frame: titleFrame)
         let textFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - textSize.width) / 2.0), y: titleFrame.maxY + titleSpacing), size: textSize)
         transition.updateFrameAdditive(node: self.textNode, frame: textFrame)
     }
+}
+
+
+import ImageIO
+
+extension UIImage {
+
+    public class func gif(data: Data) -> UIImage? {
+        // Create source from data
+        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
+            print("SwiftGif: Source for the image does not exist")
+            return nil
+        }
+
+        return UIImage.animatedImageWithSource(source)
+    }
+
+    public class func gif(url: String) -> UIImage? {
+        // Validate URL
+        let bundleURL = URL(fileURLWithPath: url)
+
+        // Validate data
+        guard let imageData = try? Data(contentsOf: bundleURL) else {
+            print("SwiftGif: Cannot turn image named \"\(url)\" into NSData")
+            return nil
+        }
+
+        return gif(data: imageData)
+    }
+
+    public class func gif(name: String) -> UIImage? {
+        // Check for existance of gif
+        guard let bundleURL = Bundle.main
+          .url(forResource: name, withExtension: "gif") else {
+            print("SwiftGif: This image named \"\(name)\" does not exist")
+            return nil
+        }
+
+        // Validate data
+        guard let imageData = try? Data(contentsOf: bundleURL) else {
+            print("SwiftGif: Cannot turn image named \"\(name)\" into NSData")
+            return nil
+        }
+
+        return gif(data: imageData)
+    }
+
+    @available(iOS 9.0, *)
+    public class func gif(asset: String) -> UIImage? {
+        // Create source from assets catalog
+        guard let dataAsset = NSDataAsset(name: asset) else {
+            print("SwiftGif: Cannot turn image named \"\(asset)\" into NSDataAsset")
+            return nil
+        }
+
+        return gif(data: dataAsset.data)
+    }
+
+    internal class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
+        var delay = 0.1
+
+        // Get dictionaries
+        let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
+        let gifPropertiesPointer = UnsafeMutablePointer<UnsafeRawPointer?>.allocate(capacity: 0)
+        defer {
+            gifPropertiesPointer.deallocate()
+        }
+        let unsafePointer = Unmanaged.passUnretained(kCGImagePropertyGIFDictionary).toOpaque()
+        if CFDictionaryGetValueIfPresent(cfProperties, unsafePointer, gifPropertiesPointer) == false {
+            return delay
+        }
+
+        let gifProperties: CFDictionary = unsafeBitCast(gifPropertiesPointer.pointee, to: CFDictionary.self)
+
+        // Get delay time
+        var delayObject: AnyObject = unsafeBitCast(
+            CFDictionaryGetValue(gifProperties,
+                Unmanaged.passUnretained(kCGImagePropertyGIFUnclampedDelayTime).toOpaque()),
+            to: AnyObject.self)
+        if delayObject.doubleValue == 0 {
+            delayObject = unsafeBitCast(CFDictionaryGetValue(gifProperties,
+                Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()), to: AnyObject.self)
+        }
+
+        if let delayObject = delayObject as? Double, delayObject > 0 {
+            delay = delayObject
+        } else {
+            delay = 0.1 // Make sure they're not too fast
+        }
+
+        return delay
+    }
+
+    internal class func gcdForPair(_ lhs: Int?, _ rhs: Int?) -> Int {
+        var lhs = lhs
+        var rhs = rhs
+        // Check if one of them is nil
+        if rhs == nil || lhs == nil {
+            if rhs != nil {
+                return rhs!
+            } else if lhs != nil {
+                return lhs!
+            } else {
+                return 0
+            }
+        }
+
+        // Swap for modulo
+        if lhs! < rhs! {
+            let ctp = lhs
+            lhs = rhs
+            rhs = ctp
+        }
+
+        // Get greatest common divisor
+        var rest: Int
+        while true {
+            rest = lhs! % rhs!
+
+            if rest == 0 {
+                return rhs! // Found it
+            } else {
+                lhs = rhs
+                rhs = rest
+            }
+        }
+    }
+
+    internal class func gcdForArray(_ array: [Int]) -> Int {
+        if array.isEmpty {
+            return 1
+        }
+
+        var gcd = array[0]
+
+        for val in array {
+            gcd = UIImage.gcdForPair(val, gcd)
+        }
+
+        return gcd
+    }
+
+    internal class func animatedImageWithSource(_ source: CGImageSource) -> UIImage? {
+        let count = CGImageSourceGetCount(source)
+        var images = [CGImage]()
+        var delays = [Int]()
+
+        // Fill arrays
+        for index in 0..<count {
+            // Add image
+            if let image = CGImageSourceCreateImageAtIndex(source, index, nil) {
+                images.append(image)
+            }
+
+            // At it's delay in cs
+            let delaySeconds = UIImage.delayForImageAtIndex(Int(index),
+                source: source)
+            delays.append(Int(delaySeconds * 1000.0)) // Seconds to ms
+        }
+
+        // Calculate full duration
+        let duration: Int = {
+            var sum = 0
+
+            for val: Int in delays {
+                sum += val
+            }
+
+            return sum
+            }()
+
+        // Get frames
+        let gcd = gcdForArray(delays)
+        var frames = [UIImage]()
+
+        var frame: UIImage
+        var frameCount: Int
+        for index in 0..<count {
+            frame = UIImage(cgImage: images[Int(index)])
+            frameCount = Int(delays[Int(index)] / gcd)
+
+            for _ in 0..<frameCount {
+                frames.append(frame)
+            }
+        }
+
+        // Heyhey
+        let animation = UIImage.animatedImage(with: frames,
+            duration: Double(duration) / 1000.0)
+
+        return animation
+    }
+
 }
