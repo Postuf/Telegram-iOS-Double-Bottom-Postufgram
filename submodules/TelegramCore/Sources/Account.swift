@@ -307,9 +307,28 @@ public func setAccountRecordAccessChallengeData(transaction: AccountManagerModif
 public func changeChatsAndChannelsNotifications(unmute: Bool, atAccount account: Account) {
     let _ = updateGlobalNotificationSettingsInteractively(postbox: account.postbox, { settings in
         var settings = settings
+        
+        settings.privateChats.tempEnabled = settings.privateChats.enabled
         settings.privateChats.enabled = unmute
+        
+        settings.groupChats.tempEnabled = settings.groupChats.enabled
         settings.groupChats.enabled = unmute
+        
+        settings.channels.tempEnabled = settings.channels.enabled
         settings.channels.enabled = unmute
+        
+        return settings
+    }).start()
+}
+
+public func setSavedChatsAndChannelsNotificationsSettings(at account: Account) {
+    let _ = updateGlobalNotificationSettingsInteractively(postbox: account.postbox, { settings in
+        var settings = settings
+
+        settings.privateChats.enabled = settings.privateChats.tempEnabled
+        settings.groupChats.enabled = settings.groupChats.tempEnabled
+        settings.channels.enabled = settings.channels.tempEnabled
+        
         return settings
     }).start()
 }
@@ -909,6 +928,8 @@ public class Account {
         return self._importantTasksRunning.get()
     }
     
+    public var isHidden: Bool = false
+    
     fileprivate let masterNotificationKey = Atomic<MasterNotificationKey?>(value: nil)
     
     var transformOutgoingMessageMedia: TransformOutgoingMessageMedia?
@@ -966,6 +987,16 @@ public class Account {
         }
         
         let networkStateQueue = Queue()
+        
+        let _ = accountManager.transaction({ [weak self] transaction -> Void in
+            guard let self = self else { return }
+            let records = transaction.getAllRecords()
+            
+            guard let record = records.first(where: { $0.id == id }) else { return }
+            
+            self.isHidden = record.attributes.contains { $0 is HiddenAccountAttribute } ?? false
+            
+        }).start()
         
         let networkStateSignal = combineLatest(queue: networkStateQueue, self.stateManager.isUpdating, network.connectionStatus/*, delayNetworkStatus*/)
         |> map { isUpdating, connectionStatus/*, delayNetworkStatus*/ -> AccountNetworkState in
