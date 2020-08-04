@@ -106,12 +106,12 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
             text = NSAttributedString(string: presentationData.strings.FalseBottom_HideAccount_Text, font: textFont, textColor: textColor)
             buttonText = presentationData.strings.FalseBottom_HideAccount_Button
             
-            if let path = getAppBundle().path(forResource: "FalseBottomAddAccount", ofType: "tgs") {
-                self.animationNode.setup(source: AnimatedStickerNodeLocalFileSource(path: path), width: 568, height: 640, playbackMode: .loop, mode: .direct, fillColors: [
-                    "Shape Layer 1.**.Fill 1": self.presentationData.theme.list.plainBackgroundColor,
-                    "phone Outlines.**.Fill 1": self.presentationData.theme.list.plainBackgroundColor
+            if let path = getAppBundle().path(forResource: "FalseBottomHideAccount", ofType: "tgs") {
+                self.animationNode.setup(source: AnimatedStickerNodeLocalFileSource(path: path), width: 528, height: 348, playbackMode: .loop, mode: .direct, fillColors: [:
+//                    "Shape Layer 1.**.Fill 1": self.presentationData.theme.list.plainBackgroundColor,
+//                    "phone Outlines.**.Fill 1": self.presentationData.theme.list.plainBackgroundColor
                 ])
-                self.animationSize = CGSize(width: 284, height: 320)
+                self.animationSize = CGSize(width: 264.0, height: 174.0)
                 self.animationNode.visibility = true
             }
             
@@ -120,9 +120,9 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
             text = NSAttributedString(string: presentationData.strings.FalseBottom_AddOneMoreAccount_Text, font: textFont, textColor: textColor)
             buttonText = presentationData.strings.FalseBottom_AddOneMoreAccount_Button
             
-            if let path = getAppBundle().path(forResource: "TwoFactorSetupIntro", ofType: "tgs") {
-                self.animationNode.setup(source: AnimatedStickerNodeLocalFileSource(path: path), width: 248, height: 248, playbackMode: .once, mode: .direct)
-                self.animationSize = CGSize(width: 124.0, height: 124.0)
+            if let path = getAppBundle().path(forResource: "FalseBottomAddOneMoreAccount", ofType: "tgs") {
+                self.animationNode.setup(source: AnimatedStickerNodeLocalFileSource(path: path), width: 174, height: 348, playbackMode: .loop, mode: .direct)
+                self.animationSize = CGSize(width: 87.0, height: 174.0)
                 self.animationNode.visibility = true
         }
             
@@ -131,9 +131,9 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
             text = NSAttributedString(string: presentationData.strings.FalseBottom_SetMasterPasscode_Text, font: textFont, textColor: textColor)
             buttonText = presentationData.strings.FalseBottom_SetMasterPasscode_Button
             
-            if let path = getAppBundle().path(forResource: "TwoFactorSetupIntro", ofType: "tgs") {
-                self.animationNode.setup(source: AnimatedStickerNodeLocalFileSource(path: path), width: 248, height: 248, playbackMode: .once, mode: .direct)
-                self.animationSize = CGSize(width: 124.0, height: 124.0)
+            if let path = getAppBundle().path(forResource: "FalseBottomSetMasterPasscode", ofType: "tgs") {
+                self.animationNode.setup(source: AnimatedStickerNodeLocalFileSource(path: path), width: 528, height: 348, playbackMode: .loop, mode: .direct)
+                self.animationSize = CGSize(width: 264.0, height: 174.0)
                 self.animationNode.visibility = true
             }
             
@@ -197,7 +197,7 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
     func containerLayoutUpdated(layout: ContainerViewLayout, navigationHeight: CGFloat, transition: ContainedViewLayoutTransition) {
         let sideInset: CGFloat = 32.0
         let buttonSideInset: CGFloat = 48.0
-        let iconSpacing: CGFloat = 8.0
+        let iconSpacing: CGFloat = 19.0
         let titleSpacing: CGFloat = 19.0
         let buttonHeight: CGFloat = 50.0
         
