@@ -14,6 +14,10 @@ shift
 shift
 shift
 
+export CODESIGNING_DATA_PATH="build-system/fake-codesigning"
+export CODESIGNING_CERTS_VARIANT="distribution"
+export CODESIGNING_PROFILES_VARIANT="appstore"
+
 BUILD_PATH="build"
 if [ "$APP_TYPE" == "wallet" ]; then
 	APP_NAME="TONWallet"
@@ -145,7 +149,6 @@ REMOVE_ENTITLEMENT_KEYS=(\
 COPY_ENTITLEMENT_KEYS=(\
 	"com.apple.developer.associated-domains" \
 	"com.apple.developer.icloud-services" \
-	"com.apple.developer.pushkit.unrestricted-voip" \
 )
 
 REPLACE_TO_PRODUCTION_ENTITLEMENT_KEYS=(\
