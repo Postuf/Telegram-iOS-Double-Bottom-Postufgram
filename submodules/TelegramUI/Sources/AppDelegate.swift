@@ -642,26 +642,9 @@ final class SharedApplicationContext {
         }, dismissNativeController: {
             self.window?.rootViewController?.dismiss(animated: true, completion: nil)
         }, getAvailableAlternateIcons: {
-            if #available(iOS 10.3, *) {
-                var icons = [PresentationAppIcon(name: "Blue", imageName: "BlueIcon", isDefault: buildConfig.isAppStoreBuild),
-                        PresentationAppIcon(name: "Black", imageName: "BlackIcon"),
-                        PresentationAppIcon(name: "BlueClassic", imageName: "BlueClassicIcon"),
-                        PresentationAppIcon(name: "BlackClassic", imageName: "BlackClassicIcon"),
-                        PresentationAppIcon(name: "BlueFilled", imageName: "BlueFilledIcon"),
-                        PresentationAppIcon(name: "BlackFilled", imageName: "BlackFilledIcon")]
-                if buildConfig.isInternalBuild {
-                    icons.append(PresentationAppIcon(name: "WhiteFilled", imageName: "WhiteFilledIcon"))
-                }
-                return icons
-            } else {
-                return []
-            }
+            return []
         }, getAlternateIconName: {
-            if #available(iOS 10.3, *) {
-                return application.alternateIconName
-            } else {
-                return nil
-            }
+            return nil
         }, requestSetAlternateIconName: { name, completion in
             if #available(iOS 10.3, *) {
                 application.setAlternateIconName(name, completionHandler: { error in
