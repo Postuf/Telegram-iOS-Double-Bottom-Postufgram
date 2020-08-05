@@ -516,8 +516,8 @@ private func themeSettingsControllerEntries(presentationData: PresentationData, 
     entries.append(.bubbleSettings(presentationData.theme, strings.Appearance_BubbleCornersSetting, ""))
     
     if !availableAppIcons.isEmpty {
-        entries.append(.iconHeader(presentationData.theme, strings.Appearance_AppIcon.uppercased()))
-        entries.append(.iconItem(presentationData.theme, presentationData.strings, availableAppIcons, currentAppIconName))
+//        entries.append(.iconHeader(presentationData.theme, strings.Appearance_AppIcon.uppercased()))
+//        entries.append(.iconItem(presentationData.theme, presentationData.strings, availableAppIcons, currentAppIconName))
     }
     
     entries.append(.otherHeader(presentationData.theme, strings.Appearance_Other.uppercased()))
