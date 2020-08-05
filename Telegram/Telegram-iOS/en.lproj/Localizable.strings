@@ -337,7 +337,7 @@
 
 // Tour
 "Tour.Title1" = "Postufgram";
-"Tour.Text1" = "The world's **fastest** messaging app.\nIt is **free** and **secure**.";
+"Tour.Text1" = "The world’s first messaging app\nwith **false bottom**.";
 
 "Tour.Title2" = "Fast";
 "Tour.Text2" = "**Postufgram** delivers messages\nfaster than any other application.";
