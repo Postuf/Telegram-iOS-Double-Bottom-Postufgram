@@ -16,11 +16,9 @@ load("//Config:utils.bzl",
     "get_provisioning_profile",
     "get_codesign_entitlements",
 )
-
 load("//Config:app_configuration.bzl",
     "appConfig",
 )
-
 def app_binary_configs():
     config = {
         "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES": "YES",
@@ -31,8 +29,8 @@ def app_binary_configs():
         "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),
-        "APP_NAME": "Telegram",
-        "PRODUCT_NAME": "Telegram",
+        "APP_NAME": "Postufgram",
+        "PRODUCT_NAME": "Postufgram",
         "TARGETED_DEVICE_FAMILY": "1,2",
     }
     config = merge_dict(SHARED_CONFIGS, config)
@@ -42,7 +40,6 @@ def app_binary_configs():
     configs = add_provisioning_profile_specifier(configs, "app")
     configs = add_codesign_identity(configs)
     return configs
-
 def share_extension_configs():
     config = {
         "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES": "NO",
@@ -52,7 +49,7 @@ def share_extension_configs():
         "DEVELOPMENT_TEAM": get_development_team(),
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),
-        "APP_NAME": "Telegram",
+        "APP_NAME": "Postufgram",
         "PRODUCT_NAME": "ShareExtension",
     }
     config = merge_dict(SHARED_CONFIGS, config)
@@ -62,7 +59,6 @@ def share_extension_configs():
     configs = add_provisioning_profile_specifier(configs, "share")
     configs = add_codesign_identity(configs)
     return configs
-
 def widget_extension_configs():
     config = {
         "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES": "NO",
@@ -72,7 +68,7 @@ def widget_extension_configs():
         "DEVELOPMENT_TEAM": get_development_team(),
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),
-        "APP_NAME": "Telegram",
+        "APP_NAME": "Postufgram",
         "PRODUCT_NAME": "WidgetExtension",
     }
     config = merge_dict(SHARED_CONFIGS, config)
@@ -82,7 +78,6 @@ def widget_extension_configs():
     configs = add_provisioning_profile_specifier(configs, "widget")
     configs = add_codesign_identity(configs)
     return configs
-
 def notification_content_extension_configs():
     config = {
         "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES": "NO",
@@ -92,7 +87,7 @@ def notification_content_extension_configs():
         "DEVELOPMENT_TEAM": get_development_team(),
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),
-        "APP_NAME": "Telegram",
+        "APP_NAME": "Postufgram",
         "PRODUCT_NAME": "NotificationContentExtension",
     }
     config = merge_dict(SHARED_CONFIGS, config)
@@ -102,7 +97,6 @@ def notification_content_extension_configs():
     configs = add_provisioning_profile_specifier(configs, "notification_content")
     configs = add_codesign_identity(configs)
     return configs
-
 def notification_service_extension_configs():
     config = {
         "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES": "NO",
@@ -112,7 +106,7 @@ def notification_service_extension_configs():
         "DEVELOPMENT_TEAM": get_development_team(),
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),
-        "APP_NAME": "Telegram",
+        "APP_NAME": "Postufgram",
         "PRODUCT_NAME": "NotificationServiceExtension",
     }
     config = merge_dict(SHARED_CONFIGS, config)
@@ -122,7 +116,6 @@ def notification_service_extension_configs():
     configs = add_provisioning_profile_specifier(configs, "notification_service")
     configs = add_codesign_identity(configs)
     return configs
-
 def intents_extension_configs():
     config = {
         "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES": "NO",
@@ -132,7 +125,7 @@ def intents_extension_configs():
         "DEVELOPMENT_TEAM": get_development_team(),
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),
-        "APP_NAME": "Telegram",
+        "APP_NAME": "Postufgram",
         "PRODUCT_NAME": "IntentsExtension",
     }
     config = merge_dict(SHARED_CONFIGS, config)
@@ -142,7 +135,6 @@ def intents_extension_configs():
     configs = add_provisioning_profile_specifier(configs, "intents")
     configs = add_codesign_identity(configs)
     return configs
-
 def watch_extension_binary_configs():
     config = {
         "SDKROOT": "watchos",
@@ -153,7 +145,7 @@ def watch_extension_binary_configs():
         "LD_RUNPATH_SEARCH_PATHS": "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks",
         "WK_COMPANION_APP_BUNDLE_IDENTIFIER": bundle_identifier(suffix=""),
         "WK_APP_BUNDLE_IDENTIFIER": bundle_identifier(suffix=".watchkitapp"),
-        "APP_NAME": "Telegram",
+        "APP_NAME": "Postufgram",
         "APP_BUNDLE_ID": bundle_identifier(suffix=""),
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),
@@ -164,7 +156,6 @@ def watch_extension_binary_configs():
     configs = add_provisioning_profile_specifier(configs, "watch_extension")
     configs = add_codesign_identity(configs)
     return configs
-
 def watch_binary_configs():
     config = {
         "SDKROOT": "watchos",
@@ -175,7 +166,7 @@ def watch_binary_configs():
         "LD_RUNPATH_SEARCH_PATHS": "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks",
         "WK_COMPANION_APP_BUNDLE_IDENTIFIER": bundle_identifier(suffix=""),
         "WK_APP_BUNDLE_IDENTIFIER": bundle_identifier(suffix=".watchkitapp"),
-        "APP_NAME": "Telegram",
+        "APP_NAME": "Postufgram",
         "APP_BUNDLE_ID": bundle_identifier(suffix=""),
         "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
         "BUILD_NUMBER": get_build_number(),
@@ -187,7 +178,6 @@ def watch_binary_configs():
     configs = add_provisioning_profile_specifier(configs, "watch_app")
     configs = add_codesign_identity(configs)
     return configs
-
 def info_plist_substitutions(name):
     substitutions = {
         "DEVELOPMENT_LANGUAGE": DEVELOPMENT_LANGUAGE,
@@ -197,14 +187,13 @@ def info_plist_substitutions(name):
         "CURRENT_PROJECT_VERSION": "1",
     }
     return substitutions
-
 def app_info_plist_substitutions():
     substitutions = {
         "DEVELOPMENT_LANGUAGE": DEVELOPMENT_LANGUAGE,
-        "EXECUTABLE_NAME": "Telegram",
+        "EXECUTABLE_NAME": "Postufgram",
         "PRODUCT_BUNDLE_IDENTIFIER": bundle_identifier(suffix=""),
-        "PRODUCT_NAME": "Telegram",
-        "APP_NAME": "Telegram",
+        "PRODUCT_NAME": "Postufgram",
+        "APP_NAME": "Postufgram",
         "CURRENT_PROJECT_VERSION": "1",
         "APP_SPECIFIC_URL_SCHEME": appConfig()["appSpecificUrlScheme"],
         "BUILD_NUMBER": get_build_number(),
@@ -213,28 +202,26 @@ def app_info_plist_substitutions():
         "TARGETED_DEVICE_FAMILY": "1,2",
     }
     return substitutions
-
 def share_extension_info_plist_substitutions():
     substitutions = {
         "DEVELOPMENT_LANGUAGE": DEVELOPMENT_LANGUAGE,
         "EXECUTABLE_NAME": "ShareExtension",
         "PRODUCT_BUNDLE_IDENTIFIER": bundle_identifier(suffix=".Share"),
         "PRODUCT_NAME": "Share",
-        "APP_NAME": "Telegram",
+        "APP_NAME": "Postufgram",
         "CURRENT_PROJECT_VERSION": "1",
         "APP_SPECIFIC_URL_SCHEME": appConfig()["appSpecificUrlScheme"],
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),
     }
     return substitutions
-
 def widget_extension_info_plist_substitutions():
     substitutions = {
         "DEVELOPMENT_LANGUAGE": DEVELOPMENT_LANGUAGE,
         "EXECUTABLE_NAME": "WidgetExtension",
         "PRODUCT_BUNDLE_IDENTIFIER": bundle_identifier(suffix=".Widget"),
         "PRODUCT_NAME": "Widget",
-        "APP_NAME": "Telegram",
+        "APP_NAME": "Postufgram",
         "CURRENT_PROJECT_VERSION": "1",
         "APP_SPECIFIC_URL_SCHEME": appConfig()["appSpecificUrlScheme"],
         "BUILD_NUMBER": get_build_number(),
@@ -242,42 +229,39 @@ def widget_extension_info_plist_substitutions():
         "MinimumOSVersion": "9.0",
     }
     return substitutions
-
 def notification_content_extension_info_plist_substitutions():
     substitutions = {
         "DEVELOPMENT_LANGUAGE": DEVELOPMENT_LANGUAGE,
         "EXECUTABLE_NAME": "NotificationContentExtension",
         "PRODUCT_BUNDLE_IDENTIFIER": bundle_identifier(suffix=".NotificationContent"),
-        "PRODUCT_NAME": "Telegram",
-        "APP_NAME": "Telegram",
+        "PRODUCT_NAME": "Postufgram",
+        "APP_NAME": "Postufgram",
         "CURRENT_PROJECT_VERSION": "1",
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),
         "MinimumOSVersion": "10.0",
     }
     return substitutions
-
 def notification_service_extension_info_plist_substitutions():
     substitutions = {
         "DEVELOPMENT_LANGUAGE": DEVELOPMENT_LANGUAGE,
         "EXECUTABLE_NAME": "NotificationServiceExtension",
         "PRODUCT_BUNDLE_IDENTIFIER": bundle_identifier(suffix=".NotificationService"),
-        "PRODUCT_NAME": "Telegram",
-        "APP_NAME": "Telegram",
+        "PRODUCT_NAME": "Postufgram",
+        "APP_NAME": "Postufgram",
         "CURRENT_PROJECT_VERSION": "1",
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),
         "MinimumOSVersion": "10.0",
     }
     return substitutions
-
 def intents_extension_info_plist_substitutions():
     substitutions = {
         "DEVELOPMENT_LANGUAGE": DEVELOPMENT_LANGUAGE,
         "EXECUTABLE_NAME": "IntentsExtension",
         "PRODUCT_BUNDLE_IDENTIFIER": bundle_identifier(suffix=".SiriIntents"),
-        "PRODUCT_NAME": "Telegram",
-        "APP_NAME": "Telegram",
+        "PRODUCT_NAME": "Postufgram",
+        "APP_NAME": "Postufgram",
         "CURRENT_PROJECT_VERSION": "1",
         "APP_SPECIFIC_URL_SCHEME": appConfig()["appSpecificUrlScheme"],
         "BUILD_NUMBER": get_build_number(),
@@ -286,30 +270,28 @@ def intents_extension_info_plist_substitutions():
         "MinimumOSVersion": "10.0",
     }
     return substitutions
-
 def watch_extension_info_plist_substitutions():
     substitutions = {
         "DEVELOPMENT_LANGUAGE": DEVELOPMENT_LANGUAGE,
         "EXECUTABLE_NAME": "WatchAppExtension",
         "PRODUCT_BUNDLE_IDENTIFIER": bundle_identifier(suffix=".watchkitapp.watchkitextension"),
-        "APP_NAME": "Telegram",
+        "APP_NAME": "Postufgram",
         "APP_BUNDLE_ID": bundle_identifier(suffix=""),
-        "PRODUCT_NAME": "Telegram",
+        "PRODUCT_NAME": "Postufgram",
         "CURRENT_PROJECT_VERSION": "1",
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),
         "MinimumOSVersion": "5.0",
     }
     return substitutions
-
 def watch_info_plist_substitutions():
     substitutions = {
         "DEVELOPMENT_LANGUAGE": DEVELOPMENT_LANGUAGE,
         "EXECUTABLE_NAME": "WatchApp",
         "PRODUCT_BUNDLE_IDENTIFIER":bundle_identifier(suffix=".watchkitapp"),
-        "APP_NAME": "Telegram",
+        "APP_NAME": "Postufgram",
         "APP_BUNDLE_ID": bundle_identifier(suffix=""),
-        "PRODUCT_NAME": "Telegram",
+        "PRODUCT_NAME": "Postufgram",
         "CURRENT_PROJECT_VERSION": "1",
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),

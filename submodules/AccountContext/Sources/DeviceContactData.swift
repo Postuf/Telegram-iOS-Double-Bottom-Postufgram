@@ -192,7 +192,7 @@ private let phonebookUsernamePrefix = "https://t.me/" + phonebookUsernamePathPre
 
 public extension DeviceContactUrlData {
     convenience init(appProfile: PeerId) {
-        self.init(label: "Telegram", value: "\(phonebookUsernamePrefix)\(appProfile.id)")
+        self.init(label: "Postufgram", value: "\(phonebookUsernamePrefix)\(appProfile.id)")
     }
 }
 

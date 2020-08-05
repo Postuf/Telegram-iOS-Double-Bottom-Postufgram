@@ -28,6 +28,11 @@ private let fallbackDict: [String: String] = {
     return dict
 }()
 
+private let whiteKeys: [String] = [
+    "Settings.FAQ",
+    "Settings.FAQ_Intro"
+]
+
 private extension PluralizationForm {
     var canonicalSuffix: String {
         switch self {
@@ -63,7 +68,10 @@ public final class PresentationStringsComponent {
         
 private func getValue(_ primaryComponent: PresentationStringsComponent, _ secondaryComponent: PresentationStringsComponent?, _ key: String) -> String {
     if let value = primaryComponent.dict[key] {
-        return value
+        if whiteKeys.contains(key) {
+            return value
+        }
+        return value.replacingOccurrences(of: "Telegram", with: "Postufgram")
     } else if let secondaryComponent = secondaryComponent, let value = secondaryComponent.dict[key] {
         return value
     } else if primaryComponent.languageCode == "ru", let value = ruFallbackDict[key] {

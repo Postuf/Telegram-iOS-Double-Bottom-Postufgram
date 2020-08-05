@@ -50,7 +50,7 @@
 "PUSH_MESSAGE_STICKER" = "%1$@|sent you a %2$@sticker";
 "PUSH_CHAT_MESSAGE_STICKER" = "%2$@|%1$@ sent a %3$@sticker";
 
-"PUSH_CONTACT_JOINED" = "%1$@|joined Telegram!";
+"PUSH_CONTACT_JOINED" = "%1$@|joined Postufgram!";
 
 "PUSH_CHANNEL_MESSAGE_TEXT" = "%1$@|%2$@";
 "PUSH_CHANNEL_MESSAGE_NOTEXT" = "%1$@|posted a message";
@@ -209,7 +209,7 @@
 "PUSH_PINNED_INVOICE" = "%1$@|pinned an invoice";
 "PUSH_PINNED_GIF" = "%1$@|pinned a GIF";
 
-"PUSH_CONTACT_JOINED" = "%1$@|joined Telegram!";
+"PUSH_CONTACT_JOINED" = "%1$@|joined Postufgram!";
 
 "PUSH_AUTH_UNKNOWN" = "New login|from unrecognized device %1$@";
 "PUSH_AUTH_REGION" = "New login|from unrecognized device %1$@, location: %2$@";
@@ -336,38 +336,38 @@
 "Date.ChatDateHeaderYear" = "%1$@ %2$@, %3$@";
 
 // Tour
-"Tour.Title1" = "Telegram";
+"Tour.Title1" = "Postufgram";
 "Tour.Text1" = "The world's **fastest** messaging app.\nIt is **free** and **secure**.";
 
 "Tour.Title2" = "Fast";
-"Tour.Text2" = "**Telegram** delivers messages\nfaster than any other application.";
+"Tour.Text2" = "**Postufgram** delivers messages\nfaster than any other application.";
 
 "Tour.Title3" = "Powerful";
-"Tour.Text3" = "**Telegram** has no limits on\nthe size of your chats and media.";
+"Tour.Text3" = "**Postufgram** has no limits on\nthe size of your chats and media.";
 
 "Tour.Title4" = "Secure";
-"Tour.Text4" = "**Telegram** keeps your messages\nsafe from hacker attacks.";
+"Tour.Text4" = "**Postufgram** keeps your messages\nsafe from hacker attacks.";
 
 "Tour.Title5" = "Cloud-Based";
-"Tour.Text5" = "**Telegram** lets you access your\nmessages from multiple devices.";
+"Tour.Text5" = "**Postufgram** lets you access your\nmessages from multiple devices.";
 
 "Tour.Title6" = "Free";
-"Tour.Text6" = "**Telegram** is free forever. No ads.\nNo subscription fees.";
+"Tour.Text6" = "**Postufgram** is free forever. No ads.\nNo subscription fees.";
 
 "Tour.StartButton" = "Start Messaging";
 
 // Login
 "Login.PhoneAndCountryHelp" = "Please confirm your country code and enter your phone number.";
-"Login.CodeSentInternal" = "We've sent the code to the **Telegram** app on your other device";
+"Login.CodeSentInternal" = "We've sent the code to the **Postufgram** app on your other device";
 "Login.HaveNotReceivedCodeInternal" = "Haven't received the code?";
 "Login.CodeSentSms" = "We have sent you an SMS with the code";
 "Login.Code" = "Code";
-"Login.WillCallYou" = "Telegram will call you in %@";
-"Login.CallRequestState2" = "Requesting a call from Telegram...";
-"Login.CallRequestState3" = "Telegram dialed your number\n[Didn't get the code?]";
+"Login.WillCallYou" = "Postufgram will call you in %@";
+"Login.CallRequestState2" = "Requesting a call from Postufgram...";
+"Login.CallRequestState3" = "Postufgram dialed your number\n[Didn't get the code?]";
 "Login.EmailNotConfiguredError" = "Please set up an email account.";
 "Login.EmailCodeSubject" = "%@, no code";
-"Login.EmailCodeBody" = "My phone number is:\n%@\nI can't get an activation code for Telegram.";
+"Login.EmailCodeBody" = "My phone number is:\n%@\nI can't get an activation code for Postufgram.";
 "Login.UnknownError" = "An error occurred. Please try again later";
 "Login.InvalidCodeError" = "You have entered an invalid code. Please try again.";
 "Login.NetworkError" = "Please check your internet connection and try again.";
@@ -378,13 +378,13 @@
 "Login.InvalidLastNameError" = "Invalid last name. Please try again.";
 
 "Login.InvalidPhoneEmailSubject" = "Invalid phone number: %@";
-"Login.InvalidPhoneEmailBody" = "I'm trying to use my mobile phone number: %1$@\nBut Telegram says it's invalid. Please help.\n\nApp version: %2$@\nOS version: %3$@\nLocale: %4$@\nMNC: %5$@";
+"Login.InvalidPhoneEmailBody" = "I'm trying to use my mobile phone number: %1$@\nBut Postufgram says it's invalid. Please help.\n\nApp version: %2$@\nOS version: %3$@\nLocale: %4$@\nMNC: %5$@";
 
 "Login.PhoneBannedEmailSubject" = "Banned phone number: %@";
-"Login.PhoneBannedEmailBody" = "I'm trying to use my mobile phone number: %1$@\nBut Telegram says it's banned. Please help.\n\nApp version: %2$@\nOS version: %3$@\nLocale: %4$@\nMNC: %5$@";
+"Login.PhoneBannedEmailBody" = "I'm trying to use my mobile phone number: %1$@\nBut Postufgram says it's banned. Please help.\n\nApp version: %2$@\nOS version: %3$@\nLocale: %4$@\nMNC: %5$@";
 
-"Login.PhoneGenericEmailSubject" = "Telegram iOS error: %@";
-"Login.PhoneGenericEmailBody" = "I'm trying to use my mobile phone number: %1$@\nBut Telegram shows an error. Please help.\n\nError: %2$@\nApp version: %3$@\nOS version: %4$@\nLocale: %5$@\nMNC: %6$@";
+"Login.PhoneGenericEmailSubject" = "Postufgram iOS error: %@";
+"Login.PhoneGenericEmailBody" = "I'm trying to use my mobile phone number: %1$@\nBut Postufgram shows an error. Please help.\n\nError: %2$@\nApp version: %3$@\nOS version: %4$@\nLocale: %5$@\nMNC: %6$@";
 
 
 "Login.PhoneTitle" = "Your Phone";
@@ -438,11 +438,11 @@
 "Contacts.TabTitle" = "Contacts";
 "Contacts.Title" = "Contacts";
 "Contacts.FailedToSendInvitesMessage" = "An error occurred.";
-"Contacts.AccessDeniedError" = "Telegram does not have access to your contacts";
-"Contacts.AccessDeniedHelpLandscape" = "Please go to your %@ Settings — Privacy — Contacts.\nThen select ON for Telegram.";
-"Contacts.AccessDeniedHelpPortrait" = "Please go to your %@ Settings — Privacy — Contacts. Then select ON for Telegram.";
+"Contacts.AccessDeniedError" = "Postufgram does not have access to your contacts";
+"Contacts.AccessDeniedHelpLandscape" = "Please go to your %@ Settings — Privacy — Contacts.\nThen select ON for Postufgram.";
+"Contacts.AccessDeniedHelpPortrait" = "Please go to your %@ Settings — Privacy — Contacts. Then select ON for Postufgram.";
 "Contacts.AccessDeniedHelpON" = "ON";
-"Contacts.InviteToTelegram" = "Invite to Telegram";
+"Contacts.InviteToTelegram" = "Invite to Postufgram";
 "Contacts.InviteFriends" = "Invite Friends";
 "Contacts.SelectAll" = "Select All";
 
@@ -478,7 +478,7 @@
 "Conversation.Contact" = "Contact";
 "Conversation.BlockUser" = "Block User";
 "Conversation.UnblockUser" = "Unblock User";
-"Conversation.UnsupportedMedia" = "This message is not supported on your version of Telegram. Update the app to view:\nhttps://telegram.org/update";
+"Conversation.UnsupportedMedia" = "This message is not supported on your version of Postufgram. Update the app to view:\nhttps://telegram.org/update";
 "Conversation.EncryptionWaiting" = "Waiting for %@ to get online...";
 "Conversation.EncryptionProcessing" = "Exchanging encryption keys...";
 "Conversation.EmptyPlaceholder" = "No messages here yet...";
@@ -525,9 +525,9 @@
 "Notification.CreatedChat" = "%@ created a group";
 "Notification.CreatedChannel" = "Channel created";
 "Notification.CreatedChatWithTitle" = "%@ created the group \"%@\" ";
-"Notification.Joined" = "%@ joined Telegram";
+"Notification.Joined" = "%@ joined Postufgram";
 "Notification.ChangedGroupName" = "%@ changed group name to \"%@\" ";
-"Notification.NewAuthDetected" = "%1$@,\nWe detected a login into your account from a new device on %2$@, %3$@ at %4$@\n\nDevice: %5$@\nLocation: %6$@\n\nIf this wasn't you, you can go to Settings — Privacy and Security — Sessions and terminate that session.\n\nIf you think that somebody logged in to your account against your will, you can enable two-step verification in Privacy and Security settings.\n\nSincerely,\nThe Telegram Team";
+"Notification.NewAuthDetected" = "%1$@,\nWe detected a login into your account from a new device on %2$@, %3$@ at %4$@\n\nDevice: %5$@\nLocation: %6$@\n\nIf this wasn't you, you can go to Settings — Privacy and Security — Sessions and terminate that session.\n\nIf you think that somebody logged in to your account against your will, you can enable two-step verification in Privacy and Security settings.\n\nSincerely,\nThe Postufgram Team";
 "Notification.MessageLifetimeChanged" = "%1$@ set the self-destruct timer to %2$@";
 "Notification.MessageLifetimeChangedOutgoing" = "You set the self-destruct timer to %1$@";
 "Notification.MessageLifetimeRemoved" = "%1$@ disabled the self-destruct timer";
@@ -591,7 +591,7 @@
 
 // User Profile
 "Profile.CreateEncryptedChatError" = "An error occurred.";
-"Profile.CreateEncryptedChatOutdatedError" = "Cannot create a secret chat with %@.\n%@ is using an older version of Telegram and needs to update first.";
+"Profile.CreateEncryptedChatOutdatedError" = "Cannot create a secret chat with %@.\n%@ is using an older version of Postufgram and needs to update first.";
 "Profile.CreateNewContact" = "Create New Contact";
 "Profile.AddToExisting" = "Add to Existing Contact";
 "Profile.EncryptionKey" = "Encryption Key";
@@ -623,7 +623,7 @@
 "UserInfo.NotificationsDisabled" = "Disabled";
 "UserInfo.NotificationsEnable" = "Enable";
 "UserInfo.NotificationsDisable" = "Disable";
-"UserInfo.Invite" = "Invite to Telegram";
+"UserInfo.Invite" = "Invite to Postufgram";
 
 // New Contact
 "NewContact.Title" = "New Contact";
@@ -699,7 +699,7 @@
 "Settings.Support" = "Ask a Question";
 "Settings.FAQ" = "Telegram FAQ";
 "Settings.FAQ_URL" = "https://telegram.org/faq#general";
-"Settings.FAQ_Intro" = "Please note that Telegram Support is done by volunteers. We try to respond as quickly as possible, but it may take a while.\n\nPlease take a look at the Telegram FAQ: it has important troubleshooting tips and answers to most questions.";
+"Settings.FAQ_Intro" = "Please note that Postufgram Support is done by volunteers. We try to respond as quickly as possible, but it may take a while.\n\nPlease take a look at the Postufgram FAQ: it has important troubleshooting tips and answers to most questions.";
 "Settings.FAQ_Button" = "FAQ";
 "Settings.SaveIncomingPhotos" = "Save Incoming Photos";
 
@@ -756,7 +756,7 @@
 "Cache.Title" = "Storage Usage";
 "Cache.ClearCache" = "Clear Cache";
 "Cache.KeepMedia" = "Keep Media";
-"Cache.Help" = "Photos, videos and other files from cloud chats that you have **not accessed** during this period will be removed from this device to save disk space.\n\nAll media will stay in the Telegram cloud and can be re-downloaded if you need it again.";
+"Cache.Help" = "Photos, videos and other files from cloud chats that you have **not accessed** during this period will be removed from this device to save disk space.\n\nAll media will stay in the Postufgram cloud and can be re-downloaded if you need it again.";
 
 // Blocked Users
 "BlockedUsers.Title" = "Blocked";
@@ -780,9 +780,9 @@
 "BroadcastListInfo.AddRecipient" = "Add Recipient";
 
 "Settings.LogoutConfirmationTitle" = "Log out?";
-"Settings.LogoutConfirmationText" = "\nNote that you can seamlessly use Telegram on all your devices at once.\n\nRemember, logging out kills all your Secret Chats.";
+"Settings.LogoutConfirmationText" = "\nNote that you can seamlessly use Postufgram on all your devices at once.\n\nRemember, logging out kills all your Secret Chats.";
 
-"Login.PadPhoneHelp" = "\nYou can use your main mobile number to log in to Telegram on all devices.\nDon't use your iPad's SIM number here — we'll need to send you an SMS.\n\nIs this number correct?\n{number}";
+"Login.PadPhoneHelp" = "\nYou can use your main mobile number to log in to Postufgram on all devices.\nDon't use your iPad's SIM number here — we'll need to send you an SMS.\n\nIs this number correct?\n{number}";
 "Login.PadPhoneHelpTitle" = "Your Number";
 
 "MessageTimer.Custom" = "Custom";
@@ -868,7 +868,7 @@
 "Activity.RecordingAudio" = "recording audio";
 "Activity.RecordingVideoMessage" = "recording video";
 
-"Compatibility.SecretMediaVersionTooLow" = "%@ is using an older version of Telegram, so secret photos will be shown in compatibility mode.\n\nOnce %@ updates Telegram, photos with timers for 1 minute or less will start working in 'Tap and hold to view' mode, and you will be notified whenever the other party takes a screenshot.";
+"Compatibility.SecretMediaVersionTooLow" = "%@ is using an older version of Postufgram, so secret photos will be shown in compatibility mode.\n\nOnce %@ updates Postufgram, photos with timers for 1 minute or less will start working in 'Tap and hold to view' mode, and you will be notified whenever the other party takes a screenshot.";
 
 "Contacts.GlobalSearch" = "Global Search";
 "Profile.Username" = "username";
@@ -877,7 +877,7 @@
 
 "Username.Title" = "Username";
 "Username.Placeholder" = "Your Username";
-"Username.Help" = "You can choose a username on **Telegram**. If you do, other people will be able to find you by this username and contact you without knowing your phone number.\n\nYou can use **a-z**, **0-9** and underscores. Minimum length is **5** characters.";
+"Username.Help" = "You can choose a username on **Postufgram**. If you do, other people will be able to find you by this username and contact you without knowing your phone number.\n\nYou can use **a-z**, **0-9** and underscores. Minimum length is **5** characters.";
 "Username.InvalidTooShort" = "A username must have at least 5 characters.";
 "Username.InvalidStartsWithNumber" = "Sorry, a username can't start with a number.";
 "Username.InvalidCharacters" = "Sorry, this username is invalid.";
@@ -979,8 +979,8 @@
 
 "Settings.PhoneNumber" = "Change Number";
 
-"PhoneNumberHelp.Help" = "You can change your Telegram number here. Your account and all your cloud data — messages, media, contacts, etc. will be moved to the new number.\n\n**Important:** all your Telegram contacts will get your **new number** added to their address book, provided they had your old number and you haven't blocked them in Telegram.";
-"PhoneNumberHelp.Alert" = "All your Telegram contacts will get your new number added to their address book, provided they had your old number and you haven't blocked them in Telegram.";
+"PhoneNumberHelp.Help" = "You can change your Postufgram number here. Your account and all your cloud data — messages, media, contacts, etc. will be moved to the new number.\n\n**Important:** all your Postufgram contacts will get your **new number** added to their address book, provided they had your old number and you haven't blocked them in Postufgram.";
+"PhoneNumberHelp.Alert" = "All your Postufgram contacts will get your new number added to their address book, provided they had your old number and you haven't blocked them in Postufgram.";
 "PhoneNumberHelp.ChangeNumber" = "Change Number";
 
 "ChangePhoneNumberNumber.Title" = "Change Number";
@@ -991,9 +991,9 @@
 "ChangePhoneNumberCode.Code" = "YOUR CODE";
 "ChangePhoneNumberCode.CodePlaceholder" = "Code";
 "ChangePhoneNumberCode.Help" = "We have sent you an SMS with the code";
-"ChangePhoneNumberCode.CallTimer" = "Telegram will call you in %@";
-"ChangePhoneNumberCode.RequestingACall" = "Requesting a call from Telegram...";
-"ChangePhoneNumberCode.Called" = "Telegram dialed your number";
+"ChangePhoneNumberCode.CallTimer" = "Postufgram will call you in %@";
+"ChangePhoneNumberCode.RequestingACall" = "Requesting a call from Postufgram...";
+"ChangePhoneNumberCode.Called" = "Postufgram dialed your number";
 
 "LoginPassword.Title" = "Your Password";
 "LoginPassword.PasswordPlaceholder" = "Password";
@@ -1127,14 +1127,14 @@
 "SharedMedia.EmptyFilesText" = "You can send and receive\nfiles of any type up to 1.5 GB each\nand access them anywhere.";
 
 "ShareFileTip.Title" = "Sharing Files";
-"ShareFileTip.Text" = "You can share **uncompressed** media files from your Camera Roll here.\n\nTo share files of any other type, open them on your %@ (e.g. in your browser), tap **Open in...** or the action button and choose Telegram.";
+"ShareFileTip.Text" = "You can share **uncompressed** media files from your Camera Roll here.\n\nTo share files of any other type, open them on your %@ (e.g. in your browser), tap **Open in...** or the action button and choose Postufgram.";
 "ShareFileTip.CloseTip" = "Close Tip";
 
 "DialogList.SearchSectionDialogs" = "Chats and Contacts";
 "DialogList.SearchSectionGlobal" = "Global Search";
 "DialogList.SearchSectionMessages" = "Messages";
 
-"Username.LinkHint" = "This link opens a chat with you in Telegram:[\nhttps://t.me/%@]";
+"Username.LinkHint" = "This link opens a chat with you in Postufgram:[\nhttps://t.me/%@]";
 "Username.LinkCopied" = "Copied link to clipboard";
 
 "SharedMedia.DeleteItemsConfirmation_1" = "Delete media file?";
@@ -1154,18 +1154,18 @@
 "PasscodeSettings.SimplePasscode" = "Simple Passcode";
 "PasscodeSettings.SimplePasscodeHelp" = "A simple passcode is a 4 digit number.";
 "PasscodeSettings.EncryptData" = "Encrypt Local Database";
-"PasscodeSettings.EncryptDataHelp" = "Experimental feature, use with caution. Encrypt your local Telegram data, using a derivative of your passcode as the key.";
+"PasscodeSettings.EncryptDataHelp" = "Experimental feature, use with caution. Encrypt your local Postufgram data, using a derivative of your passcode as the key.";
 
-"EnterPasscode.EnterTitle" = "Enter your Telegram Passcode";
+"EnterPasscode.EnterTitle" = "Enter your Postufgram Passcode";
 "EnterPasscode.ChangeTitle" = "Change Passcode";
-"EnterPasscode.EnterPasscode" = "Enter your Telegram Passcode";
+"EnterPasscode.EnterPasscode" = "Enter your Postufgram Passcode";
 "EnterPasscode.EnterNewPasscodeNew" = "Enter a passcode";
 "EnterPasscode.EnterNewPasscodeChange" = "Enter your new passcode";
 "EnterPasscode.RepeatNewPasscode" = "Re-enter your new passcode";
 "EnterPasscode.EnterCurrentPasscode" = "Enter your current passcode";
-"EnterPasscode.TouchId" = "Unlock Telegram";
+"EnterPasscode.TouchId" = "Unlock Postufgram";
 
-"DialogList.PasscodeLockHelp" = "Tap to lock Telegram";
+"DialogList.PasscodeLockHelp" = "Tap to lock Postufgram";
 
 "PasscodeSettings.AutoLock" = "Auto-Lock";
 "PasscodeSettings.AutoLock.Disabled" = "Disabled";
@@ -1185,32 +1185,32 @@
 
 "AccessDenied.Title" = "Please Allow Access";
 
-"AccessDenied.Contacts" = "Telegram messaging is based on your existing contact list.\n\nPlease go to Settings > Privacy > Contacts and set Telegram to ON.";
+"AccessDenied.Contacts" = "Postufgram messaging is based on your existing contact list.\n\nPlease go to Settings > Privacy > Contacts and set Postufgram to ON.";
 
-"AccessDenied.VoiceMicrophone" = "Telegram needs access to your microphone to send voice messages.\n\nPlease go to Settings > Privacy > Microphone and set Telegram to ON.";
+"AccessDenied.VoiceMicrophone" = "Postufgram needs access to your microphone to send voice messages.\n\nPlease go to Settings > Privacy > Microphone and set Postufgram to ON.";
 
-"AccessDenied.VideoMicrophone" = "Telegram needs access to your microphone to record sound in videos recording.\n\nPlease go to Settings > Privacy > Microphone and set Telegram to ON.";
+"AccessDenied.VideoMicrophone" = "Postufgram needs access to your microphone to record sound in videos recording.\n\nPlease go to Settings > Privacy > Microphone and set Postufgram to ON.";
 
-"AccessDenied.MicrophoneRestricted" = "Microphone access is restricted for Telegram.\n\nPlease go to Settings > General > Restrictions > Microphone and set Telegram to ON.";
+"AccessDenied.MicrophoneRestricted" = "Microphone access is restricted for Postufgram.\n\nPlease go to Settings > General > Restrictions > Microphone and set Postufgram to ON.";
 
 
-"AccessDenied.Camera" = "Telegram needs access to your camera to take photos and videos.\n\nPlease go to Settings > Privacy > Camera and set Telegram to ON.";
+"AccessDenied.Camera" = "Postufgram needs access to your camera to take photos and videos.\n\nPlease go to Settings > Privacy > Camera and set Postufgram to ON.";
 
-"AccessDenied.CameraRestricted" = "Camera access is restricted for Telegram.\n\nPlease go to Settings > General > Restrictions > Camera and set Telegram to ON.";
+"AccessDenied.CameraRestricted" = "Camera access is restricted for Postufgram.\n\nPlease go to Settings > General > Restrictions > Camera and set Postufgram to ON.";
 
 "AccessDenied.CameraDisabled" = "Camera access is globally restricted on your phone.\n\nPlease go to Settings > General > Restrictions and set Camera to ON";
 
-"AccessDenied.PhotosAndVideos" = "Telegram needs access to your photo library to send photos and videos.\n\nPlease go to Settings > Privacy > Photos and set Telegram to ON.";
+"AccessDenied.PhotosAndVideos" = "Postufgram needs access to your photo library to send photos and videos.\n\nPlease go to Settings > Privacy > Photos and set Postufgram to ON.";
 
-"AccessDenied.SaveMedia" = "Telegram needs access to your photo library to save photos and videos.\n\nPlease go to Settings > Privacy > Photos and set Telegram to ON.";
+"AccessDenied.SaveMedia" = "Postufgram needs access to your photo library to save photos and videos.\n\nPlease go to Settings > Privacy > Photos and set Postufgram to ON.";
 
-"AccessDenied.PhotosRestricted" = "Photo access is restricted for Telegram.\n\nPlease go to Settings > General > Restrictions > Photos and set Telegram to ON.";
+"AccessDenied.PhotosRestricted" = "Photo access is restricted for Postufgram.\n\nPlease go to Settings > General > Restrictions > Photos and set Postufgram to ON.";
 
-"AccessDenied.LocationDenied" = "Telegram needs access to your location so that you can share it with your contacts.\n\nPlease go to Settings > Privacy > Location Services and set Telegram to ON.";
+"AccessDenied.LocationDenied" = "Postufgram needs access to your location so that you can share it with your contacts.\n\nPlease go to Settings > Privacy > Location Services and set Postufgram to ON.";
 
-"AccessDenied.LocationDisabled" = "Telegram needs access to your location so that you can share it with your contacts.\n\nPlease go to Settings > Privacy > Location Services and set it to ON.";
+"AccessDenied.LocationDisabled" = "Postufgram needs access to your location so that you can share it with your contacts.\n\nPlease go to Settings > Privacy > Location Services and set it to ON.";
 
-"AccessDenied.LocationTracking" = "Telegram needs access to your location to show you on the map.\n\nPlease go to Settings > Privacy > Location Services and set it to ON.";
+"AccessDenied.LocationTracking" = "Postufgram needs access to your location to show you on the map.\n\nPlease go to Settings > Privacy > Location Services and set it to ON.";
 
 "AccessDenied.Settings" = "Settings";
 
@@ -1305,7 +1305,7 @@
 "TwoStepAuth.SetupEmail" = "Set Recovery E-Mail";
 "TwoStepAuth.ChangeEmail" = "Change Recovery E-Mail";
 "TwoStepAuth.PendingEmailHelp" = "Your recovery e-mail %@ is not yet active and pending confirmation.";
-"TwoStepAuth.GenericHelp" = "You have enabled Two-Step verification.\nYou'll need the password you set up here to log in to your Telegram account.";
+"TwoStepAuth.GenericHelp" = "You have enabled Two-Step verification.\nYou'll need the password you set up here to log in to your Postufgram account.";
 
 "TwoStepAuth.ConfirmationTitle" = "Two-Step Verification";
 "TwoStepAuth.ConfirmationText" = "Please check your e-mail and click on the validation link to complete Two-Step Verification setup. Be sure to check the spam folder as well.";
@@ -1325,7 +1325,7 @@
 
 "TwoStepAuth.EmailTitle" = "Recovery E-Mail";
 "TwoStepAuth.EmailSkip" = "Skip";
-"TwoStepAuth.EmailSkipAlert" = "No, seriously.\n\nIf you forget your password, you will lose access to your Telegram account. There will be no way to restore it.";
+"TwoStepAuth.EmailSkipAlert" = "No, seriously.\n\nIf you forget your password, you will lose access to your Postufgram account. There will be no way to restore it.";
 "TwoStepAuth.Email" = "E-Mail";
 "TwoStepAuth.EmailPlaceholder" = "Your E-Mail";
 "TwoStepAuth.EmailHelp" = "Please add your valid e-mail. It is the only way to recover a forgotten password.";
@@ -1354,7 +1354,7 @@
 "Conversation.FileDropbox" = "Dropbox";
 
 "Conversation.FileOpenIn" = "Open in...";
-"Conversation.FileHowToText" = "To share files of any type, open them on your %@ (e.g. in your browser), tap **Open in...** or the action button and choose Telegram.";
+"Conversation.FileHowToText" = "To share files of any type, open them on your %@ (e.g. in your browser), tap **Open in...** or the action button and choose Postufgram.";
 
 "Map.LocationTitle" = "Location";
 "Map.OpenInMaps" = "Open in Maps";
@@ -1388,9 +1388,9 @@
 "Map.ETAHours_any" = "%@ h";
 "Map.ETAHours_many" = "%@ h";
 
-"ChangePhone.ErrorOccupied" = "The number %@ is already connected to a Telegram account. Please delete that account before migrating to the new number.";
+"ChangePhone.ErrorOccupied" = "The number %@ is already connected to a Postufgram account. Please delete that account before migrating to the new number.";
 
-"AccessDenied.LocationTracking" = "Telegram needs access to your location to show you on the map.\n\nPlease go to Settings > Privacy > Location Services and set it to ON.";
+"AccessDenied.LocationTracking" = "Postufgram needs access to your location to show you on the map.\n\nPlease go to Settings > Privacy > Location Services and set it to ON.";
 
 "PrivacySettings.AuthSessions" = "Active Sessions";
 "AuthSessions.Title" = "Active Sessions";
@@ -1400,7 +1400,7 @@
 "AuthSessions.TerminateSession" = "Terminate session";
 "AuthSessions.OtherSessions" = "ACTIVE SESSIONS";
 "AuthSessions.EmptyTitle" = "No other sessions";
-"AuthSessions.EmptyText" = "You can log in to Telegram from other mobile, tablet and desktop devices, using the same phone number. All your data will be instantly synchronized.";
+"AuthSessions.EmptyText" = "You can log in to Postufgram from other mobile, tablet and desktop devices, using the same phone number. All your data will be instantly synchronized.";
 "AuthSessions.AppUnofficial" = "(ID: %@)";
 
 "WebPreview.GettingLinkInfo" = "Getting Link Info...";
@@ -1413,7 +1413,7 @@
 
 "GroupInfo.InviteLink.Title" = "Invite Link";
 "GroupInfo.InviteLink.LinkSection" = "LINK";
-"GroupInfo.InviteLink.Help" = "Anyone who has Telegram installed will be able to join your group by following this link.";
+"GroupInfo.InviteLink.Help" = "Anyone who has Postufgram installed will be able to join your group by following this link.";
 "GroupInfo.InviteLink.CopyLink" = "Copy Link";
 "GroupInfo.InviteLink.RevokeLink" = "Revoke Link";
 "GroupInfo.InviteLink.ShareLink" = "Share Link";
@@ -1500,7 +1500,7 @@
 
 "Login.PhoneNumberHelp" = "Help";
 "Login.EmailPhoneSubject" = "Invalid number %@";
-"Login.EmailPhoneBody" = "I'm trying to use my mobile phone number: %@\nBut Telegram says it's invalid. Please help.\nAdditional Info: %@, %@.";
+"Login.EmailPhoneBody" = "I'm trying to use my mobile phone number: %@\nBut Postufgram says it's invalid. Please help.\nAdditional Info: %@, %@.";
 
 "SharedMedia.TitleLink" = "Shared Links";
 "SharedMedia.EmptyLinksText" = "All links shared in this chat will appear here.";
@@ -1527,8 +1527,8 @@
 "Channel.Edit.LinkItem" = "Link";
 
 "Channel.Username.Title" = "Link";
-"Channel.Username.Help" = "You can choose a channel name on **Telegram**. If you do, other people will be able to find your channel by this name.\n\nYou can use **a-z**, **0-9** and underscores. Minimum length is **5** characters.";
-"Channel.Username.LinkHint" = "This link opens your channel in Telegram:[\nhttps://t.me/%@]";
+"Channel.Username.Help" = "You can choose a channel name on **Postufgram**. If you do, other people will be able to find your channel by this name.\n\nYou can use **a-z**, **0-9** and underscores. Minimum length is **5** characters.";
+"Channel.Username.LinkHint" = "This link opens your channel in Postufgram:[\nhttps://t.me/%@]";
 "Channel.Username.InvalidTooShort" = "Channel names must have at least 5 characters.";
 "Channel.Username.InvalidStartsWithNumber" = "Channel names can't start with a number.";
 "Channel.Username.InvalidCharacters" = "Sorry, this name is invalid.";
@@ -1572,7 +1572,7 @@
 
 "Channel.Setup.Title" = "Channel";
 
-"Channel.Username.CreatePublicLinkHelp" = "People can share this link with others and find your channel using Telegram search.";
+"Channel.Username.CreatePublicLinkHelp" = "People can share this link with others and find your channel using Postufgram search.";
 "Channel.Username.CreatePrivateLinkHelp" = "People can join your channel by following this link. You can revoke the link at any time.";
 
 "Channel.Setup.PublicNoLink" = "Please choose a link for your public channel, so that people can find it in search and share with others.\n\nIf you're not interested, we suggest creating a private channel instead.";
@@ -1698,7 +1698,7 @@
 
 "Group.Management.AddModeratorHelp" = "You can add admins to help you manage your group.";
 
-"Watch.AppName" = "Telegram";
+"Watch.AppName" = "Postufgram";
 "Watch.Compose.AddContact" = "Choose Contact";
 "Watch.Compose.CreateMessage" = "Create Message";
 "Watch.Compose.CurrentLocation" = "Current Location";
@@ -1733,7 +1733,7 @@
 
 "Watch.Message.ForwardedFrom" = "Forwarded from";
 
-"Watch.Notification.Joined" = "Joined Telegram";
+"Watch.Notification.Joined" = "Joined Postufgram";
 
 "Watch.MessageView.Title" = "Message";
 "Watch.MessageView.Forward" = "Forward";
@@ -1747,9 +1747,9 @@
 "Watch.Stickers.StickerPacks" = "Sticker Sets";
 
 "Watch.Location.Current" = "Current Location";
-"Watch.Location.Access" = "Allow Telegram to access location on your phone";
+"Watch.Location.Access" = "Allow Postufgram to access location on your phone";
 
-"Watch.AuthRequired" = "Log in to Telegram on your phone to get started";
+"Watch.AuthRequired" = "Log in to Postufgram on your phone to get started";
 
 "Watch.NoConnection" = "No Connection";
 "Watch.ConnectionDescription" = "Your Watch needs to be connected for the app to work";
@@ -1796,7 +1796,7 @@
 "Cache.ClearProgress" = "Please Wait...";
 "Cache.ClearEmpty" = "Empty";
 "Cache.ByPeerHeader" = "CHATS";
-"Cache.Indexing" = "Telegram is calculating current cache size.\nThis can take a few minutes.";
+"Cache.Indexing" = "Postufgram is calculating current cache size.\nThis can take a few minutes.";
 
 "ExplicitContent.AlertTitle" = "Sorry";
 "ExplicitContent.AlertChannel" = "You can't access this channel because it violates App Store rules.";
@@ -1877,7 +1877,7 @@
 "PrivacyLastSeenSettings.GroupsAndChannelsHelp" = "Change who can add you to groups and channels.";
 "MusicPlayer.VoiceNote" = "Voice Message";
 
-"Watch.Microphone.Access" = "Allow Telegram to access the microphone on your phone";
+"Watch.Microphone.Access" = "Allow Postufgram to access the microphone on your phone";
 
 "Settings.AppleWatch" = "Apple Watch";
 "AppleWatch.Title" = "Apple Watch";
@@ -1896,7 +1896,7 @@
 "KeyCommand.SendMessage" = "Send Message";
 "KeyCommand.ChatInfo" = "Chat Info";
 
-"Conversation.SecretLinkPreviewAlert" = "Would you like to enable extended link previews in Secret Chats? Note that link previews are generated on Telegram servers.";
+"Conversation.SecretLinkPreviewAlert" = "Would you like to enable extended link previews in Secret Chats? Note that link previews are generated on Postufgram servers.";
 "Conversation.SecretChatContextBotAlert" = "Please note that inline bots are provided by third-party developers. For the bot to work, the symbols you type after the bot's username are sent to the respective developer.";
 
 "Map.OpenInWaze" = "Open in Waze";
@@ -1968,7 +1968,7 @@
 "Group.Setup.TypePublicHelp" = "Public groups can be found in search, chat history is available to everyone and anyone can join.";
 "Group.Setup.TypePrivateHelp" = "Private groups can only be joined if you were invited or have an invite link.";
 
-"Group.Username.CreatePublicLinkHelp" = "People can share this link with others and find your group using Telegram search.";
+"Group.Username.CreatePublicLinkHelp" = "People can share this link with others and find your group using Postufgram search.";
 "Group.Username.CreatePrivateLinkHelp" = "People can join your group by following this link. You can revoke the link at any time.";
 
 "Conversation.PinMessageAlertGroup" = "Pin this message and notify all members of the group?";
@@ -2068,12 +2068,12 @@
 
 "Login.CodeSentCall" = "We are calling your phone to dictate a code.";
 
-"Login.WillSendSms" = "Telegram will send you an SMS in %@";
-"Login.SmsRequestState2" = "Requesting an SMS from Telegram...";
-"Login.SmsRequestState3" = "Telegram sent you an SMS\n[Didn't get the code?]";
+"Login.WillSendSms" = "Postufgram will send you an SMS in %@";
+"Login.SmsRequestState2" = "Requesting an SMS from Postufgram...";
+"Login.SmsRequestState3" = "Postufgram sent you an SMS\n[Didn't get the code?]";
 
 "CancelResetAccount.Title" = "Cancel Account Reset";
-"CancelResetAccount.TextSMS" = "Somebody with access to your phone number %@ has requested to delete your Telegram account and reset your 2-Step Verification password.\n\nIf it wasn't you, please enter the code we've just sent you via SMS to your number.";
+"CancelResetAccount.TextSMS" = "Somebody with access to your phone number %@ has requested to delete your Postufgram account and reset your 2-Step Verification password.\n\nIf it wasn't you, please enter the code we've just sent you via SMS to your number.";
 
 "CancelResetAccount.Success" = "The deletion process was cancelled for your account %@.";
 "MediaPicker.MomentsDateRangeSameMonthYearFormat" = "{month} {day1} – {day2}, {year}";
@@ -2172,7 +2172,7 @@
 "StickerPack.RemoveMaskCount_many" = "Remove %@ Masks";
 "StickerPack.RemoveMaskCount_0" = "Remove %@ Masks";
 
-"Conversation.BotInteractiveUrlAlert" = "Allow %@ to pass your Telegram name and id (not your phone number) to pages you open with this bot?";
+"Conversation.BotInteractiveUrlAlert" = "Allow %@ to pass your Postufgram name and id (not your phone number) to pages you open with this bot?";
 "StickerPacksSettings.ArchivedMasks" = "Archived Masks";
 "StickerSettings.MaskContextInfo" = "If you archive a set of masks, you can quickly restore it later from the Archived Masks section.";
 "StickerPacksSettings.ArchivedMasks.Info" = "You can have up to 200 sets of masks.
@@ -2180,7 +2180,7 @@ Unused sets are archived when you add more.";
 
 "CloudStorage.Title" = "Cloud Storage";
 
-"Widget.AuthRequired" = "Log in to Telegram";
+"Widget.AuthRequired" = "Log in to Postufgram";
 "Widget.NoUsers" = "Start messaging to see your friends here";
 
 "ShareMenu.CopyShareLinkGame" = "Copy link to game";
@@ -2205,11 +2205,11 @@ Unused sets are archived when you add more.";
 "Conversation.JumpToDate" = "Jump To Date";
 "Conversation.AddToReadingList" = "Add to Reading List";
 
-"AccessDenied.CallMicrophone" = "Telegram needs access to your microphone for voice calls.\n\nPlease go to Settings > Privacy > Microphone and set Telegram to ON.";
+"AccessDenied.CallMicrophone" = "Postufgram needs access to your microphone for voice calls.\n\nPlease go to Settings > Privacy > Microphone and set Postufgram to ON.";
 
 "Call.EncryptionKey.Title" = "Encryption Key";
 
-"Application.Name" = "Telegram";
+"Application.Name" = "Postufgram";
 "DialogList.Pin" = "Pin";
 "DialogList.Unpin" = "Unpin";
 "DialogList.PinLimitError" = "Sorry, you can pin no more than %@ chats to the top.";
@@ -2259,7 +2259,7 @@ Unused sets are archived when you add more.";
 "Calls.AddTab" = "Add Tab";
 "Calls.NewCall" = "New Call";
 
-"Calls.RatingTitle" = "Please rate the quality\nof your Telegram call";
+"Calls.RatingTitle" = "Please rate the quality\nof your Postufgram call";
 "Calls.SubmitRating" = "Submit";
 
 "Call.Seconds_1" = "%@ second";
@@ -2426,14 +2426,14 @@ Unused sets are archived when you add more.";
 
 "Calls.RatingFeedback" = "Write a comment...";
 
-"Call.StatusIncoming" = "Telegram Audio...";
+"Call.StatusIncoming" = "Postufgram Audio...";
 "Call.IncomingVoiceCall" = "Incoming Voice Call";
 "Call.IncomingVideoCall" = "Incoming Video Call";
 "Call.StatusRequesting" = "Contacting...";
 "Call.StatusWaiting" = "Waiting...";
 "Call.StatusRinging" = "Ringing...";
 "Call.StatusConnecting" = "Connecting...";
-"Call.StatusOngoing" = "Telegram Audio %@";
+"Call.StatusOngoing" = "Postufgram Audio %@";
 "Call.StatusEnded" = "Call Ended";
 "Call.StatusFailed" = "Call Failed";
 "Call.StatusBusy" = "Busy";
@@ -2487,7 +2487,7 @@ Unused sets are archived when you add more.";
 "Call.AudioRouteHeadphones" = "Headphones";
 "Call.AudioRouteHide" = "Hide";
 
-"Call.PhoneCallInProgressMessage" = "You can’t place a Telegram call if you’re already on a phone call.";
+"Call.PhoneCallInProgressMessage" = "You can’t place a Postufgram call if you’re already on a phone call.";
 "Call.RecordingDisabledMessage" = "Please end your call before recording a voice message.";
 
 "Call.EmojiDescription" = "If these emoji are the same on %@'s screen, this call is 100%% secure.";
@@ -2497,7 +2497,7 @@ Unused sets are archived when you add more.";
 "Conversation.HoldForAudio" = "Hold to record audio. Tap to switch to video.";
 "Conversation.HoldForVideo" = "Hold to record video. Tap to switch to audio.";
 
-"UserInfo.TelegramCall" = "Telegram Call";
+"UserInfo.TelegramCall" = "Postufgram Call";
 "UserInfo.PhoneCall" = "Phone Call";
 
 "SharedMedia.CategoryMedia" = "Media";
@@ -2505,8 +2505,8 @@ Unused sets are archived when you add more.";
 "SharedMedia.CategoryLinks" = "Links";
 "SharedMedia.CategoryOther" = "Audio";
 
-"AccessDenied.VideoMessageCamera" = "Telegram needs access to your camera to send video messages.\n\nPlease go to Settings > Privacy > Camera and set Telegram to ON.";
-"AccessDenied.VideoMessageMicrophone" = "Telegram needs access to your microphone to send video messages.\n\nPlease go to Settings > Privacy > Microphone and set Telegram to ON.";
+"AccessDenied.VideoMessageCamera" = "Postufgram needs access to your camera to send video messages.\n\nPlease go to Settings > Privacy > Camera and set Postufgram to ON.";
+"AccessDenied.VideoMessageMicrophone" = "Postufgram needs access to your microphone to send video messages.\n\nPlease go to Settings > Privacy > Microphone and set Postufgram to ON.";
 
 "ChatSettings.AutomaticVideoMessageDownload" = "AUTOMATIC VIDEO MESSAGE DOWNLOAD";
 
@@ -2524,7 +2524,7 @@ Unused sets are archived when you add more.";
 "Message.ForwardedMessageShort" = "Forwarded From\n%@";
 
 "Checkout.LiabilityAlertTitle" = "Warning";
-"Checkout.LiabilityAlert" = "Neither Telegram, nor %1$@ will have access to your credit card information. Credit card details will be handled only by the payment system, %2$@.\n\nPayments will go directly to the developer of %1$@. Telegram cannot provide any guarantees, so proceed at your own risk. In case of problems, please contact the developer of %1$@ or your bank.";
+"Checkout.LiabilityAlert" = "Neither Postufgram, nor %1$@ will have access to your credit card information. Credit card details will be handled only by the payment system, %2$@.\n\nPayments will go directly to the developer of %1$@. Postufgram cannot provide any guarantees, so proceed at your own risk. In case of problems, please contact the developer of %1$@ or your bank.";
 
 "Settings.AppLanguage" = "Language";
 "Settings.AppLanguage.Unofficial" = "UNOFFICIAL";
@@ -2533,7 +2533,7 @@ Unused sets are archived when you add more.";
 
 "Privacy.PaymentsTitle" = "PAYMENTS";
 "Privacy.PaymentsClearInfo" = "Clear payment & shipping info";
-"Privacy.PaymentsClearInfoHelp" = "You can delete your shipping info and instruct all payment providers to remove your saved credit cards. Note that Telegram never stores your credit card data.";
+"Privacy.PaymentsClearInfoHelp" = "You can delete your shipping info and instruct all payment providers to remove your saved credit cards. Note that Postufgram never stores your credit card data.";
 "Privacy.PaymentsClear.PaymentInfo" = "Payment Info";
 "Privacy.PaymentsClear.ShippingInfo" = "Shipping Info";
 
@@ -2675,7 +2675,7 @@ Unused sets are archived when you add more.";
 
 "Contacts.PhoneNumber" = "Phone Number";
 "Contacts.AddPhoneNumber" = "Add %@";
-"Contacts.ShareTelegram" = "Share Telegram";
+"Contacts.ShareTelegram" = "Share Postufgram";
 
 "Conversation.ViewChannel" = "VIEW CHANNEL";
 "Conversation.ViewGroup" = "VIEW GROUP";
@@ -2738,10 +2738,10 @@ Unused sets are archived when you add more.";
 "Group.Members.AddMemberBotErrorNotAllowed" = "Sorry, you don't have the necessary permissions to add bots to this group.";
 
 "Privacy.Calls.P2P" = "Peer-to-Peer";
-"Privacy.Calls.P2PHelp" = "Disabling peer-to-peer will relay all calls through Telegram servers to avoid revealing your IP address, but will slightly decrease audio quality.";
+"Privacy.Calls.P2PHelp" = "Disabling peer-to-peer will relay all calls through Postufgram servers to avoid revealing your IP address, but will slightly decrease audio quality.";
 
 "Privacy.Calls.Integration" = "iOS Call Integration";
-"Privacy.Calls.IntegrationHelp" = "iOS Call Integration shows Telegram calls on the lock screen and in the system's call history. If iCloud sync is enabled, your call history is shared with Apple.";
+"Privacy.Calls.IntegrationHelp" = "iOS Call Integration shows Postufgram calls on the lock screen and in the system's call history. If iCloud sync is enabled, your call history is shared with Apple.";
 
 "Call.ReportPlaceholder" = "What went wrong?";
 "Call.ReportIncludeLog" = "Send technical information";
@@ -2760,12 +2760,12 @@ Unused sets are archived when you add more.";
 
 "Stickers.FrequentlyUsed" = "Recently Used";
 
-"Contacts.ImportersCount_1" = "1 contact on Telegram";
-"Contacts.ImportersCount_2" = "2 contacts on Telegram";
-"Contacts.ImportersCount_3_10" = "%@ contacts on Telegram";
-"Contacts.ImportersCount_any" = "%@ contacts on Telegram";
-"Contacts.ImportersCount_many" = "%@ contacts on Telegram";
-"Contacts.ImportersCount_0" = "%@ contacts on Telegram";
+"Contacts.ImportersCount_1" = "1 contact on Postufgram";
+"Contacts.ImportersCount_2" = "2 contacts on Postufgram";
+"Contacts.ImportersCount_3_10" = "%@ contacts on Postufgram";
+"Contacts.ImportersCount_any" = "%@ contacts on Postufgram";
+"Contacts.ImportersCount_many" = "%@ contacts on Postufgram";
+"Contacts.ImportersCount_0" = "%@ contacts on Postufgram";
 
 "Conversation.ContextMenuBan" = "Restrict";
 
@@ -2773,13 +2773,13 @@ Unused sets are archived when you add more.";
 "SocksProxySetup.UseForCallsHelp" = "Proxy servers may degrade the quality of your calls.";
 
 "InviteText.URL" = "https://telegram.org/dl";
-"InviteText.SingleContact" = "Hey, I'm using Telegram to chat. Join me! Download it here: %@";
-"InviteText.ContactsCountText_1" = "Hey, I'm using Telegram to chat. Join me! Download it here: {url}";
-"InviteText.ContactsCountText_2" = "Hey, I'm using Telegram to chat – and so are 2 of our other contacts. Join us! Download it here: {url}";
-"InviteText.ContactsCountText_3_10" = "Hey, I'm using Telegram to chat – and so are %@ of our other contacts. Join us! Download it here: {url}";
-"InviteText.ContactsCountText_any" = "Hey, I'm using Telegram to chat – and so are %@ of our other contacts. Join us! Download it here: {url}";
-"InviteText.ContactsCountText_many" = "Hey, I'm using Telegram to chat – and so are %@ of our other contacts. Join us! Download it here: {url}";
-"InviteText.ContactsCountText_0" = "Hey, I'm using Telegram to chat. Join me! Download it here: {url}";
+"InviteText.SingleContact" = "Hey, I'm using Postufgram to chat. Join me! Download it here: %@";
+"InviteText.ContactsCountText_1" = "Hey, I'm using Postufgram to chat. Join me! Download it here: {url}";
+"InviteText.ContactsCountText_2" = "Hey, I'm using Postufgram to chat – and so are 2 of our other contacts. Join us! Download it here: {url}";
+"InviteText.ContactsCountText_3_10" = "Hey, I'm using Postufgram to chat – and so are %@ of our other contacts. Join us! Download it here: {url}";
+"InviteText.ContactsCountText_any" = "Hey, I'm using Postufgram to chat – and so are %@ of our other contacts. Join us! Download it here: {url}";
+"InviteText.ContactsCountText_many" = "Hey, I'm using Postufgram to chat – and so are %@ of our other contacts. Join us! Download it here: {url}";
+"InviteText.ContactsCountText_0" = "Hey, I'm using Postufgram to chat. Join me! Download it here: {url}";
 
 "Invite.LargeRecipientsCountWarning" = "Please note that it may take some time for your device to send all of these invitations";
 
@@ -2934,12 +2934,12 @@ Unused sets are archived when you add more.";
 
 "NotificationSettings.ContactJoined" = "New Contacts";
 
-"AccessDenied.LocationAlwaysDenied" = "If you'd like to share your Live Location with friends, Telegram needs location access when the app is in the background.\n\nPlease go to Settings > Privacy > Location Services and set Telegram to Always.";
+"AccessDenied.LocationAlwaysDenied" = "If you'd like to share your Live Location with friends, Postufgram needs location access when the app is in the background.\n\nPlease go to Settings > Privacy > Location Services and set Postufgram to Always.";
 
 "UserInfo.UnblockConfirmation" = "Unblock %@?";
 
 "Login.BannedPhoneSubject" = "Banned phone number: %@";
-"Login.BannedPhoneBody" = "I'm trying to use my mobile phone number: %@\nBut Telegram says it's banned. Please help.";
+"Login.BannedPhoneBody" = "I'm trying to use my mobile phone number: %@\nBut Postufgram says it's banned. Please help.";
 
 "Conversation.StopLiveLocation" = "Stop Sharing";
 
@@ -3010,7 +3010,7 @@ Unused sets are archived when you add more.";
 "Channel.Setup.TypePrivateHelp" = "Private channels can only be joined if you were invited or have an invite link.";
 "Group.Username.InvalidTooShort" = "Group names must have at least 5 characters.";
 "Group.Username.InvalidStartsWithNumber" = "Group names can't start with a number.";
-"Group.Username.CreatePublicLinkHelp" = "People can share this link with others and find your group using Telegram search.";
+"Group.Username.CreatePublicLinkHelp" = "People can share this link with others and find your group using Postufgram search.";
 "Channel.TypeSetup.Title" = "Channel Type";
 
 "Group.Setup.TypePrivate" = "Private";
@@ -3022,16 +3022,16 @@ Unused sets are archived when you add more.";
 
 "Privacy.PaymentsClearInfoDoneHelp" = "Payment & shipping info cleared.";
 
-"InfoPlist.NSContactsUsageDescription" = "Telegram will continuously upload your contacts to its heavily encrypted cloud servers to let you connect with your friends across all your devices.";
-"InfoPlist.NSLocationWhenInUseUsageDescription" = "When you send your location to your friends, Telegram needs access to show them a map.";
+"InfoPlist.NSContactsUsageDescription" = "Postufgram will continuously upload your contacts to its heavily encrypted cloud servers to let you connect with your friends across all your devices.";
+"InfoPlist.NSLocationWhenInUseUsageDescription" = "When you send your location to your friends, Postufgram needs access to show them a map.";
 "InfoPlist.NSCameraUsageDescription" = "We need this so that you can take and share photos and videos.";
 "InfoPlist.NSPhotoLibraryUsageDescription" = "We need this so that you can share photos and videos from your photo library.";
 "InfoPlist.NSPhotoLibraryAddUsageDescription" = "We need this so that you can save photos and videos to your photo library.";
 "InfoPlist.NSMicrophoneUsageDescription" = "We need this so that you can record and share voice messages and videos with sound.";
 "InfoPlist.NSSiriUsageDescription" = "You can use Siri to send messages.";
-"InfoPlist.NSLocationAlwaysAndWhenInUseUsageDescription" = "When you choose to share your Live Location with friends in a chat, Telegram needs background access to your location to keep them updated for the duration of the live sharing.";
-"InfoPlist.NSLocationAlwaysUsageDescription" = "When you choose to share your live location with friends in a chat, Telegram needs background access to your location to keep them updated for the duration of the live sharing. You also need this to send locations from an Apple Watch.";
-"InfoPlist.NSLocationWhenInUseUsageDescription" = "When you send your location to your friends, Telegram needs access to show them a map.";
+"InfoPlist.NSLocationAlwaysAndWhenInUseUsageDescription" = "When you choose to share your Live Location with friends in a chat, Postufgram needs background access to your location to keep them updated for the duration of the live sharing.";
+"InfoPlist.NSLocationAlwaysUsageDescription" = "When you choose to share your live location with friends in a chat, Postufgram needs background access to your location to keep them updated for the duration of the live sharing. You also need this to send locations from an Apple Watch.";
+"InfoPlist.NSLocationWhenInUseUsageDescription" = "When you send your location to your friends, Postufgram needs access to show them a map.";
 "InfoPlist.NSFaceIDUsageDescription" = "You can use Face ID to unlock the app.";
 
 "Privacy.Calls.P2PNever" = "Never";
@@ -3075,10 +3075,10 @@ Unused sets are archived when you add more.";
 "Channel.AdminLogFilter.EventsNewSubscribers" = "New Subscribers";
 "Channel.AdminLogFilter.EventsLeavingSubscribers" = "Subscribers Removed";
 
-"Conversation.ClearPrivateHistory" = "This will delete all messages and media in this chat from your Telegram cloud. Your chat partner will still have them.";
-"Conversation.ClearGroupHistory" = "This will delete all messages and media in this chat from your Telegram cloud. Other members of the group will still have them.";
+"Conversation.ClearPrivateHistory" = "This will delete all messages and media in this chat from your Postufgram cloud. Your chat partner will still have them.";
+"Conversation.ClearGroupHistory" = "This will delete all messages and media in this chat from your Postufgram cloud. Other members of the group will still have them.";
 "Conversation.ClearSecretHistory" = "This will delete all messages and media in this chat for both you and your chat partner.";
-"Conversation.ClearSelfHistory" = "This will delete all messages and media in this chat from your Telegram cloud.";
+"Conversation.ClearSelfHistory" = "This will delete all messages and media in this chat from your Postufgram cloud.";
 
 "MediaPicker.LivePhotoDescription" = "The live photo will be sent as a GIF.";
 
@@ -3122,7 +3122,7 @@ Unused sets are archived when you add more.";
 "AuthSessions.Sessions" = "Sessions";
 "AuthSessions.LoggedIn" = "Websites";
 "AuthSessions.LogOutApplications" = "Disconnect All Websites";
-"AuthSessions.LogOutApplicationsHelp" = "You can log in on websites that support signing in with Telegram.";
+"AuthSessions.LogOutApplicationsHelp" = "You can log in on websites that support signing in with Postufgram.";
 "AuthSessions.LoggedInWithTelegram" = "CONNECTED WEBSITES";
 "AuthSessions.LogOut" = "Disconnect";
 "AuthSessions.Message" = "You allowed this bot to message you when you logged in on %@.";
@@ -3175,26 +3175,26 @@ Unused sets are archived when you add more.";
 
 "DialogList.AdLabel" = "Proxy Sponsor";
 "DialogList.AdNoticeAlert" = "The proxy you are using displays a sponsored channel in your chat list.";
-"SocksProxySetup.AdNoticeHelp" = "This proxy may display a sponsored channel in your chat list. This doesn't reveal your Telegram traffic.";
+"SocksProxySetup.AdNoticeHelp" = "This proxy may display a sponsored channel in your chat list. This doesn't reveal your Postufgram traffic.";
 
 "SocksProxySetup.ShareProxyList" = "Share Proxy List";
 
 "Privacy.SecretChatsTitle" = "SECRET CHATS";
 "Privacy.SecretChatsLinkPreviews" = "Link Previews";
-"Privacy.SecretChatsLinkPreviewsHelp" = "Link previews will be generated on Telegram servers. We do not store data about the links you send.";
+"Privacy.SecretChatsLinkPreviewsHelp" = "Link previews will be generated on Postufgram servers. We do not store data about the links you send.";
 
 "Privacy.ContactsTitle" = "CONTACTS";
 "Privacy.ContactsSync" = "Sync Contacts";
 "Privacy.ContactsSyncHelp" = "Turn on to continuously sync contacts from this device with your account.";
 "Privacy.ContactsReset" = "Delete Synced Contacts";
-"Privacy.ContactsResetConfirmation" = "This will remove your contacts from the Telegram servers.\nIf 'Sync Contacts' is enabled, contacts will be re-synced.";
+"Privacy.ContactsResetConfirmation" = "This will remove your contacts from the Postufgram servers.\nIf 'Sync Contacts' is enabled, contacts will be re-synced.";
 
 "Login.TermsOfServiceDecline" = "Decline";
 "Login.TermsOfServiceAgree" = "Agree & Continue";
 
 "Login.TermsOfService.ProceedBot" = "Please agree and proceed to %@.";
 
-"Login.TermsOfServiceSignupDecline" = "We're very sorry, but this means you can't sign up for Telegram.\n\nUnlike others, we don't use your data for ad targeting or other commercial purposes. Telegram only stores the information it needs to function as a feature-rich cloud service. You can adjust how we use your data (e.g., delete synced contacts) in Privacy & Security settings.\n\nBut if you're generally not OK with Telegram's modest needs, it won't be possible for us to provide this service.";
+"Login.TermsOfServiceSignupDecline" = "We're very sorry, but this means you can't sign up for Postufgram.\n\nUnlike others, we don't use your data for ad targeting or other commercial purposes. Postufgram only stores the information it needs to function as a feature-rich cloud service. You can adjust how we use your data (e.g., delete synced contacts) in Privacy & Security settings.\n\nBut if you're generally not OK with Postufgram's modest needs, it won't be possible for us to provide this service.";
 
 "UserInfo.BotPrivacy" = "Privacy Policy";
 
@@ -3207,20 +3207,20 @@ Unused sets are archived when you add more.";
 "PrivacyPolicy.AgeVerificationAgree" = "Agree";
 
 "PrivacyPolicy.DeclineTitle" = "Decline";
-"PrivacyPolicy.DeclineMessage" = "We're very sorry, but this means we must part ways here. Unlike others, we don't use your data for ad targeting or other commercial purposes. Telegram only stores the information it needs to function as a feature-rich cloud service. You can adjust how we use your data (e.g., delete synced contacts) in Privacy & Security settings.\n\nBut if you're generally not OK with Telegram's modest needs, it won't be possible for us to provide this service.";
+"PrivacyPolicy.DeclineMessage" = "We're very sorry, but this means we must part ways here. Unlike others, we don't use your data for ad targeting or other commercial purposes. Postufgram only stores the information it needs to function as a feature-rich cloud service. You can adjust how we use your data (e.g., delete synced contacts) in Privacy & Security settings.\n\nBut if you're generally not OK with Postufgram's modest needs, it won't be possible for us to provide this service.";
 "PrivacyPolicy.DeclineDeclineAndDelete" = "Decline and Delete";
 
-"PrivacyPolicy.DeclineLastWarning" = "Warning, this will irreversibly delete your Telegram account along with all the data you store in the Telegram cloud.\n\nWe will provide a tool to download your data before June, 23 – so you may want to wait a little before deleting.";
+"PrivacyPolicy.DeclineLastWarning" = "Warning, this will irreversibly delete your Postufgram account along with all the data you store in the Postufgram cloud.\n\nWe will provide a tool to download your data before June, 23 – so you may want to wait a little before deleting.";
 "PrivacyPolicy.DeclineDeleteNow" = "Delete Now";
 
-"Settings.Passport" = "Telegram Passport";
+"Settings.Passport" = "Postufgram Passport";
 
 "Passport.Title" = "Passport";
 
 "Passport.RequestHeader" = "%@ requests access to your personal data to sign you up for their services.";
 
-"Passport.InfoTitle" = "What is Telegram Passport?";
-"Passport.InfoText" = "With **Telegram Passport** you can easily sign up for websites and services that require identity verification.\n\nYour information, personal data, and documents are protected by end-to-end encryption. Nobody, including Telegram, can access them without your permission.";
+"Passport.InfoTitle" = "What is Postufgram Passport?";
+"Passport.InfoText" = "With **Postufgram Passport** you can easily sign up for websites and services that require identity verification.\n\nYour information, personal data, and documents are protected by end-to-end encryption. Nobody, including Postufgram, can access them without your permission.";
 "Passport.InfoLearnMore" = "Learn More";
 "Passport.InfoFAQ_URL" = "https://telegram.org/faq#passport";
 
@@ -3241,19 +3241,19 @@ Unused sets are archived when you add more.";
 "Passport.AcceptHelp" = "You are sending your documents directly to %1$@ and allowing their @%2$@ to send you messages.";
 "Passport.Authorize" = "Authorize";
 
-"Passport.DeletePassport" = "Delete Telegram Passport";
-"Passport.DeletePassportConfirmation" = "Are you sure you want to delete your Telegram Passport? All details will be lost.";
+"Passport.DeletePassport" = "Delete Postufgram Passport";
+"Passport.DeletePassportConfirmation" = "Are you sure you want to delete your Postufgram Passport? All details will be lost.";
 
-"Passport.PasswordHelp" = "Please enter your Telegram Password\nto decrypt your data";
+"Passport.PasswordHelp" = "Please enter your Postufgram Password\nto decrypt your data";
 "Passport.PasswordPlaceholder" = "Enter your password";
 "Passport.InvalidPasswordError" = "Invalid password. Please try again.";
 "Passport.FloodError" = "Limit exceeded. Please try again later.";
-"Passport.UpdateRequiredError" = "Sorry, your Telegram app is out of date and can’t handle this request. Please update Telegram.";
+"Passport.UpdateRequiredError" = "Sorry, your Postufgram app is out of date and can’t handle this request. Please update Postufgram.";
 
 "Passport.ForgottenPassword" = "Forgotten Password";
-"Passport.PasswordReset" = "All documents uploaded to your Telegram Passport will be lost. You will be able to upload new documents.";
+"Passport.PasswordReset" = "All documents uploaded to your Postufgram Passport will be lost. You will be able to upload new documents.";
 
-"Passport.PasswordDescription" = "Please create a password to secure your personal data with end-to-end encryption.\n\nThis password will also be required whenever you log in to Telegram on a new device.";
+"Passport.PasswordDescription" = "Please create a password to secure your personal data with end-to-end encryption.\n\nThis password will also be required whenever you log in to Postufgram on a new device.";
 "Passport.PasswordCreate" = "Create a Password";
 "Passport.PasswordCompleteSetup" = "Complete Password Setup";
 "Passport.PasswordNext" = "Next";
@@ -3373,14 +3373,14 @@ Unused sets are archived when you add more.";
 
 "Passport.Phone.Title" = "Phone Number";
 "Passport.Phone.UseTelegramNumber" = "Use %@";
-"Passport.Phone.UseTelegramNumberHelp" = "Use the same phone number as on Telegram.";
+"Passport.Phone.UseTelegramNumberHelp" = "Use the same phone number as on Postufgram.";
 "Passport.Phone.EnterOtherNumber" = "OR ENTER NEW PHONE NUMBER";
 "Passport.Phone.Help" = "Note: You will receive a confirmation code on the phone number you provide.";
 "Passport.Phone.Delete" = "Delete Phone Number";
 
 "Passport.Email.Title" = "Email";
 "Passport.Email.UseTelegramEmail" = "Use %@";
-"Passport.Email.UseTelegramEmailHelp" = "Use the same address as on Telegram.";
+"Passport.Email.UseTelegramEmailHelp" = "Use the same address as on Postufgram.";
 "Passport.Email.EnterOtherEmail" = "OR ENTER NEW EMAIL ADDRESS";
 "Passport.Email.EmailPlaceholder" = "Enter your email address";
 "Passport.Email.Help" = "Note: You will receive a confirmation code to the email address you provide.";
@@ -3406,7 +3406,7 @@ Unused sets are archived when you add more.";
 "Passport.ScanPassport" = "Scan Your Passport";
 "Passport.ScanPassportHelp" = "Scan your passport or identity card with machine-readable zone to fill personal details automatically.";
 
-"TwoStepAuth.PasswordRemovePassportConfirmation" = "Are you sure you want to disable your password?\n\nWarning! All data saved in your Telegram Passport will be lost!";
+"TwoStepAuth.PasswordRemovePassportConfirmation" = "Are you sure you want to disable your password?\n\nWarning! All data saved in your Postufgram Passport will be lost!";
 
 "Application.Update" = "Update";
 
@@ -3451,17 +3451,17 @@ Unused sets are archived when you add more.";
 
 "Passport.CorrectErrors" = "Tap to correct errors";
 
-"Passport.NotLoggedInMessage" = "Please log in to your account to use Telegram Passport";
+"Passport.NotLoggedInMessage" = "Please log in to your account to use Postufgram Passport";
 
-"Update.Title" = "Telegram Update";
-"Update.AppVersion" = "Telegram %@";
-"Update.UpdateApp" = "Update Telegram";
+"Update.Title" = "Postufgram Update";
+"Update.AppVersion" = "Postufgram %@";
+"Update.UpdateApp" = "Update Postufgram";
 "Update.Skip" = "Skip";
 
 "ReportPeer.ReasonCopyright" = "Copyright";
 
 "PrivacySettings.DataSettings" = "Data Settings";
-"PrivacySettings.DataSettingsHelp" = "Control which of your data is stored in the cloud and used by Telegram to enable advanced features.";
+"PrivacySettings.DataSettingsHelp" = "Control which of your data is stored in the cloud and used by Postufgram to enable advanced features.";
 
 "PrivateDataSettings.Title" = "Data Settings";
 "Privacy.ChatsTitle" = "CHATS";
@@ -3634,8 +3634,8 @@ Unused sets are archived when you add more.";
 
 "SocksProxySetup.PasteFromClipboard" = "Paste From Clipboard";
 
-"Share.AuthTitle" = "Log in to Telegram";
-"Share.AuthDescription" = "Open Telegram and log in to share.";
+"Share.AuthTitle" = "Log in to Postufgram";
+"Share.AuthDescription" = "Open Postufgram and log in to share.";
 
 "Notifications.DisplayNamesOnLockScreen" = "Names on lock-screen";
 "Notifications.DisplayNamesOnLockScreenInfoWithLink" = "Display names in notifications when the device is locked. To disable, make sure that \"Show Previews\" is also set to \"When Unlocked\" or \"Never\" in [iOS Settings]";
@@ -3681,7 +3681,7 @@ Unused sets are archived when you add more.";
 "ApplyLanguage.ChangeLanguageAction" = "Change";
 "ApplyLanguage.ApplyLanguageAction" = "Change";
 "ApplyLanguage.UnsufficientDataTitle" = "Insufficient Data";
-"ApplyLanguage.UnsufficientDataText" = "Unfortunately, this custom language pack (%1$@) doesn't contain data for Telegram iOS. You can contribute to this language pack using the [translations platform]()";
+"ApplyLanguage.UnsufficientDataText" = "Unfortunately, this custom language pack (%1$@) doesn't contain data for Postufgram iOS. You can contribute to this language pack using the [translations platform]()";
 "ApplyLanguage.LanguageNotSupportedError" = "Sorry, this language doesn't seem to exist.";
 "ApplyLanguage.ApplySuccess" = "Language changed";
 
@@ -3722,8 +3722,8 @@ Unused sets are archived when you add more.";
 "InstantPage.TapToOpenLink" = "Tap to open the link:";
 "InstantPage.RelatedArticleAuthorAndDateTitle" = "%1$@ • %2$@";
 
-"AuthCode.Alert" = "Your login code is %@. Enter it in the Telegram app where you are trying to log in.\n\nDo not give this code to anyone.";
-"Login.CheckOtherSessionMessages" = "Check your Telegram messages";
+"AuthCode.Alert" = "Your login code is %@. Enter it in the Postufgram app where you are trying to log in.\n\nDo not give this code to anyone.";
+"Login.CheckOtherSessionMessages" = "Check your Postufgram messages";
 "Login.SendCodeViaSms" = "Send the code as an SMS";
 "Login.CancelPhoneVerification" = "Do you want to stop the phone number verification process?";
 "Login.CancelPhoneVerificationStop" = "Stop";
@@ -3731,7 +3731,7 @@ Unused sets are archived when you add more.";
 "Login.CodeExpired" = "Code expired, please login again.";
 "Login.CancelSignUpConfirmation" = "Do you want to stop the registration process?";
 
-"Passcode.AppLockedAlert" = "Telegram\nLocked";
+"Passcode.AppLockedAlert" = "Postufgram\nLocked";
 
 "ChatList.ReadAll" = "Read All";
 "ChatList.Read" = "Read";
@@ -3751,7 +3751,7 @@ Unused sets are archived when you add more.";
 "Permissions.Skip" = "Skip";
 
 "Permissions.ContactsTitle.v0" = "Sync Your Contacts";
-"Permissions.ContactsText.v0" = "See who's on Telegram and switch seamlessly, without having to \"add\" your friends.";
+"Permissions.ContactsText.v0" = "See who's on Postufgram and switch seamlessly, without having to \"add\" your friends.";
 "Permissions.ContactsAllow.v0" = "Allow Access";
 "Permissions.ContactsAllowInSettings.v0" = "Allow in Settings";
 
@@ -3762,7 +3762,7 @@ Unused sets are archived when you add more.";
 "Permissions.NotificationsAllowInSettings.v0" = "Turn ON in Settings";
 
 "Permissions.CellularDataTitle.v0" = "Enable Cellular Data";
-"Permissions.CellularDataText.v0" = "Don't worry, Telegram keeps network usage to a minimum. You can further control this in Settings > Data and Storage.";
+"Permissions.CellularDataText.v0" = "Don't worry, Postufgram keeps network usage to a minimum. You can further control this in Settings > Data and Storage.";
 "Permissions.CellularDataAllowInSettings.v0" = "Turn ON in Settings";
 
 "Permissions.SiriTitle.v0" = "Turn ON Siri";
@@ -3773,11 +3773,11 @@ Unused sets are archived when you add more.";
 "Permissions.PrivacyPolicy" = "Privacy Policy";
 
 "Contacts.PermissionsTitle" = "Access to Contacts";
-"Contacts.PermissionsText" = "Please allow Telegram access to your phonebook to seamlessly find all your friends.";
+"Contacts.PermissionsText" = "Please allow Postufgram access to your phonebook to seamlessly find all your friends.";
 "Contacts.PermissionsAllow" = "Allow Access";
 "Contacts.PermissionsAllowInSettings" = "Allow in Settings";
 "Contacts.PermissionsSuppressWarningTitle" = "Keep contacts disabled?";
-"Contacts.PermissionsSuppressWarningText" = "You won't know when your friends join Telegram and become available to chat. We recommend enabling access to contacts in Settings.";
+"Contacts.PermissionsSuppressWarningText" = "You won't know when your friends join Postufgram and become available to chat. We recommend enabling access to contacts in Settings.";
 "Contacts.PermissionsKeepDisabled" = "Keep Disabled";
 "Contacts.PermissionsEnable" = "Enable";
 
@@ -3789,7 +3789,7 @@ Unused sets are archived when you add more.";
 "Notifications.PermissionsAllowInSettings" = "Turn ON in Settings";
 "Notifications.PermissionsOpenSettings" = "Open Settings";
 "Notifications.PermissionsSuppressWarningTitle" = "Keep notifications disabled?";
-"Notifications.PermissionsSuppressWarningText" = "You may miss important messages on Telegram due to your current settings.\n\nFor better results, enable alerts or banners and try muting certain chats or chat types in Telegram settings.";
+"Notifications.PermissionsSuppressWarningText" = "You may miss important messages on Postufgram due to your current settings.\n\nFor better results, enable alerts or banners and try muting certain chats or chat types in Postufgram settings.";
 "Notifications.PermissionsKeepDisabled" = "Keep Disabled";
 "Notifications.PermissionsEnable" = "Enable";
 
@@ -3846,8 +3846,8 @@ Unused sets are archived when you add more.";
 
 "AttachmentMenu.WebSearch" = "Web Search";
 
-"Conversation.UnsupportedMediaPlaceholder" = "This message is not supported on your version of Telegram. Please update to the latest version.";
-"Conversation.UpdateTelegram" = "UPDATE TELEGRAM";
+"Conversation.UnsupportedMediaPlaceholder" = "This message is not supported on your version of Postufgram. Please update to the latest version.";
+"Conversation.UpdateTelegram" = "UPDATE POSTUFGRAM";
 
 "Cache.LowDiskSpaceText" = "Your phone has run out of available storage. Please free some space to download or upload media.";
 
@@ -3857,7 +3857,7 @@ Unused sets are archived when you add more.";
 "Contacts.SortedByName" = "Sorted by Name";
 "Contacts.SortedByPresence" = "Sorted by Last Seen Time";
 
-"NotificationSettings.ContactJoinedInfo" = "Receive push notifications when one of your contacts becomes available on Telegram.";
+"NotificationSettings.ContactJoinedInfo" = "Receive push notifications when one of your contacts becomes available on Postufgram.";
 
 "GroupInfo.Permissions" = "Permissions";
 "GroupInfo.Permissions.Title" = "Permissions";
@@ -3980,7 +3980,7 @@ Unused sets are archived when you add more.";
 "Undo.DeletedChannel" = "Deleted channel";
 "Undo.DeletedGroup" = "Deleted group";
 
-"AccessDenied.Wallpapers" = "Telegram needs access to your photo library to set a custom chat background.\n\nPlease go to Settings > Privacy > Photos and set Telegram to ON.";
+"AccessDenied.Wallpapers" = "Postufgram needs access to your photo library to set a custom chat background.\n\nPlease go to Settings > Privacy > Photos and set Postufgram to ON.";
 
 "Conversation.ChatBackground" = "Chat Background";
 "Conversation.ViewBackground" = "VIEW BACKGROUND";
@@ -4252,13 +4252,13 @@ Unused sets are archived when you add more.";
 "ChatList.ClearChatConfirmation" = "Are you sure you want to delete all\nmessages in the chat with %@?";
 
 "Settings.CheckPhoneNumberTitle" = "Is %@ still your number?";
-"Settings.CheckPhoneNumberText" = "Keep your number up to date to ensure you can always log in to Telegram. [Learn more]()";
+"Settings.CheckPhoneNumberText" = "Keep your number up to date to ensure you can always log in to Postufgram. [Learn more]()";
 "Settings.KeepPhoneNumber" = "Keep %@";
 "Settings.ChangePhoneNumber" = "Change Number";
 
 "Undo.ChatDeletedForBothSides" = "Chat deleted for both sides";
 
-"AppUpgrade.Running" = "Optimizing Telegram...
+"AppUpgrade.Running" = "Optimizing Postufgram...
 This may take a while, depending on the size of the database. Please keep the app open until the process is finished.
 
 Sorry for the inconvenience.";
@@ -4321,8 +4321,8 @@ Sorry for the inconvenience.";
 
 "Privacy.AddNewPeer" = "Add Users or Groups";
 "PrivacyPhoneNumberSettings.WhoCanSeeMyPhoneNumber" = "WHO CAN SEE MY PHONE NUMBER";
-"PrivacyPhoneNumberSettings.CustomHelp" = "Users who already have your number saved in the contacts will also see it on Telegram.";
-"PrivacyPhoneNumberSettings.CustomDisabledHelp" = "Users who add your number to their contacts will see it on Telegram only if they are your contacts.";
+"PrivacyPhoneNumberSettings.CustomHelp" = "Users who already have your number saved in the contacts will also see it on Postufgram.";
+"PrivacyPhoneNumberSettings.CustomDisabledHelp" = "Users who add your number to their contacts will see it on Postufgram only if they are your contacts.";
 
 "PrivacyPhoneNumberSettings.DiscoveryHeader" = "WHO CAN FIND ME BY MY NUMBER";
 
@@ -4333,7 +4333,7 @@ Sorry for the inconvenience.";
 "PrivacySettings.PasscodeOff" = "Off";
 "PrivacySettings.PasscodeOn" = "On";
 
-"UserInfo.BlockConfirmationTitle" = "Do you want to block %@ from messaging and calling you on Telegram?";
+"UserInfo.BlockConfirmationTitle" = "Do you want to block %@ from messaging and calling you on Postufgram?";
 "UserInfo.BlockActionTitle" = "Block %@";
 "ReportSpam.DeleteThisChat" = "Delete this Chat";
 
@@ -4497,7 +4497,7 @@ Any member of this group will be able to see messages in the channel.";
 
 "Group.PublicLink.Title" = "Public Link";
 "Group.PublicLink.Placeholder" = "link";
-"Group.PublicLink.Info" = "People can share this link with others and find your group using Telegram search.\n\nYou can use **a-z**, **0-9** and underscores. Minimum length is **5** characters.";
+"Group.PublicLink.Info" = "People can share this link with others and find your group using Postufgram search.\n\nYou can use **a-z**, **0-9** and underscores. Minimum length is **5** characters.";
 
 "CreateGroup.ErrorLocatedGroupsTooMuch" = "Sorry, you have too many location-based groups already. Please delete one of your existing ones first.";
 
@@ -5042,7 +5042,7 @@ Any member of this group will be able to see messages in the channel.";
 "Wallet.Receive.ShareInvoiceUrlInfo" = "Share this link with other Gram wallet owners to receive %@ Grams from them.";
 
 "Settings.Wallet" = "Gram Wallet";
-"SettingsSearch.Synonyms.Wallet" = "TON Telegram Open Network Crypto";
+"SettingsSearch.Synonyms.Wallet" = "TON Postufgram Open Network Crypto";
 
 "Conversation.ClearCache" = "Clear Cache";
 "ClearCache.Description" = "Media files will be deleted from your phone, but available for re-downloading when necessary.";
@@ -5067,12 +5067,12 @@ Any member of this group will be able to see messages in the channel.";
 "TwoFactorSetup.Password.Action" = "Create Password";
 
 "TwoFactorSetup.Email.Title" = "Recovery Email";
-"TwoFactorSetup.Email.Text" = "You can set a recovery email to be able to reset you password and restore access to your Telegram account.";
+"TwoFactorSetup.Email.Text" = "You can set a recovery email to be able to reset you password and restore access to your Postufgram account.";
 "TwoFactorSetup.Email.Placeholder" = "Your email address";
 "TwoFactorSetup.Email.Action" = "Continue";
 "TwoFactorSetup.Email.SkipAction" = "Skip setting email";
 "TwoFactorSetup.Email.SkipConfirmationTitle" = "No, seriously.";
-"TwoFactorSetup.Email.SkipConfirmationText" = "If you forget your password, you will lose access to your Telegram account. There will be no way to restore it.";
+"TwoFactorSetup.Email.SkipConfirmationText" = "If you forget your password, you will lose access to your Postufgram account. There will be no way to restore it.";
 "TwoFactorSetup.Email.SkipConfirmationSkip" = "Skip";
 
 "TwoFactorSetup.EmailVerification.Title" = "Recovery Email";
@@ -5106,11 +5106,11 @@ Any member of this group will be able to see messages in the channel.";
 "Group.ErrorSupergroupConversionNotPossible" = "Sorry, you are a member of too many groups and channels. Please leave some before creating a new one.";
 
 "ClearCache.StorageTitle" = "%@ STORAGE";
-"ClearCache.StorageCache" = "Telegram Cache";
-"ClearCache.StorageServiceFiles" = "Telegram Service Files";
+"ClearCache.StorageCache" = "Postufgram Cache";
+"ClearCache.StorageServiceFiles" = "Postufgram Service Files";
 "ClearCache.StorageOtherApps" = "Other Apps";
 "ClearCache.StorageFree" = "Free";
-"ClearCache.ClearCache" = "Clear Telegram Cache";
+"ClearCache.ClearCache" = "Clear Postufgram Cache";
 "ClearCache.Clear" = "Clear";
 "ClearCache.Forever" = "Forever";
 
@@ -5178,8 +5178,8 @@ Any member of this group will be able to see messages in the channel.";
 "AuthSessions.AddDevice.ScanTitle" = "Scan QR Code";
 "AuthSessions.AddDevice.InvalidQRCode" = "Invalid QR Code";
 "AuthSessions.AddDeviceIntro.Title" = "Log in by QR Code";
-"AuthSessions.AddDeviceIntro.Text1" = "Download Telegram on your computer from [desktop.telegram.org]()";
-"AuthSessions.AddDeviceIntro.Text2" = "Run Telegram on your computer to get the QR code";
+"AuthSessions.AddDeviceIntro.Text1" = "Download Postufgram on your computer from [desktop.telegram.org]()";
+"AuthSessions.AddDeviceIntro.Text2" = "Run Postufgram on your computer to get the QR code";
 "AuthSessions.AddDeviceIntro.Text3" = "Scan the QR code to connect your account";
 "AuthSessions.AddDeviceIntro.Action" = "Scan QR Code";
 "AuthSessions.AddedDeviceTitle" = "Login Successful";
@@ -5192,13 +5192,13 @@ Any member of this group will be able to see messages in the channel.";
 "Map.Home" = "Home";
 "Map.Work" = "Work";
 "Map.HomeAndWorkTitle" = "Home & Work Addresses";
-"Map.HomeAndWorkInfo" = "Telegram uses the Home and Work addresses from your Contact Card.\n\nKeep your Contact Card up to date for quick access to sending Home and Work addresses.";
+"Map.HomeAndWorkInfo" = "Postufgram uses the Home and Work addresses from your Contact Card.\n\nKeep your Contact Card up to date for quick access to sending Home and Work addresses.";
 "Map.SearchNoResultsDescription" = "There were no results for \"%@\".\nTry a new search.";
 
 "ChatList.Search.ShowMore" = "Show more";
 "ChatList.Search.ShowLess" = "Show less";
 
-"AuthSessions.OtherDevices" = "The official Telegram App is available for iPhone, iPad, Android, macOS, Windows and Linux. [Learn More]()";
+"AuthSessions.OtherDevices" = "The official Postufgram App is available for iPhone, iPad, Android, macOS, Windows and Linux. [Learn More]()";
 
 "MediaPlayer.UnknownArtist" = "Unknown Artist";
 "MediaPlayer.UnknownTrack" = "Unknown Track";
@@ -5216,7 +5216,7 @@ Any member of this group will be able to see messages in the channel.";
 
 "Theme.Colors.Proceed" = "Proceed";
 
-"AuthSessions.AddDevice.UrlLoginHint" = "This code can be used to allow someone to log in to your Telegram account.\n\nTo confirm Telegram login, please go to Settings > Devices > Scan QR and scan the code.";
+"AuthSessions.AddDevice.UrlLoginHint" = "This code can be used to allow someone to log in to your Postufgram account.\n\nTo confirm Postufgram login, please go to Settings > Devices > Scan QR and scan the code.";
 
 "Appearance.RemoveThemeColor" = "Remove";
 "Appearance.RemoveThemeColorConfirmation" = "Remove Color";
@@ -5710,14 +5710,14 @@ Any member of this group will be able to see messages in the channel.";
 
 "Cache.MaximumCacheSize" = "Maximum Cache Size";
 "Cache.NoLimit" = "No Limit";
-"Cache.MaximumCacheSizeHelp" = "If your cache size exceeds this limit, the oldest media will be deleted.\n\nAll media will stay in the Telegram cloud and can be re-downloaded if you need it again.";
+"Cache.MaximumCacheSizeHelp" = "If your cache size exceeds this limit, the oldest media will be deleted.\n\nAll media will stay in the Postufgram cloud and can be re-downloaded if you need it again.";
 
 "FalseBottom.Toast.HideAccount" = "Hide account";
 "FalseBottom.HideAccount.Title" = "Hide account";
 "FalseBottom.HideAccount.Text" = "Access different accounts depending on the passcode you enter.";
 "FalseBottom.HideAccount.Button" = "Enable";
 "FalseBottom.AddOneMoreAccount.Title" = "One more account";
-"FalseBottom.AddOneMoreAccount.Text" = "You have to add one more Telegram account without \"hide account\" feature if you want to hide current account.";
+"FalseBottom.AddOneMoreAccount.Text" = "You have to add one more Postufgram account without \"hide account\" feature if you want to hide current account.";
 "FalseBottom.AddOneMoreAccount.Button" = "Add an account";
 "FalseBottom.SetMasterPasscode.Title" = "Shared passcode";
 "FalseBottom.SetMasterPasscode.Text" = "Set up a shared passcode for all non-hidden accounts.";
