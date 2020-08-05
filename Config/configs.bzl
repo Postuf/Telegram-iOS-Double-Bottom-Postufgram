@@ -190,7 +190,7 @@ def info_plist_substitutions(name):
 def app_info_plist_substitutions():
     substitutions = {
         "DEVELOPMENT_LANGUAGE": DEVELOPMENT_LANGUAGE,
-        "EXECUTABLE_NAME": "Postufgram",
+        "EXECUTABLE_NAME": "Telegram",
         "PRODUCT_BUNDLE_IDENTIFIER": bundle_identifier(suffix=""),
         "PRODUCT_NAME": "Postufgram",
         "APP_NAME": "Postufgram",
