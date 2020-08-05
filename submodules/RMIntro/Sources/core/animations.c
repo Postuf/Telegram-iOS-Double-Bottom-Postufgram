@@ -207,6 +207,12 @@ void set_ic_textures(int a_ic_bubble_dot, int a_ic_bubble, int a_ic_cam_lens, in
     ic_videocam_texture = a_ic_videocam;
 }
 
+void set_postufgram_textures(int a_telegram_sphere, int a_telegram_plane)
+{
+    telegram_sphere_texture = a_telegram_sphere;
+    telegram_plane_texture = a_telegram_plane;
+}
+
 void set_telegram_textures(int a_telegram_sphere, int a_telegram_plane)
 {
     telegram_sphere_texture = a_telegram_sphere;

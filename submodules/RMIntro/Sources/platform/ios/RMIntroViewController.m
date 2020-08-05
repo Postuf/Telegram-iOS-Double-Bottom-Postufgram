@@ -597,7 +597,7 @@ static void TGDispatchOnMainThread(dispatch_block_t block) {
     }
     set_intro_background_color(red, green, blue);
     
-    set_telegram_textures(setup_texture(@"telegram_sphere.png", color), setup_texture(@"telegram_plane1.png", color));
+    set_postufgram_textures(setup_texture(@"postufgram_sphere.png", color), setup_texture(@"postufgram_plane1", color));
     
     set_ic_textures(setup_texture(@"ic_bubble_dot.png", color), setup_texture(@"ic_bubble.png", color), setup_texture(@"ic_cam_lens.png", color), setup_texture(@"ic_cam.png", color), setup_texture(@"ic_pencil.png", color), setup_texture(@"ic_pin.png", color), setup_texture(@"ic_smile_eye.png", color), setup_texture(@"ic_smile.png", color), setup_texture(@"ic_videocam.png", color));
     
