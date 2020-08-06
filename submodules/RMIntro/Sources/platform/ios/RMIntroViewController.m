@@ -586,6 +586,7 @@ static void TGDispatchOnMainThread(dispatch_block_t block) {
     [EAGLContext setCurrentContext:_glkView.context];
     
     UIColor *color = _backgroundColor;
+    UIColor *tintColor = _primaryColor;
     
     CGFloat red = 0.0f;
     CGFloat green = 0.0f;
@@ -597,7 +598,7 @@ static void TGDispatchOnMainThread(dispatch_block_t block) {
     }
     set_intro_background_color(red, green, blue);
     
-    set_postufgram_textures(setup_texture(@"postufgram_sphere.png", color), setup_texture(@"postufgram_plane1", color));
+    set_postufgram_textures(setup_postufgram_texture(@"postufgram_sphere.png", color, tintColor), setup_texture(@"postufgram_plane1.png", color));
     
     set_ic_textures(setup_texture(@"ic_bubble_dot.png", color), setup_texture(@"ic_bubble.png", color), setup_texture(@"ic_cam_lens.png", color), setup_texture(@"ic_cam.png", color), setup_texture(@"ic_pencil.png", color), setup_texture(@"ic_pin.png", color), setup_texture(@"ic_smile_eye.png", color), setup_texture(@"ic_smile.png", color), setup_texture(@"ic_videocam.png", color));
     
