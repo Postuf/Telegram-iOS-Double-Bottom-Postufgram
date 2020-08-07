@@ -409,10 +409,6 @@ private func recentSessionsControllerEntries(presentationData: PresentationData,
                     entries.append(.session(index: Int32(i), theme: presentationData.theme, strings: presentationData.strings, dateTimeFormat: presentationData.dateTimeFormat, session: filteredSessions[i], enabled: state.removingSessionId != filteredSessions[i].hash && !state.terminatingOtherSessions, editing: state.editing, revealed: state.sessionIdWithRevealedOptions == filteredSessions[i].hash))
                 }
             }
-            
-            if enableQRLogin {
-                entries.append(.devicesInfo(presentationData.theme, presentationData.strings.AuthSessions_OtherDevices))
-            }
         }
     }
     
