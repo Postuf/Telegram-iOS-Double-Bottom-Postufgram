@@ -498,6 +498,7 @@ private enum PeerInfoSettingsSection {
     case watch
     case support
     case faq
+    case about
     case phoneNumber
     case username
     case addAccount
@@ -621,6 +622,7 @@ private enum SettingsSection: Int, CaseIterable {
     case advanced
     case extra
     case support
+    case posufgram
 }
 
 private func settingsItems(data: PeerInfoScreenData?, context: AccountContext, presentationData: PresentationData, interaction: PeerInfoInteraction, isExpanded: Bool) -> [(AnyHashable, [PeerInfoScreenItem])] {
@@ -786,6 +788,10 @@ private func settingsItems(data: PeerInfoScreenData?, context: AccountContext, p
     }))
     items[.support]!.append(PeerInfoScreenDisclosureItem(id: 1, text: presentationData.strings.Settings_FAQ, icon: PresentationResourcesSettings.faq, action: {
         interaction.openSettings(.faq)
+    }))
+    
+    items[.posufgram]!.append(PeerInfoScreenDisclosureItem(id: 0, text: presentationData.strings.Settings_Postufgram_About, icon: PresentationResourcesSettings.faq, action: {
+        interaction.openSettings(.about)
     }))
     
     var result: [(AnyHashable, [PeerInfoScreenItem])] = []
@@ -4559,6 +4565,8 @@ private final class PeerInfoScreenNode: ViewControllerTracingNode, UIScrollViewD
                 })]), in: .window(.root))
             case .faq:
                 self.openFaq()
+            case .about:
+                self.openAboutPostufgram()
             case .phoneNumber:
                 if let user = self.data?.peer as? TelegramUser, let phoneNumber = user.phone {
                     self.controller?.push(ChangePhoneNumberIntroController(context: self.context, phoneNumber: phoneNumber))
@@ -4595,6 +4603,11 @@ private final class PeerInfoScreenNode: ViewControllerTracingNode, UIScrollViewD
                 }, dismissInput: {}, contentContext: nil)
             }
         })
+    }
+    
+    private func openAboutPostufgram() {
+        let controller = PostufgramAboutController(presentationData: presentationData)
+        self.controller?.push(controller)
     }
     
     fileprivate func switchToAccount(id: AccountRecordId) {

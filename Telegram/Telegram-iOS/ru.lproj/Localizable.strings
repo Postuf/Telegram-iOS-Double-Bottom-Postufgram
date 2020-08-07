@@ -16,3 +16,7 @@
 "FalseBottom.AccountWasHidden.Button" = "Ввести код-пароль";
 
 "PasscodeSettings.AutoLock.Immediately" = "Мгновенно";
+
+"Settings.Postufgram.About" = "О Postufgram";
+"Postufgram.About.Title" = "О Postufgram";
+"Postufgram.About.Info" = "Информация о Postufgram";
