@@ -19,7 +19,7 @@
 
 "NotificationSettings.LocalAccountNotificationsSection" = "ТЕКУЩИЙ АККАУНТ НА ДАННОМ УСТРОЙСТВЕ";
 "NotificationSettings.LocalAccountNotifications" = "Включить уведомления";
-"NotificationSettings.LocalAccountNotificationsInfoOn" = "Выключите, если не хотите получать уведомления текущего аккаунта на данном устройстве.";
+"NotificationSettings.LocalAccountNotificationsInfoOn" = "Выключите, если не хотите получать все уведомления текущего аккаунта на данном устройстве.";
 "NotificationSettings.LocalAccountNotificationsInfoOff" = "Включите, если хотите получать уведомления текущего аккаунта на данном устройстве.";
 
 "Settings.Postufgram.About" = "О Postufgram";
