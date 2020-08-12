@@ -1423,7 +1423,12 @@ final class SharedApplicationContext {
                     for subController in controller.controllers {
                         subController.forEachController { controller in
                             if let controller = controller as? UndoOverlayController {
-                                controller.dismissWithCommitAction()
+                                switch controller.content {
+                                case .falseBottom:
+                                    break
+                                default:
+                                    controller.dismissWithCommitAction()
+                                }
                             }
                             return true
                         }
