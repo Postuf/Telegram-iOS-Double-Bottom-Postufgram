@@ -17,6 +17,10 @@
 
 "PasscodeSettings.AutoLock.Immediately" = "Мгновенно";
 
+"FalseBottom.CancelHide.Text" = "Внимание. Скрытие аккаунта доступно только после добавления аккаунта. Если вы захотите скрыть этот аккаунт в дальнейшем, вам надо будет удалить его и добавить заново. Вы хотите остановить процесс скрытия этого аккаунта?";
+"FalseBottom.CancelHide.Continue" = "Продолжить";
+"FalseBottom.CancelHide.Stop" = "Остановить";
+
 "NotificationSettings.LocalAccountNotificationsSection" = "ТЕКУЩИЙ АККАУНТ НА ДАННОМ УСТРОЙСТВЕ";
 "NotificationSettings.LocalAccountNotifications" = "Включить уведомления";
 "NotificationSettings.LocalAccountNotificationsInfoOn" = "Выключите, если не хотите получать все уведомления текущего аккаунта на данном устройстве.";
