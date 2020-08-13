@@ -2148,6 +2148,8 @@ final class SharedApplicationContext {
                             transaction.setAccessChallengeData(data)
                             
                             updatePresentationPasscodeSettingsInternal(transaction: transaction, { $0.withUpdatedAutolockTimeout(1).withUpdatedBiometricsDomainState(LocalAuth.evaluatedPolicyDomainState) })
+                            
+                            updatePushNotificationsSettingsAfterOnMasterPasscode(transaction: transaction)
                         }) |> deliverOnMainQueue).start(next: { _ in
                         }, error: { _ in
                         }, completed: {
