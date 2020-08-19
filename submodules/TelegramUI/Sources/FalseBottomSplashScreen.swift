@@ -390,8 +390,6 @@ private final class FalseBottomAnimationSource: AnimatedStickerNodeSource {
             ]
             
         case .setSecretPasscode:
-            fileName = "TwoFactorSetupIntro"
-            replacements = [:]
             fileName = "FalseBottomHiddenPassword"
             replacements = [
                 "0.219607843137,0.223529411765,0.23137254902,1": elementBackgroundColor,
