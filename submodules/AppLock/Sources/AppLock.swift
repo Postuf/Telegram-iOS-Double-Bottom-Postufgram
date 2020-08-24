@@ -26,7 +26,7 @@ private func isLocked(passcodeSettings: PresentationPasscodeSettings, state: Loc
             if timestamp.bootTimestamp != applicationActivityTimestamp.bootTimestamp {
                 return true
             }
-            if autolockTimeout != 1, timestamp.uptime > applicationActivityTimestamp.uptime + autolockTimeout {
+            if timestamp.uptime > applicationActivityTimestamp.uptime + autolockTimeout {
                 return true
             }
         } else {
@@ -100,12 +100,9 @@ public final class AppLockContextImpl: AppLockContext {
     private var applicationIsActiveDisposable: Disposable?
     private var applicationInForegroundDisposable: Disposable?
     private var didFinishChangingAccountDisposable: Disposable?
-    private var unlockedHiddenAccountRecordIdDisposable: Disposable?
     private let displayedAccountsFilter: DisplayedAccountsFilter
     
-    private var applicationJustLaunched: Bool = true
-    
-    public init(rootPath: String, window: Window1?, rootController: UIViewController?, applicationBindings: TelegramApplicationBindings, accountManager: AccountManager, presentationDataSignal: Signal<PresentationData, NoError>, displayedAccountsFilter: DisplayedAccountsFilter, applicationIsActive: Signal<Bool, NoError>, lockIconInitialFrame: @escaping () -> CGRect?) {
+    public init(rootPath: String, window: Window1?, rootController: UIViewController?, applicationBindings: TelegramApplicationBindings, accountManager: AccountManager, presentationDataSignal: Signal<PresentationData, NoError>, displayedAccountsFilter: DisplayedAccountsFilter, lockIconInitialFrame: @escaping () -> CGRect?) {
         assert(Queue.mainQueue().isCurrent())
         
         self.applicationBindings = applicationBindings
@@ -174,12 +171,12 @@ public final class AppLockContextImpl: AppLockContext {
                 strongSelf.autolockTimeout.set(nil)
                 strongSelf.autolockReportTimeout.set(nil)
             } else {
-                if let autolockTimeout = passcodeSettings.autolockTimeout, autolockTimeout != 1, !appInForeground {
+                if let autolockTimeout = passcodeSettings.autolockTimeout, !appInForeground {
                     shouldDisplayCoveringView = true
                 }
                 
                 if !appInForeground {
-                    if let autolockTimeout = passcodeSettings.autolockTimeout, autolockTimeout != 1 {
+                    if let autolockTimeout = passcodeSettings.autolockTimeout {
                         strongSelf.autolockReportTimeout.set(autolockTimeout)
                     } else if state.isManuallyLocked {
                         strongSelf.autolockReportTimeout.set(1)
@@ -277,15 +274,7 @@ public final class AppLockContextImpl: AppLockContext {
         self.applicationIsActiveDisposable = applicationBindings.applicationIsActive.start(next: { [weak self] applicationIsActive in
             guard let strongSelf = self else { return }
             
-            if applicationIsActive {
-                if strongSelf.applicationJustLaunched {
-                    strongSelf.applicationJustLaunched = false
-                    if strongSelf.currentStateValue.forceLockOnLaunch || strongSelf.currentStateValue.autolockTimeout == 1 {
-                        strongSelf.lock()
-                    }
-                }
-            }
-            else if let coveringView = strongSelf.coveringView, let window = strongSelf.window {
+            if let coveringView = strongSelf.coveringView, let window = strongSelf.window {
                 coveringView.updateSnapshot(getCoveringViewSnaphot(window: window))
                 window.coveringView = coveringView
             }
@@ -295,13 +284,11 @@ public final class AppLockContextImpl: AppLockContext {
 
             guard let strongSelf = self, let coveringView = strongSelf.coveringView, let window = strongSelf.window else { return }
             
-            if strongSelf.currentStateValue.autolockTimeout != 1 {
-                Queue.mainQueue().after(0.01, {
-                    coveringView.updateSnapshot(nil)
-                    coveringView.updateSnapshot(getCoveringViewSnaphot(window: window))
-                    window.coveringView = coveringView
-                })
-            }
+            Queue.mainQueue().after(0.01, {
+                coveringView.updateSnapshot(nil)
+                coveringView.updateSnapshot(getCoveringViewSnaphot(window: window))
+                window.coveringView = coveringView
+            })
         })
         
         self.applicationInForegroundDisposable = (applicationBindings.applicationInForeground
@@ -310,18 +297,8 @@ public final class AppLockContextImpl: AppLockContext {
             |> deliverOnMainQueue).start(next: { [weak self] _ in
                 guard let strongSelf = self else { return }
                 
-                if strongSelf.currentStateValue.autolockTimeout == 1 {
-                    strongSelf.lock()
-                } else {
-                    strongSelf.unlockedHiddenAccountRecordId.set(nil)
-                }
+                strongSelf.unlockedHiddenAccountRecordId.set(nil)
         })
-        
-        self.unlockedHiddenAccountRecordIdDisposable = combineLatest(self.unlockedHiddenAccountRecordId.get(), applicationBindings.applicationIsActive).start(next: { [weak self] hiddenAccountRecordId, applicationIsActive in
-                guard let strongSelf = self, applicationIsActive else { return }
-                
-                strongSelf.setForceLockOnLaunch(hiddenAccountRecordId != nil)
-            })
         
         let _ = (self.autolockTimeout.get()
         |> deliverOnMainQueue).start(next: { [weak self] autolockTimeout in
@@ -451,19 +428,10 @@ public final class AppLockContextImpl: AppLockContext {
         }
     }
     
-    private func setForceLockOnLaunch(_ value: Bool) {
-        self.updateLockState { state in
-            var state = state
-            state.forceLockOnLaunch = value
-            return state
-        }
-    }
-    
     deinit {
         self.hiddenAccountsAccessChallengeDataDisposable?.dispose()
         self.applicationIsActiveDisposable?.dispose()
         self.didFinishChangingAccountDisposable?.dispose()
         self.applicationInForegroundDisposable?.dispose()
-        self.unlockedHiddenAccountRecordIdDisposable?.dispose()
     }
 }

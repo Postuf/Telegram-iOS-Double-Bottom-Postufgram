@@ -173,19 +173,6 @@ public final class PasscodeEntryController: ViewController {
             }
         }
         
-        self.controllerNode.didEnter4Digits = { [weak self] passcode, completion in
-            guard let strongSelf = self else {
-                return
-            }
-            
-            for (id, challengeData) in strongSelf.hiddenAccountsAccessChallengeData {
-                if check(passcode: passcode, challengeData: challengeData) {
-                    completion()
-                    break
-                }
-            }
-        }
-        
         self.controllerNode.checkPasscode = { [weak self] passcode in
             guard let strongSelf = self else {
                 return
@@ -193,7 +180,9 @@ public final class PasscodeEntryController: ViewController {
             
             var succeed = check(passcode: passcode, challengeData: strongSelf.challengeData)
             
-            if !succeed, strongSelf.hasPublicAccounts {
+            if succeed {
+                strongSelf.appLockContext.unlockedHiddenAccountRecordId.set(nil)
+            } else if strongSelf.hasPublicAccounts {
                 for (id, challengeData) in strongSelf.hiddenAccountsAccessChallengeData {
                     if check(passcode: passcode, challengeData: challengeData) {
                         strongSelf.appLockContext.unlockedHiddenAccountRecordId.set(id)

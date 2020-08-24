@@ -94,7 +94,6 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
     private let mode: FalseBottomSplashMode
     
     private var animationSize: CGSize = CGSize()
-    private var animationOffset: CGPoint = CGPoint()
     private let animationNode: AnimatedStickerNode
     private let titleNode: ImmediateTextNode
     private let textNode: ImmediateTextNode
@@ -178,9 +177,11 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
             }
         }
         
+        let titleSize: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 32.0 : 28.0
+        
         self.titleNode = ImmediateTextNode()
         self.titleNode.displaysAsynchronously = false
-        self.titleNode.attributedText = NSAttributedString(string: title, font: Font.bold(32.0), textColor: self.presentationData.theme.list.itemPrimaryTextColor)
+        self.titleNode.attributedText = NSAttributedString(string: title, font: Font.bold(titleSize), textColor: self.presentationData.theme.list.itemPrimaryTextColor)
         self.titleNode.maximumNumberOfLines = 0
         self.titleNode.textAlignment = .center
         
@@ -213,14 +214,16 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
     }
     
     func containerLayoutUpdated(layout: ContainerViewLayout, navigationHeight: CGFloat, transition: ContainedViewLayoutTransition) {
-        let sideInset: CGFloat = 32.0
+        let isIphone4s = layout.size.height <= 480
+        
+        let sideInset: CGFloat = 16.0
         let buttonSideInset: CGFloat = 48.0
-        let iconSpacing: CGFloat = 35.0
-        let titleSpacing: CGFloat = 19.0
+        let iconSpacing: CGFloat = isIphone4s ? 23.0 : 35.0
+        let titleSpacing: CGFloat = 27.0
         let buttonHeight: CGFloat = 50.0
         
-        let iconSize: CGSize = self.animationSize
-        var iconOffset = CGPoint()
+        let isIphone4sAnimationHeight: CGFloat = 148.0
+        let iconSize: CGSize = isIphone4s ? CGSize(width: floor(self.animationSize.width * isIphone4sAnimationHeight / self.animationSize.height), height: isIphone4sAnimationHeight) : self.animationSize
         
         let titleSize = self.titleNode.updateLayout(CGSize(width: layout.size.width - sideInset * 2.0, height: layout.size.height))
         let textSize = self.textNode.updateLayout(CGSize(width: layout.size.width - sideInset * 2.0, height: layout.size.height))
@@ -237,15 +240,13 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
         transition.updateFrame(node: self.buttonNode, frame: buttonFrame)
         self.buttonNode.updateLayout(width: buttonFrame.width, transition: transition)
         
-        var maxContentVerticalOrigin = buttonFrame.minY - 12.0 - contentHeight
+        let titleFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - titleSize.width) / 2.0), y: floor((layout.size.height - titleSize.height) / 2.0)), size: titleSize)
+        transition.updateFrameAdditive(node: self.titleNode, frame: titleFrame)
         
-        contentVerticalOrigin = min(contentVerticalOrigin, maxContentVerticalOrigin)
-        
-        let iconFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - iconSize.width) / 2.0) + self.animationOffset.x, y: contentVerticalOrigin + self.animationOffset.y), size: iconSize).offsetBy(dx: iconOffset.x, dy: iconOffset.y)
+        let iconFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - iconSize.width) / 2.0), y: titleFrame.origin.y - iconSpacing - iconSize.height), size: iconSize)
         self.animationNode.updateLayout(size: iconFrame.size)
         transition.updateFrameAdditive(node: self.animationNode, frame: iconFrame)
-        let titleFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - titleSize.width) / 2.0), y: iconFrame.maxY + iconSpacing), size: titleSize)
-        transition.updateFrameAdditive(node: self.titleNode, frame: titleFrame)
+        
         let textFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - textSize.width) / 2.0), y: titleFrame.maxY + titleSpacing), size: textSize)
         transition.updateFrameAdditive(node: self.textNode, frame: textFrame)
     }
@@ -310,6 +311,7 @@ private final class FalseBottomAnimationSource: AnimatedStickerNodeSource {
         let middleColor1 = elementBackgroundColor.interpolated(to: outlineColor, percentage: 0.15).grayscale
         let middleColor2 = elementBackgroundColor.interpolated(to: outlineColor, percentage: 0.23).grayscale
         let middleColor3 = elementBackgroundColor.interpolated(to: outlineColor, percentage: 0.56).grayscale
+        let middleColor4 = elementBackgroundColor.interpolated(to: outlineColor, percentage: 0.56).grayscale
         let brightElementColor1: UIColor
         let brightElementColor2: UIColor
         let buttonColor = theme.list.itemCheckColors.fillColor
@@ -377,8 +379,22 @@ private final class FalseBottomAnimationSource: AnimatedStickerNodeSource {
         case .accountWasHidden:
             fileName = "FalseBottomAccountIsHidden"
             replacements = [
-                "0.121568627451,0.121568627451,0.121568627451,1": elementBackgroundColor,
-                "0.552941203117,0.556862771511,0.57647061348,1": outlineColor
+//                "0.086000001197,0.165000002992,0.250999989229,1"
+                "0.122000002394,0.122000002394,0.122000002394,1": elementBackgroundColor,
+                "0.125,0.125,0.125,1": elementBackgroundColor,
+                "0.1254902035,0.1254902035,0.1254902035,1": elementBackgroundColor,
+                "0.184000007779,0.184000007779,0.187999994615,1": middleColor1,
+//                "0.184000007779,0.226999993418,0.149000010771,1"
+                "0.196078431373,0.196078431373,0.196078431373,1": middleColor1,
+                "0.219607843137,0.223529411765,0.23137254902,1": middleColor2,
+                "0.219999994016,0.224000010771,0.231000010173,1": middleColor2,
+                "0.352999997606,0.352999997606,0.352999997606,1": middleColor3,
+//                "0.462745127958,0.258823529412,0,1"
+                "0.47080338422,0.448363120883,0.441716063256,1": middleColor4,
+                "0.552941203117,0.556862771511,0.57647061348,1": outlineColor,
+                "0.552999997606,0.556999954523,0.57599995931,1": outlineColor,
+                "0.556862745098,0.552941176471,0.560784313725,1": outlineColor
+//                "0.905999995213,0.246999987434,0.250999989229,1"
             ]
         }
         guard let path = getAppBundle().path(forResource: fileName, ofType: "tgs"),
