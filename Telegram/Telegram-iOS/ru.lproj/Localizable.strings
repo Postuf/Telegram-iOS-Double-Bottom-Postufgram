@@ -17,6 +17,7 @@
 "FalseBottom.AccountWasHidden.Button" = "Ввести код-пароль";
 
 "PasscodeSettings.AutoLock.Immediately" = "Мгновенно";
+"PasscodeSettings.MatchMaster" = "Совпадает с общим паролем. Пожалуйста, введите другой.";
 
 "FalseBottom.CancelHide.Text" = "Внимание. Скрытие аккаунта доступно только после добавления аккаунта. Если вы захотите скрыть этот аккаунт в дальнейшем, вам надо будет удалить его и добавить заново. Вы хотите остановить процесс скрытия этого аккаунта?";
 "FalseBottom.CancelHide.Continue" = "Продолжить";
