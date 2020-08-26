@@ -2278,8 +2278,6 @@ final class SharedApplicationContext {
                             }
                             
                             if let id = id {
-                                setAccountPushNotificationsEnabledOnThisDevice(accountIds: [id: false], transaction: transaction)
-                                
                                 setAccountRecordAccessChallengeData(transaction: transaction, id: id, accessChallengeData: data)
                                 
                                 updatePresentationPasscodeSettingsInternal(transaction: transaction, { $0.withUpdatedAutolockTimeout(60).withUpdatedBiometricsDomainState(LocalAuth.evaluatedPolicyDomainState) })
