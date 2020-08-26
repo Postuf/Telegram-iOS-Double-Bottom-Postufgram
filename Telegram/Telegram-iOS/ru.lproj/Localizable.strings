@@ -23,6 +23,9 @@
 "FalseBottom.CancelHide.Continue" = "Продолжить";
 "FalseBottom.CancelHide.Stop" = "Остановить";
 
+"FalseBottom.DisableNotifications.Text" = "Вы можете отключить уведомления и звонки для скрытого аккаунта";
+"FalseBottom.DisableNotifications.Subtitle" = "Применяется на все устройства, где авторизован скрытый аккаунт";
+
 "NotificationSettings.LocalAccountNotificationsSection" = "ТЕКУЩИЙ АККАУНТ НА ДАННОМ УСТРОЙСТВЕ";
 "NotificationSettings.LocalAccountNotifications" = "Включить уведомления";
 "NotificationSettings.LocalAccountNotificationsInfoOn" = "Выключите, если не хотите получать все уведомления текущего аккаунта на данном устройстве.";

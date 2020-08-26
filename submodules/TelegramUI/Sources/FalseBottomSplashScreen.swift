@@ -17,6 +17,7 @@ public enum FalseBottomSplashMode {
     case addOneMoreAccount
     case setMasterPasscode
     case setSecretPasscode
+    case disableNotifications
     case accountWasHidden
 }
 
@@ -24,6 +25,7 @@ public final class FalseBottomSplashScreen: ViewController {
     private let presentationData: PresentationData
     private let mode: FalseBottomSplashMode
     
+    var buttonPressedWithEnabledSwitch: ((Bool) -> Void)?
     var buttonPressed: (() -> Void)?
     var backPressed: (() -> Void)? {
         didSet {
@@ -59,13 +61,24 @@ public final class FalseBottomSplashScreen: ViewController {
     }
     
     override public func loadDisplayNode() {
-        self.displayNode = FalseBottomSplashScreenNode(presentationData: self.presentationData, mode: self.mode, action: { [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-            
-            strongSelf.buttonPressed?()
-        })
+        if mode == .disableNotifications {
+            self.displayNode = FalseBottomSwitchScreenNode(presentationData: self.presentationData, action: { [weak self] enabled in
+                guard let strongSelf = self else {
+                    return
+                }
+                
+                strongSelf.buttonPressedWithEnabledSwitch?(enabled)
+                strongSelf.buttonPressed?()
+            })
+        } else {
+            self.displayNode = FalseBottomSplashScreenNode(presentationData: self.presentationData, mode: self.mode, action: { [weak self] in
+                guard let strongSelf = self else {
+                    return
+                }
+                
+                strongSelf.buttonPressed?()
+            })
+        }
         
         self.displayNodeDidLoad()
     }
@@ -73,7 +86,13 @@ public final class FalseBottomSplashScreen: ViewController {
     override public func containerLayoutUpdated(_ layout: ContainerViewLayout, transition: ContainedViewLayoutTransition) {
         super.containerLayoutUpdated(layout, transition: transition)
         
-        (self.displayNode as! FalseBottomSplashScreenNode).containerLayoutUpdated(layout: layout, navigationHeight: self.navigationHeight, transition: transition)
+        if let displayNode = self.displayNode as? FalseBottomSplashScreenNode {
+            displayNode.containerLayoutUpdated(layout: layout, navigationHeight: self.navigationHeight, transition: transition)
+        }
+        
+        if let displayNode = self.displayNode as? FalseBottomSwitchScreenNode {
+            displayNode.containerLayoutUpdated(layout: layout, navigationHeight: self.navigationHeight, transition: transition)
+        }
     }
     
     override public func viewDidPopFromNavigationInteractively() {
@@ -86,6 +105,114 @@ public final class FalseBottomSplashScreen: ViewController {
     
     @objc func didTapBack() {
         backPressed?()
+    }
+}
+
+private final class FalseBottomSwitchScreenNode: ViewControllerTracingNode {
+    private let switchNode: BorderSwitchNode
+    private let textNode: ImmediateTextNode
+    private let subtitleNode: ImmediateTextNode
+    private let animationNode: AnimatedStickerNode
+    private var animationSize: CGSize = CGSize()
+    private let buttonNode: SolidRoundedButtonNode
+    
+    init(presentationData: PresentationData, action: @escaping (Bool) -> Void) {
+        let textFont = Font.regular(16.0)
+        let textColor = presentationData.theme.list.itemPrimaryTextColor
+
+        let subtitleFont = Font.regular(12.0)
+        let subtitleColor = UIColor(rgb: 0x8D8E93)
+        
+        let switchOnColorForLightBackground = UIColor(rgb: 0xA6A6A6)
+        let switchOnColorForDarkBackground = UIColor(rgb: 0x494949)
+        
+        let text = NSAttributedString(string: presentationData.strings.FalseBottom_DisableNotifications_Text, font: textFont, textColor: textColor)
+        let subtitle = NSAttributedString(string: presentationData.strings.FalseBottom_DisableNotifications_Subtitle, font: subtitleFont, textColor: subtitleColor)
+        let buttonText = presentationData.strings.Common_Next
+        let source = FalseBottomAnimationSource(mode: .disableNotifications, theme: presentationData.theme)
+        
+        self.animationNode = AnimatedStickerNode()
+        if let source = source {
+            self.animationNode.setup(source: source, width: 528, height: 348, playbackMode: .loop, mode: .direct(cachePathPrefix: nil))
+            self.animationSize = CGSize(width: 264.0, height: 174.0)
+            self.animationNode.visibility = true
+        }
+        
+        self.buttonNode = SolidRoundedButtonNode(title: buttonText, theme: SolidRoundedButtonTheme(backgroundColor: presentationData.theme.list.itemCheckColors.fillColor, foregroundColor: presentationData.theme.list.itemCheckColors.foregroundColor), height: 50.0, cornerRadius: 10.0, gloss: false)
+        
+        self.switchNode = BorderSwitchNode()
+        self.switchNode.contentColor = presentationData.theme.list.plainBackgroundColor.isDark ? switchOnColorForDarkBackground : switchOnColorForLightBackground
+        self.switchNode.isOn = true
+        
+        self.textNode = ImmediateTextNode()
+        self.textNode.displaysAsynchronously = false
+        self.textNode.attributedText = text
+        self.textNode.maximumNumberOfLines = 0
+        self.textNode.textAlignment = .center
+        
+        self.subtitleNode = ImmediateTextNode()
+        self.subtitleNode.displaysAsynchronously = false
+        self.subtitleNode.attributedText = subtitle
+        self.subtitleNode.maximumNumberOfLines = 0
+        self.subtitleNode.textAlignment = .center
+        
+        super.init()
+        
+        self.backgroundColor = presentationData.theme.list.plainBackgroundColor
+        
+        self.addSubnode(self.animationNode)
+        self.addSubnode(self.subtitleNode)
+        self.addSubnode(self.textNode)
+        self.addSubnode(self.buttonNode)
+        self.addSubnode(self.switchNode)
+        
+        self.buttonNode.pressed = { [weak self] in
+            guard let self = self else { return }
+
+            action(self.switchNode.isOn)
+        }
+    }
+    
+    func containerLayoutUpdated(layout: ContainerViewLayout, navigationHeight: CGFloat, transition: ContainedViewLayoutTransition) {
+        let isIphone4s = layout.size.height <= 480
+        
+        let sideInset: CGFloat = 30.0
+        let buttonSideInset: CGFloat = 30.0
+        let upperSpacing: CGFloat = isIphone4s ? 69 : 87
+        let iconSpacing: CGFloat = 21.0
+        let switchSpacing: CGFloat = 32.0
+        let textSpacing: CGFloat = 10.0
+        let subtitleSpacing: CGFloat = 16.0
+        let buttonHeight: CGFloat = 50.0
+        
+        let isIphone4sAnimationHeight: CGFloat = 147.0
+        let iconSize: CGSize = isIphone4s ? CGSize(width: floor(self.animationSize.width * isIphone4sAnimationHeight / self.animationSize.height), height: isIphone4sAnimationHeight) : self.animationSize
+        
+        let switchSize = self.switchNode.frame.size
+        let textSize = self.textNode.updateLayout(CGSize(width: layout.size.width - sideInset * 2.0, height: layout.size.height))
+        let subtitleSize = self.subtitleNode.updateLayout(CGSize(width: layout.size.width - sideInset * 2.0, height: layout.size.height))
+        
+        let minimalBottomInset: CGFloat = 57.0
+        let bottomInset = layout.intrinsicInsets.bottom + (isIphone4s ? 23 : minimalBottomInset)
+        
+        let buttonWidth = layout.size.width - buttonSideInset * 2.0
+        
+        let buttonFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - buttonWidth) / 2.0), y: layout.size.height - bottomInset - buttonHeight), size: CGSize(width: buttonWidth, height: buttonHeight))
+        transition.updateFrame(node: self.buttonNode, frame: buttonFrame)
+        self.buttonNode.updateLayout(width: buttonFrame.width, transition: transition)
+        
+        let switchFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - switchSize.width) / 2.0), y: floor(layout.size.height / 2.0)), size: switchSize)
+        transition.updateFrameAdditive(node: self.switchNode, frame: switchFrame)
+        
+        let iconFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - iconSize.width) / 2.0), y: switchFrame.origin.y - (iconSize.height + iconSpacing)), size: iconSize)
+        self.animationNode.updateLayout(size: iconFrame.size)
+        transition.updateFrameAdditive(node: self.animationNode, frame: iconFrame)
+        
+        let textFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - textSize.width) / 2.0), y: switchFrame.maxY + switchSpacing), size: textSize)
+        transition.updateFrameAdditive(node: self.textNode, frame: textFrame)
+        
+        let subtitleFrame = CGRect(origin: CGPoint(x: floor((layout.size.width - subtitleSize.width) / 2.0), y: textFrame.maxY + textSpacing), size: subtitleSize)
+        transition.updateFrameAdditive(node: self.subtitleNode, frame: subtitleFrame)
     }
 }
 
@@ -164,6 +291,11 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
                 self.animationSize = CGSize(width: 264.0, height: 174.0)
                 self.animationNode.visibility = true
             }
+            
+        case .disableNotifications:
+            title = ""
+            text = NSAttributedString()
+            buttonText = ""
 
         case .accountWasHidden:
             title = presentationData.strings.FalseBottom_AccountWasHidden_Title
@@ -231,8 +363,8 @@ private final class FalseBottomSplashScreenNode: ViewControllerTracingNode {
         let contentHeight = iconSize.height + iconSpacing + titleSize.height + titleSpacing + textSize.height
         var contentVerticalOrigin = floor((layout.size.height - contentHeight - iconSize.height / 2.0) / 2.0)
         
-        let minimalBottomInset: CGFloat = 60.0
-        let bottomInset = layout.intrinsicInsets.bottom + minimalBottomInset
+        let minimalBottomInset: CGFloat = 57.0
+        let bottomInset = layout.intrinsicInsets.bottom + (isIphone4s ? 23 : minimalBottomInset)
         
         let buttonWidth = layout.size.width - buttonSideInset * 2.0
         
@@ -289,6 +421,18 @@ private extension UIColor {
         let (h, s, b, a) = hsba
         var newHue = h > 0.5 ? h - 0.5 : h + 0.5
         return UIColor(hue: newHue, saturation: s, brightness:b, alpha: a)
+    }
+    
+    var isDark: Bool {
+        let color = CIColor(color: self)
+        
+        let red = color.red * 255
+        let green = color.green * 255
+        let blue = color.blue * 255
+        
+        var luma = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+        
+        return luma < 40
     }
 }
 
@@ -375,6 +519,10 @@ private final class FalseBottomAnimationSource: AnimatedStickerNodeSource {
                 "0.1254902035,0.1254902035,0.1254902035,1": elementBackgroundColor,
                 "0.552999997606,0.556999954523,0.57599995931,1": outlineColor
             ]
+            
+        case .disableNotifications:
+            fileName = "FalseBottomNotifications_part_1"
+            replacements = [:]
             
         case .accountWasHidden:
             fileName = "FalseBottomAccountIsHidden"
