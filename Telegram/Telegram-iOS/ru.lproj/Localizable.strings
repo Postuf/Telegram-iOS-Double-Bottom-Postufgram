@@ -12,6 +12,9 @@
 "FalseBottom.SetSecretPasscode.Title" = "Скрытый код-пароль";
 "FalseBottom.SetSecretPasscode.Text" = "Теперь установите код-пароль для аккаунта, который вы хотите скрыть.";
 "FalseBottom.SetSecretPasscode.Button" = "Установить код-пароль";
+"FalseBottom.LockExplanation.Title" = "Замочек";
+"FalseBottom.LockExplanation.Text" = "Для перехода в скрытый аккаунт, заблокируйте приложение, нажав на замочек.";
+"FalseBottom.LockExplanation.Button" = "Понятно";
 "FalseBottom.AccountWasHidden.Title" = "Аккаунт скрыт";
 "FalseBottom.AccountWasHidden.Text" = "Теперь вы можете, вводя первый или второй код-пароль, зайти в нужный вам аккаунт.";
 "FalseBottom.AccountWasHidden.Button" = "Ввести код-пароль";
