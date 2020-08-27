@@ -1,22 +1,22 @@
 "FalseBottom.Settings.Text" = "Двойное дно";
 "FalseBottom.Toast.HideAccount" = "Скрыть аккаунт";
-"FalseBottom.HideAccount.Title" = "Скрыть аккаунт";
-"FalseBottom.HideAccount.Text" = "Получите доступ к тому или иному аккаунту, в зависимости от того, какой пароль будет введен.";
+"FalseBottom.HideAccount.Title" = "Двойное дно";
+"FalseBottom.HideAccount.Text" = "Скройте аккаунт, чтобы получать к нему доступ только через уникальный код-пароль.";
 "FalseBottom.HideAccount.Button" = "Включить";
-"FalseBottom.AddOneMoreAccount.Title" = "Еще один аккаунт";
-"FalseBottom.AddOneMoreAccount.Text" = "Для скрытия текущего аккаунта необходимо добавить в Телеграм новый аккаунт без функции \"скрыть аккаунт\".";
+"FalseBottom.AddOneMoreAccount.Title" = "Основной аккаунт";
+"FalseBottom.AddOneMoreAccount.Text" = "Для скрытия текущего аккаунта необходимо добавить еще один аккаунт в качестве основного.";
 "FalseBottom.AddOneMoreAccount.Button" = "Добавить аккаунт";
-"FalseBottom.SetMasterPasscode.Title" = "Общий код-пароль";
-"FalseBottom.SetMasterPasscode.Text" = "Установите общий код-пароль для всех нескрытых аккаунтов.";
+"FalseBottom.SetMasterPasscode.Title" = "Основной код-пароль";
+"FalseBottom.SetMasterPasscode.Text" = "Установите основной код-пароль для всех нескрытых (основных) аккаунтов.";
 "FalseBottom.SetMasterPasscode.Button" = "Установить код-пароль";
 "FalseBottom.SetSecretPasscode.Title" = "Скрытый код-пароль";
-"FalseBottom.SetSecretPasscode.Text" = "Теперь установите код-пароль для аккаунта, который вы хотите скрыть.";
+"FalseBottom.SetSecretPasscode.Text" = "Установите код-пароль для аккаунта, который вы хотите скрыть.";
 "FalseBottom.SetSecretPasscode.Button" = "Установить код-пароль";
 "FalseBottom.LockExplanation.Title" = "Замочек";
 "FalseBottom.LockExplanation.Text" = "Для перехода в скрытый аккаунт, заблокируйте приложение, нажав на замочек.";
 "FalseBottom.LockExplanation.Button" = "Понятно";
 "FalseBottom.AccountWasHidden.Title" = "Аккаунт скрыт";
-"FalseBottom.AccountWasHidden.Text" = "Теперь вы можете, вводя первый или второй код-пароль, зайти в нужный вам аккаунт.";
+"FalseBottom.AccountWasHidden.Text" = "Теперь вы можете, вводя скрытый или основной код-пароль, зайти в нужный вам аккаунт.";
 "FalseBottom.AccountWasHidden.Button" = "Ввести код-пароль";
 
 "PasscodeSettings.AutoLock.Immediately" = "Мгновенно";
@@ -26,8 +26,8 @@
 "FalseBottom.CancelHide.Continue" = "Продолжить";
 "FalseBottom.CancelHide.Stop" = "Остановить";
 
-"FalseBottom.DisableNotifications.Text" = "Вы можете отключить уведомления и звонки для скрытого аккаунта";
-"FalseBottom.DisableNotifications.Subtitle" = "Применяется на все устройства, где авторизован скрытый аккаунт";
+"FalseBottom.DisableNotifications.Text" = "Вы можете отключить уведомления и звонки для скрытого аккаунта.";
+"FalseBottom.DisableNotifications.Subtitle" = "Применяется на все устройства, где авторизован скрытый аккаунт.";
 
 "NotificationSettings.LocalAccountNotificationsSection" = "ТЕКУЩИЙ АККАУНТ НА ДАННОМ УСТРОЙСТВЕ";
 "NotificationSettings.LocalAccountNotifications" = "Включить уведомления";
