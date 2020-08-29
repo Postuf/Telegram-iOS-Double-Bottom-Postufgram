@@ -1158,9 +1158,9 @@
 "PasscodeSettings.EncryptData" = "Encrypt Local Database";
 "PasscodeSettings.EncryptDataHelp" = "Experimental feature, use with caution. Encrypt your local Postufgram data, using a derivative of your passcode as the key.";
 
-"EnterPasscode.EnterTitle" = "Enter your Postufgram Passcode";
+"EnterPasscode.EnterTitle" = "Enter your Passcode";
 "EnterPasscode.ChangeTitle" = "Change Passcode";
-"EnterPasscode.EnterPasscode" = "Enter your Postufgram Passcode";
+"EnterPasscode.EnterPasscode" = "Enter your Passcode";
 "EnterPasscode.EnterNewPasscodeNew" = "Enter a passcode";
 "EnterPasscode.EnterNewPasscodeChange" = "Enter your new passcode";
 "EnterPasscode.RepeatNewPasscode" = "Re-enter your new passcode";

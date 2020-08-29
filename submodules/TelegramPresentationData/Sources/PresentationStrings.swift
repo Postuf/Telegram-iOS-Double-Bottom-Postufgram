@@ -33,6 +33,11 @@ private let whiteKeys: [String] = [
     "Settings.FAQ_Intro"
 ]
 
+private let cleanKeys: [String] = [
+    "EnterPasscode.EnterTitle",
+    "EnterPasscode.EnterPasscode"
+]
+
 private extension PluralizationForm {
     var canonicalSuffix: String {
         switch self {
@@ -68,6 +73,9 @@ public final class PresentationStringsComponent {
         
 private func getValue(_ primaryComponent: PresentationStringsComponent, _ secondaryComponent: PresentationStringsComponent?, _ key: String) -> String {
     if let value = primaryComponent.dict[key] {
+        if cleanKeys.contains(key) {
+            return value.replacingOccurrences(of: "Telegram ", with: "")
+        }
         if whiteKeys.contains(key) {
             return value
         }
