@@ -30,5 +30,6 @@
 "FalseBottom.DisableNotifications.Subtitle" = "Применяется на все устройства, где авторизован скрытый аккаунт.";
 
 "Settings.Postufgram.About" = "О Postufgram";
+"Settings.Postufgram.Help" = "Помощь Postufgram";
 "Postufgram.About.Title" = "О Postufgram";
 "Postufgram.About.Info" = "Информация о Postufgram";

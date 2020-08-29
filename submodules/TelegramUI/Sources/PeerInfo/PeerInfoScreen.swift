@@ -539,6 +539,7 @@ private final class PeerInfoInteraction {
     let logoutAccount: (AccountRecordId) -> Void
     let accountContextMenu: (AccountRecordId, ASDisplayNode, ContextGesture?) -> Void
     let updateBio: (String) -> Void
+    let openPostufgramHelp: () -> Void
     
     init(
         openUsername: @escaping (String) -> Void,
@@ -573,7 +574,8 @@ private final class PeerInfoInteraction {
         switchToAccount: @escaping (AccountRecordId) -> Void,
         logoutAccount: @escaping (AccountRecordId) -> Void,
         accountContextMenu: @escaping (AccountRecordId, ASDisplayNode, ContextGesture?) -> Void,
-        updateBio: @escaping (String) -> Void
+        updateBio: @escaping (String) -> Void,
+        openPostufgramHelp: @escaping () -> Void
     ) {
         self.openUsername = openUsername
         self.openPhone = openPhone
@@ -608,6 +610,7 @@ private final class PeerInfoInteraction {
         self.logoutAccount = logoutAccount
         self.accountContextMenu = accountContextMenu
         self.updateBio = updateBio
+        self.openPostufgramHelp = openPostufgramHelp
     }
 }
 
@@ -790,7 +793,10 @@ private func settingsItems(data: PeerInfoScreenData?, context: AccountContext, p
         interaction.openSettings(.faq)
     }))
     
-    items[.posufgram]!.append(PeerInfoScreenDisclosureItem(id: 0, text: presentationData.strings.Settings_Postufgram_About, icon: PresentationResourcesSettings.faq, action: {
+    items[.posufgram]!.append(PeerInfoScreenDisclosureItem(id: 0, text: presentationData.strings.Settings_Postufgram_Help, icon: PresentationResourcesSettings.support, action: {
+        interaction.openPostufgramHelp()
+    }))
+    items[.posufgram]!.append(PeerInfoScreenDisclosureItem(id: 1, text: presentationData.strings.Settings_Postufgram_About, icon: PresentationResourcesSettings.faq, action: {
         interaction.openSettings(.about)
     }))
     
@@ -1423,6 +1429,8 @@ private final class PeerInfoScreenNode: ViewControllerTracingNode, UIScrollViewD
     }
     private var didSetReady = false
     
+    private var openPostufgramHelp: () -> Void
+    
     var currentHiddenId: AccountRecordId?
     {
         didSet {
@@ -1432,7 +1440,7 @@ private final class PeerInfoScreenNode: ViewControllerTracingNode, UIScrollViewD
         }
     }
     
-    init(controller: PeerInfoScreen, context: AccountContext, peerId: PeerId, avatarInitiallyExpanded: Bool, isOpenedFromChat: Bool, nearbyPeerDistance: Int32?, callMessages: [Message], isSettings: Bool, ignoreGroupInCommon: PeerId?) {
+    init(controller: PeerInfoScreen, context: AccountContext, peerId: PeerId, avatarInitiallyExpanded: Bool, isOpenedFromChat: Bool, nearbyPeerDistance: Int32?, callMessages: [Message], isSettings: Bool, ignoreGroupInCommon: PeerId?, openPostufgramHelp: @escaping () -> Void) {
         self.controller = controller
         self.context = context
         self.peerId = peerId
@@ -1449,6 +1457,8 @@ private final class PeerInfoScreenNode: ViewControllerTracingNode, UIScrollViewD
         
         self.headerNode = PeerInfoHeaderNode(context: context, avatarInitiallyExpanded: avatarInitiallyExpanded, isOpenedFromChat: isOpenedFromChat, isSettings: isSettings)
         self.paneContainerNode = PeerInfoPaneContainerNode(context: context, peerId: peerId)
+        
+        self.openPostufgramHelp = openPostufgramHelp
         
         super.init()
         
@@ -1551,6 +1561,9 @@ private final class PeerInfoScreenNode: ViewControllerTracingNode, UIScrollViewD
             },
             updateBio: { [weak self] bio in
                 self?.updateBio(bio)
+            },
+            openPostufgramHelp: { [weak self] in
+                self?.openPostufgramHelp()
             }
         )
         
@@ -5539,7 +5552,9 @@ public final class PeerInfoScreen: ViewController {
     private var currentHiddenId: AccountRecordId?
     private var currentHiddenIdDisposable: Disposable?
     
-    public init(context: AccountContext, peerId: PeerId, avatarInitiallyExpanded: Bool, isOpenedFromChat: Bool, nearbyPeerDistance: Int32?, callMessages: [Message], isSettings: Bool = false, ignoreGroupInCommon: PeerId? = nil) {
+    private var openPostufgramHelp: () -> Void
+    
+    public init(context: AccountContext, peerId: PeerId, avatarInitiallyExpanded: Bool, isOpenedFromChat: Bool, nearbyPeerDistance: Int32?, callMessages: [Message], isSettings: Bool = false, ignoreGroupInCommon: PeerId? = nil, openPostufgramHelp: @escaping () -> Void = {}) {
         self.context = context
         self.peerId = peerId
         self.avatarInitiallyExpanded = avatarInitiallyExpanded
@@ -5548,6 +5563,7 @@ public final class PeerInfoScreen: ViewController {
         self.callMessages = callMessages
         self.isSettings = isSettings
         self.ignoreGroupInCommon = ignoreGroupInCommon
+        self.openPostufgramHelp = openPostufgramHelp
         
         self.presentationData = context.sharedContext.currentPresentationData.with { $0 }
         
@@ -5811,7 +5827,7 @@ public final class PeerInfoScreen: ViewController {
     }
     
     override public func loadDisplayNode() {
-        self.displayNode = PeerInfoScreenNode(controller: self, context: self.context, peerId: self.peerId, avatarInitiallyExpanded: self.avatarInitiallyExpanded, isOpenedFromChat: self.isOpenedFromChat, nearbyPeerDistance: self.nearbyPeerDistance, callMessages: self.callMessages, isSettings: self.isSettings, ignoreGroupInCommon: self.ignoreGroupInCommon)
+        self.displayNode = PeerInfoScreenNode(controller: self, context: self.context, peerId: self.peerId, avatarInitiallyExpanded: self.avatarInitiallyExpanded, isOpenedFromChat: self.isOpenedFromChat, nearbyPeerDistance: self.nearbyPeerDistance, callMessages: self.callMessages, isSettings: self.isSettings, ignoreGroupInCommon: self.ignoreGroupInCommon, openPostufgramHelp: self.openPostufgramHelp)
         self.controllerNode.accountsAndPeers.set(self.accountsAndPeers.get() |> map { $0.1 })
         self.controllerNode.activeSessionsContextAndCount.set(self.activeSessionsContextAndCount.get())
         self._ready.set(self.controllerNode.ready.get())

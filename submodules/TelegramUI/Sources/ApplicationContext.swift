@@ -152,6 +152,14 @@ final class AuthorizedApplicationContext {
         
         self.rootController = TelegramRootController(context: context)
         
+        self.rootController.openPostufgramHelp = { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.openChatWithPeerId(peerId: PeerId(namespace: 2, id: 1180918143))
+        }
+        
         self.rootController.globalOverlayControllersUpdated = { [weak self] in
             guard let strongSelf = self else {
                 return

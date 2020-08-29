@@ -5761,5 +5761,6 @@ Any member of this group will be able to see messages in the channel.";
 "FalseBottom.AccountWasHidden.Button" = "Enter Passcode";
 
 "Settings.Postufgram.About" = "About Postufgram";
+"Settings.Postufgram.Help" = "Postufgram Help";
 "Postufgram.About.Title" = "About Postufgram";
 "Postufgram.About.Info" = "Postufgram Info";
