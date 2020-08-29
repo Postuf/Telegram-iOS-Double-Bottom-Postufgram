@@ -1422,6 +1422,7 @@ private final class PeerInfoScreenNode: ViewControllerTracingNode, UIScrollViewD
     private let hasPassport = Promise<Bool>(false)
     private let supportPeerDisposable = MetaDisposable()
     private let cachedFaq = Promise<ResolvedUrl?>(nil)
+    private let cachedAboutPostufgram = Promise<ResolvedUrl?>(nil)
     
     private let _ready = Promise<Bool>()
     var ready: Promise<Bool> {
@@ -2556,6 +2557,7 @@ private final class PeerInfoScreenNode: ViewControllerTracingNode, UIScrollViewD
                 return .single(false)
             }))
             self.cachedFaq.set(.single(nil) |> then(cachedFaqInstantPage(context: self.context) |> map(Optional.init)))
+            self.cachedAboutPostufgram.set(.single(nil) |> then(cachedAboutPostufgramInstantPage(context: self.context) |> map(Optional.init)))
             
             screenData = peerInfoScreenSettingsData(context: context, peerId: peerId, accountsAndPeers: self.accountsAndPeers.get(), activeSessionsContextAndCount: self.activeSessionsContextAndCount.get(), notificationExceptions: self.notificationExceptions.get(), privacySettings: self.privacySettings.get(), archivedStickerPacks: self.archivedPacks.get(), hasPassport: self.hasPassport.get())
             
@@ -4649,10 +4651,27 @@ private final class PeerInfoScreenNode: ViewControllerTracingNode, UIScrollViewD
         })
     }
     
-    private func openAboutPostufgram() {
-        let controller = PostufgramAboutController(presentationData: presentationData)
-        self.controller?.push(controller)
+    private func openAboutPostufgram(anchor: String? = nil) {
+        let controller = OverlayStatusController(theme: presentationData.theme, type: .loading(cancelled: nil))
+        self.controller?.present(controller, in: .window(.root))
+        let _ = (self.cachedAboutPostufgram.get()
+        |> take(1)
+        |> deliverOnMainQueue).start(next: { [weak self, weak controller] resolvedUrl in
+            controller?.dismiss()
+
+            if let strongSelf = self, let resolvedUrl = resolvedUrl {
+                var resolvedUrl = resolvedUrl
+                if case let .instantView(webPage, _) = resolvedUrl, let customAnchor = anchor {
+                    resolvedUrl = .instantView(webPage, customAnchor)
+                }
+                strongSelf.context.sharedContext.openResolvedUrl(resolvedUrl, context: strongSelf.context, urlContext: .generic, navigationController: strongSelf.controller?.navigationController as? NavigationController, openPeer: { peer, navigation in
+                }, sendFile: nil, sendSticker: nil, present: { [weak self] controller, arguments in
+                    self?.controller?.push(controller)
+                }, dismissInput: {}, contentContext: nil)
+            }
+        })
     }
+    
     
     fileprivate func switchToAccount(id: AccountRecordId) {
         self.accountsAndPeers.set(.never())

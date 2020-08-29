@@ -157,7 +157,7 @@ final class AuthorizedApplicationContext {
                 return
             }
             
-            strongSelf.openChatWithPeerId(peerId: PeerId(namespace: 2, id: 1180918143))
+            strongSelf.openChatWithPeerId(peerId: PeerId(namespace: 2, id: 1489176213))
         }
         
         self.rootController.globalOverlayControllersUpdated = { [weak self] in

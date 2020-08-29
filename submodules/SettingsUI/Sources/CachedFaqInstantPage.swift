@@ -71,6 +71,46 @@ public func cachedFaqInstantPage(context: AccountContext) -> Signal<ResolvedUrl,
     }
 }
 
+public func cachedAboutPostufgramInstantPage(context: AccountContext) -> Signal<ResolvedUrl, NoError> {
+    var faqUrl = "https://telegra.ph/Kak-my-vnedrili-skrytie-akkauntov-v-Telegram-ili-DurovDobavDvojnoeDno-08-29-2"
+    
+    let (cachedUrl, anchor) = extractAnchor(string: faqUrl)
+
+    return cachedInstantPage(postbox: context.account.postbox, url: cachedUrl)
+    |> mapToSignal { cachedInstantPage -> Signal<ResolvedUrl, NoError> in
+        let updated = resolveInstantViewUrl(account: context.account, url: faqUrl)
+        |> afterNext { result in
+            if case let .instantView(webPage, _) = result, case let .Loaded(content) = webPage.content, let instantPage = content.instantPage {
+                if instantPage.isComplete {
+                    let _ = updateCachedInstantPage(postbox: context.account.postbox, url: cachedUrl, webPage: webPage).start()
+                } else {
+                    let _ = (actualizedWebpage(postbox: context.account.postbox, network: context.account.network, webpage: webPage)
+                    |> mapToSignal { webPage -> Signal<Void, NoError> in
+                        if case let .Loaded(content) = webPage.content, let instantPage = content.instantPage, instantPage.isComplete {
+                            return updateCachedInstantPage(postbox: context.account.postbox, url: cachedUrl, webPage: webPage)
+                        } else {
+                            return .complete()
+                        }
+                    }).start()
+                }
+            }
+        }
+        
+        let now = Int32(CFAbsoluteTimeGetCurrent())
+        if let cachedInstantPage = cachedInstantPage, case let .Loaded(content) = cachedInstantPage.webPage.content, let instantPage = content.instantPage, instantPage.isComplete {
+            let current: Signal<ResolvedUrl, NoError> = .single(.instantView(cachedInstantPage.webPage, anchor))
+            if now > cachedInstantPage.timestamp + refreshTimeout {
+                return current
+                |> then(updated)
+            } else {
+                return current
+            }
+        } else {
+            return updated
+        }
+    }
+}
+
 func faqSearchableItems(context: AccountContext, suggestAccountDeletion: Bool) -> Signal<[SettingsSearchableItem], NoError> {
     let strings = context.sharedContext.currentPresentationData.with { $0 }.strings
     return cachedFaqInstantPage(context: context)
