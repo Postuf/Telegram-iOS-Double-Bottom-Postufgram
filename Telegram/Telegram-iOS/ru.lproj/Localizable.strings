@@ -29,11 +29,6 @@
 "FalseBottom.DisableNotifications.Text" = "Вы можете отключить уведомления и звонки для скрытого аккаунта.";
 "FalseBottom.DisableNotifications.Subtitle" = "Применяется на все устройства, где авторизован скрытый аккаунт.";
 
-"NotificationSettings.LocalAccountNotificationsSection" = "ТЕКУЩИЙ АККАУНТ НА ДАННОМ УСТРОЙСТВЕ";
-"NotificationSettings.LocalAccountNotifications" = "Включить уведомления";
-"NotificationSettings.LocalAccountNotificationsInfoOn" = "Выключите, если не хотите получать все уведомления текущего аккаунта на данном устройстве.";
-"NotificationSettings.LocalAccountNotificationsInfoOff" = "Включите, если хотите получать уведомления текущего аккаунта на данном устройстве.";
-
 "Settings.Postufgram.About" = "О Postufgram";
 "Postufgram.About.Title" = "О Postufgram";
 "Postufgram.About.Info" = "Информация о Postufgram";
