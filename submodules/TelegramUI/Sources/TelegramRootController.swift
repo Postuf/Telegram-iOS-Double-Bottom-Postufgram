@@ -28,8 +28,6 @@ public final class TelegramRootController: NavigationController {
     private var presentationDataDisposable: Disposable?
     private var presentationData: PresentationData
     
-    var openPostufgramHelp: (() -> Void)?
-    
     public var falseBottomAuthViewControllersSignal: Signal<[ViewController], NoError>? {
         didSet {
             self.falseBottomAuthViewControllersDisposable?.dispose()
@@ -158,7 +156,7 @@ public final class TelegramRootController: NavigationController {
             sharedContext.switchingData = (nil, nil, nil)
         }
         
-        let accountSettingsController = PeerInfoScreen(context: self.context, peerId: self.context.account.peerId, avatarInitiallyExpanded: false, isOpenedFromChat: false, nearbyPeerDistance: nil, callMessages: [], isSettings: true, openPostufgramHelp: self.openPostufgramHelp ?? {})
+        let accountSettingsController = PeerInfoScreen(context: self.context, peerId: self.context.account.peerId, avatarInitiallyExpanded: false, isOpenedFromChat: false, nearbyPeerDistance: nil, callMessages: [], isSettings: true)
         accountSettingsController.tabBarItemDebugTapAction = { [weak self, weak accountSettingsController] in
             guard let strongSelf = self, let accountSettingsController = accountSettingsController else {
                 return

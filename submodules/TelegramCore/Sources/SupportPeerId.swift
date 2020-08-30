@@ -27,3 +27,26 @@ public func supportPeerId(account:Account) -> Signal<PeerId?, NoError> {
         return .single(nil)
     }
 }
+
+public func postufgramHelpPeerId(account:Account) -> Signal<PeerId?, NoError> {
+    return account.network.request(Api.functions.contacts.resolveUsername(username: "postufgram"))
+    |> map(Optional.init)
+    |> `catch` { _ in
+        return Signal<Api.contacts.ResolvedPeer?, NoError>.single(nil)
+    }
+    |> mapToSignal { peer -> Signal<PeerId?, NoError> in
+        if let peer = peer {
+            switch peer {
+                case let .resolvedPeer(_, chats, _):
+                    guard let user = parseTelegramGroupOrChannel(chat: chats[0]) else { return .single(nil) }
+                    return account.postbox.transaction { transaction -> PeerId in
+                        updatePeers(transaction: transaction, peers: [user], update: { (previous, updated) -> Peer? in
+                            return updated
+                        })
+                        return user.id
+                    }
+            }
+        }
+        return .single(nil)
+    }
+}
