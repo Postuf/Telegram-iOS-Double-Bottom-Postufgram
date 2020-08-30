@@ -72,7 +72,7 @@ public func cachedFaqInstantPage(context: AccountContext) -> Signal<ResolvedUrl,
 }
 
 public func cachedAboutPostufgramInstantPage(context: AccountContext) -> Signal<ResolvedUrl, NoError> {
-    var faqUrl = "https://telegra.ph/Kak-my-vnedrili-skrytie-akkauntov-v-Telegram-ili-DurovDobavDvojnoeDno-08-29-2"
+    var faqUrl = "https://postuf.com/postufgram"
     
     let (cachedUrl, anchor) = extractAnchor(string: faqUrl)
 
