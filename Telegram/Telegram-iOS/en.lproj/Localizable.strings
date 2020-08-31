@@ -50,7 +50,7 @@
 "PUSH_MESSAGE_STICKER" = "%1$@|sent you a %2$@sticker";
 "PUSH_CHAT_MESSAGE_STICKER" = "%2$@|%1$@ sent a %3$@sticker";
 
-"PUSH_CONTACT_JOINED" = "%1$@|joined Postufgram!";
+"PUSH_CONTACT_JOINED" = "%1$@|joined Telegram!";
 
 "PUSH_CHANNEL_MESSAGE_TEXT" = "%1$@|%2$@";
 "PUSH_CHANNEL_MESSAGE_NOTEXT" = "%1$@|posted a message";
@@ -209,7 +209,7 @@
 "PUSH_PINNED_INVOICE" = "%1$@|pinned an invoice";
 "PUSH_PINNED_GIF" = "%1$@|pinned a GIF";
 
-"PUSH_CONTACT_JOINED" = "%1$@|joined Postufgram!";
+"PUSH_CONTACT_JOINED" = "%1$@|joined Telegram!";
 
 "PUSH_AUTH_UNKNOWN" = "New login|from unrecognized device %1$@";
 "PUSH_AUTH_REGION" = "New login|from unrecognized device %1$@, location: %2$@";
@@ -527,7 +527,7 @@
 "Notification.CreatedChat" = "%@ created a group";
 "Notification.CreatedChannel" = "Channel created";
 "Notification.CreatedChatWithTitle" = "%@ created the group \"%@\" ";
-"Notification.Joined" = "%@ joined Postufgram";
+"Notification.Joined" = "%@ joined Telegram";
 "Notification.ChangedGroupName" = "%@ changed group name to \"%@\" ";
 "Notification.NewAuthDetected" = "%1$@,\nWe detected a login into your account from a new device on %2$@, %3$@ at %4$@\n\nDevice: %5$@\nLocation: %6$@\n\nIf this wasn't you, you can go to Settings — Privacy and Security — Sessions and terminate that session.\n\nIf you think that somebody logged in to your account against your will, you can enable two-step verification in Privacy and Security settings.\n\nSincerely,\nThe Postufgram Team";
 "Notification.MessageLifetimeChanged" = "%1$@ set the self-destruct timer to %2$@";
@@ -1735,7 +1735,7 @@
 
 "Watch.Message.ForwardedFrom" = "Forwarded from";
 
-"Watch.Notification.Joined" = "Joined Postufgram";
+"Watch.Notification.Joined" = "Joined Telegram";
 
 "Watch.MessageView.Title" = "Message";
 "Watch.MessageView.Forward" = "Forward";

@@ -30,7 +30,10 @@ private let fallbackDict: [String: String] = {
 
 private let whiteKeys: [String] = [
     "Settings.FAQ",
-    "Settings.FAQ_Intro"
+    "Settings.FAQ_Intro",
+    "PUSH_CONTACT_JOINED",
+    "Watch.Notification.Joined",
+    "Notification.Joined"
 ]
 
 private let cleanKeys: [String] = [
@@ -74,7 +77,8 @@ public final class PresentationStringsComponent {
 private func getValue(_ primaryComponent: PresentationStringsComponent, _ secondaryComponent: PresentationStringsComponent?, _ key: String) -> String {
     if let value = primaryComponent.dict[key] {
         if cleanKeys.contains(key) {
-            return value.replacingOccurrences(of: "Telegram ", with: "")
+            return value.replacingOccurrences(of: "от Telegram", with: "")
+                .replacingOccurrences(of: " Telegram", with: "")
         }
         if whiteKeys.contains(key) {
             return value
