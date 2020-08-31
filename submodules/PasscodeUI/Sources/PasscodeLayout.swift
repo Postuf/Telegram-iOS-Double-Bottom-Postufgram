@@ -138,7 +138,7 @@ public struct PasscodeLayout {
             case .iPhone4:
                 self.titleOffset = 30.0
                 self.subtitleOffset = -13.0
-                self.inputFieldOffset = 85.0
+                self.inputFieldOffset = 70.0
             case .iPhone5:
                 self.titleOffset = 50.0
                 self.subtitleOffset = -7.0
