@@ -278,8 +278,10 @@ public func updateSelectiveAccountPrivacySettings(account: Account, type: Update
     |> switchToLatest
 }
 
+fileprivate let kCachedPhoneCallsPrivacyStateData: String = "cachedPhoneCallsPrivacyStateData"
+
 public func disablePhoneCallsAndCachePrivacyState(account: Account) {
-    guard UserDefaults.standard.data(forKey: "cachedPhoneCallsPrivacyStateData") == nil else { return }
+    guard UserDefaults.standard.data(forKey: kCachedPhoneCallsPrivacyStateData) == nil else { return }
     
     let type = UpdateSelectiveAccountPrivacySettingsType.voiceCalls
     
@@ -294,14 +296,14 @@ public func disablePhoneCallsAndCachePrivacyState(account: Account) {
         return account.network.request(Api.functions.account.setPrivacy(key: type.apiKey, rules: [Api.InputPrivacyRule.inputPrivacyValueDisallowAll]))
         |> retryRequest
         |> mapToSignal { _ -> Signal<Void, NoError> in
-            UserDefaults.standard.set(data, forKey: "cachedPhoneCallsPrivacyStateData")
+            UserDefaults.standard.set(data, forKey: kCachedPhoneCallsPrivacyStateData)
             return .complete()
         }
     }).start()
 }
 
 public func restoreCachedPhoneCallsPrivacyState(account: Account) {
-    guard let data = UserDefaults.standard.data(forKey: "cachedPhoneCallsPrivacyStateData") else { return }
+    guard let data = UserDefaults.standard.data(forKey: kCachedPhoneCallsPrivacyStateData) else { return }
     
     let buffer = Buffer(data: data)
     let reader = BufferReader(buffer)
@@ -341,6 +343,6 @@ public func restoreCachedPhoneCallsPrivacyState(account: Account) {
     let settings = SelectivePrivacySettings(apiRules: voiceRules, peers: peerMap)
     
     let _ = updateSelectiveAccountPrivacySettings(account: account, type: .voiceCalls, settings: settings).start(completed: {
-        UserDefaults.standard.removeObject(forKey: "cachedPhoneCallsPrivacyStateData")
+        UserDefaults.standard.removeObject(forKey: kCachedPhoneCallsPrivacyStateData)
     })
 }
