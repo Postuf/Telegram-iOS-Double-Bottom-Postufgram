@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14313.18" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="umr-Wa-jBL">
-    <device id="watch38" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17156" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="umr-Wa-jBL">
+    <device id="watch38"/>
     <dependencies>
-        <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14238.10"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17034"/>
     </dependencies>
     <scenes>
         <!--TGNeoConversationController-->
@@ -2000,4 +1997,20 @@ contacts found.</string>
         </scene>
     </scenes>
     <color key="tintColor" red="0.15550534427165985" green="0.57037848234176636" blue="0.8720671534538269" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <resources>
+        <image name="BotCommandIcon" width="128" height="128"/>
+        <image name="File.png" width="128" height="128"/>
+        <image name="LocationIcon" width="128" height="128"/>
+        <image name="LoginIcon" width="128" height="128"/>
+        <image name="MediaAudioPlay" width="128" height="128"/>
+        <image name="MediaLocation" width="11" height="15"/>
+        <image name="MessageStatusDot" width="128" height="128"/>
+        <image name="MicAccessIcon" width="128" height="128"/>
+        <image name="MicIcon" width="128" height="128"/>
+        <image name="PickLocation" width="128" height="128"/>
+        <image name="RemotePlayVideo" width="128" height="128"/>
+        <image name="Spinner" width="128" height="128"/>
+        <image name="StickerIcon" width="128" height="128"/>
+        <image name="VerifiedProfile" width="128" height="128"/>
+    </resources>
 </document>
