@@ -37,8 +37,6 @@ private func isLocked(passcodeSettings: PresentationPasscodeSettings, state: Loc
 }
 
 private func getCoveringViewSnaphot(window: Window1) -> UIImage? {
-    print("getCoveringViewSnaphot")
-    
     let scale: CGFloat = 0.5
     let unscaledSize = window.hostView.containerView.frame.size
     return generateImage(CGSize(width: floor(unscaledSize.width * scale), height: floor(unscaledSize.height * scale)), rotatedContext: { size, context in
@@ -164,9 +162,11 @@ public final class AppLockContextImpl: AppLockContext {
         
         let unlockedHiddenAccountRecordIdPromise = accountManager.hiddenAccountManager.unlockedHiddenAccountRecordIdPromise
         
-        let requiresSnapshotUpdateSignal: Signal<AccountRecordId?, NoError> = accountManager.accountRecords()
+        let accounts: Signal<AccountRecordId?, NoError> = accountManager.accountRecords()
         |> map { $0.currentRecord?.id }
         |> distinctUntilChanged(isEqual: ==)
+            
+        let hiddenAccounts = accounts
         |> mapToSignal { currentId -> Signal<AccountRecordId?, NoError> in
             return unlockedHiddenAccountRecordIdPromise.get()
             |> map { hiddenId -> AccountRecordId? in
@@ -178,6 +178,8 @@ public final class AppLockContextImpl: AppLockContext {
             |> filter { $0 != nil }
             |> distinctUntilChanged(isEqual: ==)
         }
+            
+        let requiresSnapshotUpdateSignal = hiddenAccounts
         |> distinctUntilChanged(isEqual: ==)
         
         self.requiresSnapshotUpdateDisposable = (requiresSnapshotUpdateSignal |> deliverOnMainQueue).start(next: { [weak self] value in
