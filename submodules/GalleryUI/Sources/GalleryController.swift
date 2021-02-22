@@ -382,7 +382,6 @@ public class GalleryController: ViewController, StandalonePresentableController 
     private let updateVisibleDisposable = MetaDisposable()
     
     private var screenCaptureEventsDisposable: Disposable?
-    private var applicationInForegroundDisposable: Disposable?
     
     public init(context: AccountContext, source: GalleryControllerItemSource, invertItemOrder: Bool = false, streamSingleVideo: Bool = false, fromPlayingVideo: Bool = false, landscape: Bool = false, timecode: Double? = nil, synchronousLoad: Bool = false, replaceRootController: @escaping (ViewController, Promise<Bool>?) -> Void, baseNavigationController: NavigationController?, actionInteraction: GalleryControllerActionInteraction? = nil) {
         self.context = context
@@ -429,18 +428,6 @@ public class GalleryController: ViewController, StandalonePresentableController 
                 }
         }
         
-        self.applicationInForegroundDisposable = (context.sharedContext.applicationBindings.applicationInForeground
-            |> filter({ !$0 })
-            |> deliverOnMainQueue)
-            .start(next: { [weak self] _ in
-                guard let strongSelf = self else { return }
-                
-                guard strongSelf.context.account.isHidden else { return }
-                
-                strongSelf.galleryNode.setControlsHidden(false, animated: false)
-                strongSelf.dismiss(forceAway: false)
-            })
-        
         let messageView = message
         |> filter({ $0 != nil })
         |> mapToSignal { message -> Signal<GalleryMessageHistoryView?, NoError> in
@@ -453,7 +440,7 @@ public class GalleryController: ViewController, StandalonePresentableController 
                         } else {
                             namespaces = .not(Namespaces.Message.allScheduled)
                         }
-                        return context.account.postbox.aroundMessageHistoryViewForLocation(context.chatLocationInput(for: chatLocation, contextHolder: chatLocationContextHolder), anchor: .index(message!.index), count: 50, clipHoles: false, fixedCombinedReadStates: nil, topTaggedMessageIdNamespaces: [], tagMask: tags, namespaces: namespaces, orderStatistics: [.combinedLocation])
+                        return context.account.postbox.aroundMessageHistoryViewForLocation(context.chatLocationInput(for: chatLocation, contextHolder: chatLocationContextHolder), anchor: .index(message!.index), count: 50, clipHoles: false, fixedCombinedReadStates: nil, topTaggedMessageIdNamespaces: [], tagMask: tags, appendMessagesFromTheSameGroup: false, namespaces: namespaces, orderStatistics: [.combinedLocation])
                         |> mapToSignal { (view, _, _) -> Signal<GalleryMessageHistoryView?, NoError> in
                             let mapped = GalleryMessageHistoryView.view(view)
                             return .single(mapped)
@@ -879,7 +866,6 @@ public class GalleryController: ViewController, StandalonePresentableController 
         }
         self.updateVisibleDisposable.dispose()
         self.screenCaptureEventsDisposable?.dispose()
-        self.applicationInForegroundDisposable?.dispose()
     }
     
     @objc private func donePressed() {
@@ -927,8 +913,19 @@ public class GalleryController: ViewController, StandalonePresentableController 
             }
         }, editMedia: { [weak self] messageId in
             if let strongSelf = self {
-                strongSelf.dismiss(forceAway: true)
-                strongSelf.actionInteraction?.editMedia(messageId)
+                var snapshots: [UIView] = []
+                if let navigationBar = strongSelf.navigationBar, let snapshotView = navigationBar.view.snapshotContentTree() {
+                    snapshotView.frame = navigationBar.frame
+                    snapshots.append(snapshotView)
+                }
+                if let snapshotView = strongSelf.galleryNode.footerNode.view.snapshotContentTree() {
+                    snapshotView.frame = strongSelf.galleryNode.footerNode.frame
+                    snapshots.append(snapshotView)
+                }
+                
+                strongSelf.actionInteraction?.editMedia(messageId, snapshots, { [weak self] in
+                    self?.dismiss(forceAway: true)
+                })
             }
         })
         self.displayNode = GalleryControllerNode(controllerInteraction: controllerInteraction)
@@ -1048,7 +1045,7 @@ public class GalleryController: ViewController, StandalonePresentableController 
                                 } else {
                                     namespaces = .not(Namespaces.Message.allScheduled)
                                 }
-                                let signal = strongSelf.context.account.postbox.aroundMessageHistoryViewForLocation(strongSelf.context.chatLocationInput(for: chatLocation, contextHolder: chatLocationContextHolder), anchor: .index(reloadAroundIndex), count: 50, clipHoles: false, fixedCombinedReadStates: nil, topTaggedMessageIdNamespaces: [], tagMask: tagMask, namespaces: namespaces, orderStatistics: [.combinedLocation])
+                                let signal = strongSelf.context.account.postbox.aroundMessageHistoryViewForLocation(strongSelf.context.chatLocationInput(for: chatLocation, contextHolder: chatLocationContextHolder), anchor: .index(reloadAroundIndex), count: 50, clipHoles: false, fixedCombinedReadStates: nil, topTaggedMessageIdNamespaces: [], tagMask: tagMask, appendMessagesFromTheSameGroup: false, namespaces: namespaces, orderStatistics: [.combinedLocation])
                                     |> mapToSignal { (view, _, _) -> Signal<GalleryMessageHistoryView?, NoError> in
                                         let mapped = GalleryMessageHistoryView.view(view)
                                         return .single(mapped)
@@ -1228,7 +1225,7 @@ public class GalleryController: ViewController, StandalonePresentableController 
             self.centralItemNavigationStyle.set(centralItemNode.navigationStyle())
             self.centralItemFooterContentNode.set(centralItemNode.footerContent())
             
-            if let (media, _) = mediaForMessage(message: message) {
+            if let _ = mediaForMessage(message: message) {
                 centralItemNode.activateAsInitial()
             }
         }
@@ -1260,7 +1257,7 @@ public class GalleryController: ViewController, StandalonePresentableController 
             if let centralItemNode = self.galleryNode.pager.centralItemNode(), let itemSize = centralItemNode.contentSize() {
                 centralItemNode.adjustForPreviewing()
                 self.preferredContentSize = itemSize.aspectFitted(layout.size)
-                self.containerLayoutUpdated(ContainerViewLayout(size: self.preferredContentSize, metrics: LayoutMetrics(), deviceMetrics: layout.deviceMetrics, intrinsicInsets: UIEdgeInsets(), safeInsets: UIEdgeInsets(), statusBarHeight: nil, inputHeight: nil, inputHeightIsInteractivellyChanging: false, inVoiceOver: false), transition: .immediate)
+                self.containerLayoutUpdated(ContainerViewLayout(size: self.preferredContentSize, metrics: LayoutMetrics(), deviceMetrics: layout.deviceMetrics, intrinsicInsets: UIEdgeInsets(), safeInsets: UIEdgeInsets(), additionalInsets: UIEdgeInsets(), statusBarHeight: nil, inputHeight: nil, inputHeightIsInteractivellyChanging: false, inVoiceOver: false), transition: .immediate)
             }
         }
     }

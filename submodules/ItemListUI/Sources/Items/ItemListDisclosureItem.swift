@@ -17,8 +17,8 @@ public enum ItemListDisclosureStyle {
 
 public enum ItemListDisclosureLabelStyle {
     case text
-    case monospaceText
     case detailText
+    case coloredText(UIColor)
     case multilineDetailText
     case badge(UIColor)
     case color(UIColor)
@@ -27,8 +27,6 @@ public enum ItemListDisclosureLabelStyle {
 public class ItemListDisclosureItem: ListViewItem, ItemListItem {
     let presentationData: ItemListPresentationData
     let icon: UIImage?
-    let longTapIcon: UIImage?
-    let backgroundIcon: UIImage?
     let title: String
     let titleColor: ItemListDisclosureItemTitleColor
     let enabled: Bool
@@ -41,10 +39,9 @@ public class ItemListDisclosureItem: ListViewItem, ItemListItem {
     let clearHighlightAutomatically: Bool
     public let tag: ItemListItemTag?
     
-    public init(presentationData: ItemListPresentationData, icon: UIImage? = nil, longTapIcon: UIImage? = nil, backgroundIcon: UIImage? = nil, title: String, enabled: Bool = true, titleColor: ItemListDisclosureItemTitleColor = .primary, label: String, labelStyle: ItemListDisclosureLabelStyle = .text, sectionId: ItemListSectionId, style: ItemListStyle, disclosureStyle: ItemListDisclosureStyle = .arrow, action: (() -> Void)?, clearHighlightAutomatically: Bool = true, tag: ItemListItemTag? = nil) {
+    public init(presentationData: ItemListPresentationData, icon: UIImage? = nil, title: String, enabled: Bool = true, titleColor: ItemListDisclosureItemTitleColor = .primary, label: String, labelStyle: ItemListDisclosureLabelStyle = .text, sectionId: ItemListSectionId, style: ItemListStyle, disclosureStyle: ItemListDisclosureStyle = .arrow, action: (() -> Void)?, clearHighlightAutomatically: Bool = true, tag: ItemListItemTag? = nil) {
         self.presentationData = presentationData
         self.icon = icon
-        self.longTapIcon = longTapIcon
         self.title = title
         self.titleColor = titleColor
         self.enabled = enabled
@@ -56,7 +53,6 @@ public class ItemListDisclosureItem: ListViewItem, ItemListItem {
         self.action = action
         self.clearHighlightAutomatically = clearHighlightAutomatically
         self.tag = tag
-        self.backgroundIcon = backgroundIcon
     }
     
     public func nodeConfiguredForParams(async: @escaping (@escaping () -> Void) -> Void, params: ListViewItemLayoutParams, synchronousLoads: Bool, previousItem: ListViewItem?, nextItem: ListViewItem?, completion: @escaping (ListViewItemNode, @escaping () -> (Signal<Void, NoError>?, (ListViewItemApply) -> Void)) -> Void) {
@@ -106,8 +102,6 @@ public class ItemListDisclosureItem: ListViewItem, ItemListItem {
 
 private let badgeFont = Font.regular(15.0)
 
-private var displaysAlternativeIcon = false
-
 public class ItemListDisclosureItemNode: ListViewItemNode, ItemListItemNode {
     private let backgroundNode: ASDisplayNode
     private let topStripeNode: ASDisplayNode
@@ -116,8 +110,6 @@ public class ItemListDisclosureItemNode: ListViewItemNode, ItemListItemNode {
     private let maskNode: ASImageNode
     
     let iconNode: ASImageNode
-    let alternativeIconNode: ASImageNode
-    let backgroundIconNode: ASImageNode
     let titleNode: TextNode
     let labelNode: TextNode
     let arrowNode: ASImageNode
@@ -133,32 +125,6 @@ public class ItemListDisclosureItemNode: ListViewItemNode, ItemListItemNode {
             return true
         } else {
             return false
-        }
-    }
-    
-    override public var canBeSuperLongTapped: Bool {
-        return item?.longTapIcon != nil
-    }
-    
-    override public func superLongTapped() {
-        displaysAlternativeIcon.toggle()
-        let displayAlternativeIcon = displaysAlternativeIcon ?? false
-        let duration = 0.3
-        
-        if displayAlternativeIcon {
-            self.iconNode.layer.animateAlpha(from: 1.0, to: 0.0, duration: duration)
-            self.iconNode.layer.animateScale(from: 1.0, to: 0.5, duration: duration)
-            self.alternativeIconNode.layer.animateAlpha(from: 0.0, to: 1.0, duration: duration)
-            self.alternativeIconNode.layer.animateScale(from: 0.5, to: 1.0, duration: duration)
-            self.iconNode.alpha = 0.0
-            self.alternativeIconNode.alpha = 1.0
-        } else {
-            self.iconNode.layer.animateAlpha(from: 0.0, to: 1.0, duration: duration)
-            self.iconNode.layer.animateScale(from: 0.5, to: 1.0, duration: duration)
-            self.alternativeIconNode.layer.animateAlpha(from: 1.0, to: 0.0, duration: duration)
-            self.alternativeIconNode.layer.animateScale(from: 1.0, to: 0.5, duration: duration)
-            self.iconNode.alpha = 1.0
-            self.alternativeIconNode.alpha = 0.0
         }
     }
     
@@ -182,14 +148,6 @@ public class ItemListDisclosureItemNode: ListViewItemNode, ItemListItemNode {
         self.iconNode = ASImageNode()
         self.iconNode.isLayerBacked = true
         self.iconNode.displaysAsynchronously = false
-        
-        self.alternativeIconNode = ASImageNode()
-        self.alternativeIconNode.isLayerBacked = true
-        self.alternativeIconNode.displaysAsynchronously = false
-        
-        self.backgroundIconNode = ASImageNode()
-        self.backgroundIconNode.isLayerBacked = true
-        self.backgroundIconNode.displaysAsynchronously = false
         
         self.titleNode = TextNode()
         self.titleNode.isUserInteractionEnabled = false
@@ -320,9 +278,9 @@ public class ItemListDisclosureItemNode: ListViewItemNode, ItemListItemNode {
                 labelBadgeColor = item.presentationData.theme.list.itemSecondaryTextColor
                 labelFont = detailFont
                 labelConstrain = params.width - params.rightInset - 40.0 - leftInset
-            case .monospaceText:
-                labelBadgeColor = item.presentationData.theme.list.itemSecondaryTextColor
-                labelFont = Font.monospace(item.presentationData.fontSize.itemListBaseFontSize)
+            case let .coloredText(color):
+                labelBadgeColor = color
+                labelFont = titleFont
             default:
                 labelBadgeColor = item.presentationData.theme.list.itemSecondaryTextColor
                 labelFont = titleFont
@@ -375,40 +333,6 @@ public class ItemListDisclosureItemNode: ListViewItemNode, ItemListItemNode {
                         strongSelf.activateArea.accessibilityTraits = .notEnabled
                     }
                     
-                    if let backgroundIcon = item.backgroundIcon {
-                        if strongSelf.backgroundIconNode.supernode == nil {
-                            strongSelf.addSubnode(strongSelf.backgroundIconNode)
-                        }
-                        strongSelf.backgroundIconNode.image = backgroundIcon
-                        let iconY: CGFloat
-                        if case .multilineDetailText = item.labelStyle {
-                            iconY = 14.0
-                        } else {
-                            iconY = floor((layout.contentSize.height - backgroundIcon.size.height) / 2.0)
-                        }
-                        strongSelf.backgroundIconNode.frame = CGRect(origin: CGPoint(x: params.leftInset + floor((leftInset - params.leftInset - backgroundIcon.size.width) / 2.0), y: iconY), size: backgroundIcon.size)
-                    } else if strongSelf.backgroundIconNode.supernode != nil {
-                        strongSelf.backgroundIconNode.image = nil
-                        strongSelf.backgroundIconNode.removeFromSupernode()
-                    }
-                    
-                    if let alternativeIcon = item.longTapIcon {
-                        if strongSelf.alternativeIconNode.supernode == nil {
-                            strongSelf.addSubnode(strongSelf.alternativeIconNode)
-                        }
-                        strongSelf.alternativeIconNode.image = alternativeIcon
-                        let iconY: CGFloat
-                        if case .multilineDetailText = item.labelStyle {
-                            iconY = 14.0
-                        } else {
-                            iconY = floor((layout.contentSize.height - alternativeIcon.size.height) / 2.0)
-                        }
-                        strongSelf.alternativeIconNode.frame = CGRect(origin: CGPoint(x: params.leftInset + floor((leftInset - params.leftInset - alternativeIcon.size.width) / 2.0), y: iconY), size: alternativeIcon.size)
-                    } else if strongSelf.alternativeIconNode.supernode != nil {
-                        strongSelf.alternativeIconNode.image = nil
-                        strongSelf.alternativeIconNode.removeFromSupernode()
-                    }
-                    
                     if let icon = item.icon {
                         if strongSelf.iconNode.supernode == nil {
                             strongSelf.addSubnode(strongSelf.iconNode)
@@ -426,14 +350,6 @@ public class ItemListDisclosureItemNode: ListViewItemNode, ItemListItemNode {
                     } else if strongSelf.iconNode.supernode != nil {
                         strongSelf.iconNode.image = nil
                         strongSelf.iconNode.removeFromSupernode()
-                    }
-                    
-                    if displaysAlternativeIcon, item.longTapIcon != nil {
-                        strongSelf.iconNode.alpha = 0.0
-                        strongSelf.alternativeIconNode.alpha = 1.0
-                    } else {
-                        strongSelf.iconNode.alpha = 1.0
-                        strongSelf.alternativeIconNode.alpha = 0.0
                     }
                     
                     if let updateArrowImage = updateArrowImage {

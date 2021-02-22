@@ -270,7 +270,7 @@ func fetchMessageHistoryHole(accountPeerId: PeerId, source: FetchMessageHistoryH
                                     offsetId = start.id == Int32.max ? start.id : (start.id + 1)
                                     addOffset = 0
                                     maxId = start.id == Int32.max ? start.id : (start.id + 1)
-                                    minId = end.id
+                                    minId = end.id == 1 ? 0 : end.id
                                     
                                     let rangeStartId = end.id
                                     let rangeEndId = min(start.id, Int32.max - 1)
@@ -614,7 +614,7 @@ func fetchChatListHole(postbox: Postbox, network: Network, accountPeerId: PeerId
             
             for peerId in fetchedChats.chatPeerIds {
                 if let peer = transaction.getPeer(peerId) {
-                    transaction.updatePeerChatListInclusion(peerId, inclusion: .ifHasMessagesOrOneOf(groupId: groupId, pinningIndex: nil, minTimestamp: minTimestampForPeerInclusion(peer)))
+                    transaction.updatePeerChatListInclusion(peerId, inclusion: .ifHasMessagesOrOneOf(groupId: groupId, pinningIndex: transaction.getPeerChatListIndex(peerId)?.1.pinningIndex, minTimestamp: minTimestampForPeerInclusion(peer)))
                 } else {
                     assertionFailure()
                 }
@@ -727,9 +727,4 @@ func fetchCallListHole(network: Network, postbox: Postbox, accountPeerId: PeerId
         }
         return searchResult
     }
-}
-
-public func fetchAccountPeer(account: Account) {
-    let messageId = MessageId(peerId: PeerId(namespace: PeerId.Namespace(Int32.max), id: 0), namespace: 0, id: 1)
-    fetchChatListHole(postbox: account.postbox, network: account.network, accountPeerId: account.peerId, groupId: .root, hole: ChatListHole(index: MessageIndex(id: messageId, timestamp: Int32.max - 1))).start()
 }

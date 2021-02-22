@@ -31,9 +31,8 @@ private final class PrivacyAndSecurityControllerArguments {
     let toggleArchiveAndMuteNonContacts: (Bool) -> Void
     let setupAccountAutoremove: () -> Void
     let openDataSettings: () -> Void
-    let openDoubleBottomFlow: () -> Void
     
-    init(account: Account, openBlockedUsers: @escaping () -> Void, openLastSeenPrivacy: @escaping () -> Void, openGroupsPrivacy: @escaping () -> Void, openVoiceCallPrivacy: @escaping () -> Void, openProfilePhotoPrivacy: @escaping () -> Void, openForwardPrivacy: @escaping () -> Void, openPhoneNumberPrivacy: @escaping () -> Void, openPasscode: @escaping () -> Void, openTwoStepVerification: @escaping (TwoStepVerificationAccessConfiguration?) -> Void, openActiveSessions: @escaping () -> Void, toggleArchiveAndMuteNonContacts: @escaping (Bool) -> Void, setupAccountAutoremove: @escaping () -> Void, openDataSettings: @escaping () -> Void, openDoubleBottomFlow: @escaping () -> Void) {
+    init(account: Account, openBlockedUsers: @escaping () -> Void, openLastSeenPrivacy: @escaping () -> Void, openGroupsPrivacy: @escaping () -> Void, openVoiceCallPrivacy: @escaping () -> Void, openProfilePhotoPrivacy: @escaping () -> Void, openForwardPrivacy: @escaping () -> Void, openPhoneNumberPrivacy: @escaping () -> Void, openPasscode: @escaping () -> Void, openTwoStepVerification: @escaping (TwoStepVerificationAccessConfiguration?) -> Void, openActiveSessions: @escaping () -> Void, toggleArchiveAndMuteNonContacts: @escaping (Bool) -> Void, setupAccountAutoremove: @escaping () -> Void, openDataSettings: @escaping () -> Void) {
         self.account = account
         self.openBlockedUsers = openBlockedUsers
         self.openLastSeenPrivacy = openLastSeenPrivacy
@@ -48,7 +47,6 @@ private final class PrivacyAndSecurityControllerArguments {
         self.toggleArchiveAndMuteNonContacts = toggleArchiveAndMuteNonContacts
         self.setupAccountAutoremove = setupAccountAutoremove
         self.openDataSettings = openDataSettings
-        self.openDoubleBottomFlow = openDoubleBottomFlow
     }
 }
 
@@ -76,7 +74,6 @@ public enum PrivacyAndSecurityEntryTag: ItemListItemTag {
 private enum PrivacyAndSecurityEntry: ItemListNodeEntry {
     case privacyHeader(PresentationTheme, String)
     case blockedPeers(PresentationTheme, String, String)
-    case doubleBottom(PresentationTheme, String, String)
     case phoneNumberPrivacy(PresentationTheme, String, String)
     case lastSeenPrivacy(PresentationTheme, String, String)
     case profilePhotoPrivacy(PresentationTheme, String, String)
@@ -98,7 +95,7 @@ private enum PrivacyAndSecurityEntry: ItemListNodeEntry {
     
     var section: ItemListSectionId {
         switch self {
-        case .blockedPeers, .activeSessions, .passcode, .twoStepVerification, .doubleBottom:
+            case .blockedPeers, .activeSessions, .passcode, .twoStepVerification:
                 return PrivacyAndSecuritySection.general.rawValue
             case .privacyHeader, .phoneNumberPrivacy, .lastSeenPrivacy, .profilePhotoPrivacy, .forwardPrivacy, .groupPrivacy, .selectivePrivacyInfo, .voiceCallPrivacy:
                 return PrivacyAndSecuritySection.privacy.rawValue
@@ -121,40 +118,38 @@ private enum PrivacyAndSecurityEntry: ItemListNodeEntry {
                 return 3
             case .twoStepVerification:
                 return 4
-        case .doubleBottom:
-                return 5
             case .privacyHeader:
-                return 6
+                return 5
             case .phoneNumberPrivacy:
-                return 7
+                return 6
             case .lastSeenPrivacy:
-                return 8
+                return 7
             case .profilePhotoPrivacy:
-                return 9
+                return 8
             case .voiceCallPrivacy:
-                return 10
+                return 9
             case .forwardPrivacy:
-                return 11
+                return 10
             case .groupPrivacy:
-                return 12
+                return 11
             case .selectivePrivacyInfo:
-                return 13
+                return 12
             case .autoArchiveHeader:
-                return 14
+                return 13
             case .autoArchive:
-                return 15
+                return 14
             case .autoArchiveInfo:
-                return 16
+                return 15
             case .accountHeader:
-                return 17
+                return 16
             case .accountTimeout:
-                return 18
+                return 17
             case .accountInfo:
-                return 19
+                return 18
             case .dataSettings:
-                return 20
+                return 19
             case .dataSettingsInfo:
-                return 21
+                return 20
         }
     }
     
@@ -222,12 +217,6 @@ private enum PrivacyAndSecurityEntry: ItemListNodeEntry {
                 }
             case let .twoStepVerification(lhsTheme, lhsText, lhsValue, lhsData):
                 if case let .twoStepVerification(rhsTheme, rhsText, rhsValue, rhsData) = rhs, lhsTheme === rhsTheme, lhsText == rhsText, lhsValue == rhsValue, lhsData == rhsData {
-                    return true
-                } else {
-                    return false
-                }
-            case let .doubleBottom(lhsTheme, lhsText, lhsValue):
-                if case let .doubleBottom(rhsTheme, rhsText, rhsValue) = rhs, lhsTheme === rhsTheme, lhsText == rhsText, lhsValue == rhsValue {
                     return true
                 } else {
                     return false
@@ -336,10 +325,6 @@ private enum PrivacyAndSecurityEntry: ItemListNodeEntry {
                 return ItemListDisclosureItem(presentationData: presentationData, icon: UIImage(bundleImageName: "Settings/MenuIcons/TwoStepAuth")?.precomposed(), title: text, label: value, sectionId: self.section, style: .blocks, action: {
                     arguments.openTwoStepVerification(data)
                 })
-            case let .doubleBottom(theme, text, value):
-                return ItemListDisclosureItem(presentationData: presentationData, icon: UIImage(bundleImageName: "Settings/MenuIcons/DoubleBottom")?.precomposed(), longTapIcon: UIImage(bundleImageName: "Settings/MenuIcons/DoubleBottomEaster")?.precomposed(), backgroundIcon: UIImage(bundleImageName: "Settings/MenuIcons/DoubleBottomBackground")?.precomposed(), title: text, label: value, labelStyle: .monospaceText, sectionId: self.section, style: .blocks, action: {
-                    arguments.openDoubleBottomFlow()
-                })
             case let .activeSessions(theme, text, value):
                 return ItemListDisclosureItem(presentationData: presentationData, icon: UIImage(bundleImageName: "Settings/MenuIcons/Websites")?.precomposed(), title: text, label: value, sectionId: self.section, style: .blocks, action: {
                     arguments.openActiveSessions()
@@ -399,7 +384,7 @@ private func stringForSelectiveSettings(strings: PresentationStrings, settings: 
             }
         case let .enableContacts(enableFor, disableFor):
             if !enableFor.isEmpty && !disableFor.isEmpty {
-                return strings.PrivacySettings_LastSeenContactsMinusPlus("\(countForSelectivePeers(enableFor))", "\(countForSelectivePeers(disableFor))").0
+                return strings.PrivacySettings_LastSeenContactsMinusPlus("\(countForSelectivePeers(disableFor))", "\(countForSelectivePeers(enableFor))").0
             } else if !enableFor.isEmpty {
                 return strings.PrivacySettings_LastSeenContactsPlus("\(countForSelectivePeers(enableFor))").0
             } else if !disableFor.isEmpty {
@@ -410,7 +395,7 @@ private func stringForSelectiveSettings(strings: PresentationStrings, settings: 
     }
 }
 
-private func privacyAndSecurityControllerEntries(presentationData: PresentationData, state: PrivacyAndSecurityControllerState, privacySettings: AccountPrivacySettings?, accessChallengeData: PostboxAccessChallengeData, blockedPeerCount: Int?, activeWebsitesCount: Int, hasTwoStepAuth: Bool?, twoStepAuthData: TwoStepVerificationAccessConfiguration?, canAutoarchive: Bool, doubleBottomDisplayTime: Int64?) -> [PrivacyAndSecurityEntry] {
+private func privacyAndSecurityControllerEntries(presentationData: PresentationData, state: PrivacyAndSecurityControllerState, privacySettings: AccountPrivacySettings?, accessChallengeData: PostboxAccessChallengeData, blockedPeerCount: Int?, activeWebsitesCount: Int, hasTwoStepAuth: Bool?, twoStepAuthData: TwoStepVerificationAccessConfiguration?, canAutoarchive: Bool) -> [PrivacyAndSecurityEntry] {
     var entries: [PrivacyAndSecurityEntry] = []
     
     entries.append(.blockedPeers(presentationData.theme, presentationData.strings.Settings_BlockedUsers, blockedPeerCount == nil ? "" : (blockedPeerCount == 0 ? presentationData.strings.PrivacySettings_BlockedPeersEmpty : "\(blockedPeerCount!)")))
@@ -441,10 +426,6 @@ private func privacyAndSecurityControllerEntries(presentationData: PresentationD
         twoStepAuthString = hasTwoStepAuth ? presentationData.strings.PrivacySettings_PasscodeOn : presentationData.strings.PrivacySettings_PasscodeOff
     }
     entries.append(.twoStepVerification(presentationData.theme, presentationData.strings.PrivacySettings_TwoStepAuth, twoStepAuthString, twoStepAuthData))
-    
-    if let doubleBottomDisplayTime = doubleBottomDisplayTime {
-        entries.append(.doubleBottom(presentationData.theme, presentationData.strings.DoubleBottom_Settings_Text, "\(doubleBottomDisplayTime)"))
-    }
     
     entries.append(.privacyHeader(presentationData.theme, presentationData.strings.PrivacySettings_PrivacyTitle))
     if let privacySettings = privacySettings {
@@ -549,7 +530,7 @@ public func privacyAndSecurityController(context: AccountContext, initialSetting
                 return .single(false)
             }
         } else {
-            return .complete()
+            return .single(hasTwoStepAuth)
         }
     }
     
@@ -868,8 +849,6 @@ public func privacyAndSecurityController(context: AccountContext, initialSetting
         }))
     }, openDataSettings: {
         pushControllerImpl?(dataPrivacyController(context: context), true)
-    }, openDoubleBottomFlow: { [weak context] in
-        context?.sharedContext.openDoubleBottomFlow()
     })
     
     actionsDisposable.add(managedUpdatedRecentPeers(accountPeerId: context.account.peerId, postbox: context.account.postbox, network: context.account.network).start())
@@ -886,57 +865,8 @@ public func privacyAndSecurityController(context: AccountContext, initialSetting
     
     let preferencesKey: PostboxViewKey = .preferences(keys: Set([PreferencesKeys.appConfiguration]))
     
-    let accountIsHiddenSignal = context.sharedContext.accountManager.accountRecords()
-    |> map { view -> Bool in
-            view.currentRecord?.attributes.contains(where: { $0 is HiddenAccountAttribute }) ?? false
-    }
-    |> distinctUntilChanged(isEqual: ==)
-    
-    let doubleBottomTimestampSignal = context.account.postbox.transaction({ transaction -> Int64 in
-        var value = transaction.getPreferencesEntry(key: PreferencesKeys.doubleBottomHideTimestamp) as? DoubleBottomHideTimestamp ?? DoubleBottomHideTimestamp.defaultValue
-        if value.timestamp == 0 {
-            value.timestamp = Int64(Date().timeIntervalSince1970) + 60
-            transaction.setPreferencesEntry(key: PreferencesKeys.doubleBottomHideTimestamp, value: value)
-        }
-        return value.timestamp
-    })
-    
-    let doubleBottomDisplayTimeSignal = combineLatest(accountIsHiddenSignal, doubleBottomTimestampSignal) |> mapToSignal { [weak context] accountIsHidden, timestamp -> Signal<Int64?,NoError> in
-        let currentTimestamp = Int64(Date().timeIntervalSince1970)
-        let timeLeft = timestamp - currentTimestamp
-        if timeLeft <= 0 || accountIsHidden {
-            return .single(nil)
-        }
-        return Signal { subscriber in
-            let disposable = MetaDisposable()
-            let queue = Queue.mainQueue()
-            queue.async {
-                subscriber.putNext(timeLeft)
-                let timer = Timer(timeout: 1.0, repeat: true, completion: {
-                    let newTimeStamp = Int64(Date().timeIntervalSince1970)
-                    let timeLeft = timestamp - newTimeStamp
-                    if timeLeft <= 0 {
-                        subscriber.putNext(nil)
-                        subscriber.putCompletion()
-                    } else {
-                        subscriber.putNext(timeLeft)
-                    }
-                }, queue: queue)
-                
-                disposable.set(ActionDisposable {
-                    queue.async {
-                        timer.invalidate()
-                    }
-                })
-                
-                timer.start()
-            }
-            return disposable
-        }
-    }
-    
-    let signal = combineLatest(queue: .mainQueue(), context.sharedContext.presentationData, statePromise.get(), privacySettingsPromise.get(), context.sharedContext.accountManager.noticeEntry(key: ApplicationSpecificNotice.secretChatLinkPreviewsKey()), context.sharedContext.accountManager.sharedData(keys: [ApplicationSpecificSharedDataKeys.contactSynchronizationSettings]), recentPeers(account: context.account), blockedPeersState.get(), webSessionsContext.state, context.sharedContext.accountManager.accessChallengeData(), combineLatest(twoStepAuth.get(), twoStepAuthDataValue.get()), context.account.postbox.combinedView(keys: [preferencesKey]), doubleBottomDisplayTimeSignal)
-    |> map { presentationData, state, privacySettings, noticeView, sharedData, recentPeers, blockedPeersState, activeWebsitesState, accessChallengeData, twoStepAuth, preferences, doubleBottomDisplayTime -> (ItemListControllerState, (ItemListNodeState, Any)) in
+    let signal = combineLatest(queue: .mainQueue(), context.sharedContext.presentationData, statePromise.get(), privacySettingsPromise.get(), context.sharedContext.accountManager.noticeEntry(key: ApplicationSpecificNotice.secretChatLinkPreviewsKey()), context.sharedContext.accountManager.sharedData(keys: [ApplicationSpecificSharedDataKeys.contactSynchronizationSettings]), recentPeers(account: context.account), blockedPeersState.get(), webSessionsContext.state, context.sharedContext.accountManager.accessChallengeData(), combineLatest(twoStepAuth.get(), twoStepAuthDataValue.get()), context.account.postbox.combinedView(keys: [preferencesKey]))
+    |> map { presentationData, state, privacySettings, noticeView, sharedData, recentPeers, blockedPeersState, activeWebsitesState, accessChallengeData, twoStepAuth, preferences -> (ItemListControllerState, (ItemListNodeState, Any)) in
         var canAutoarchive = false
         if let view = preferences.views[preferencesKey] as? PreferencesView, let appConfiguration = view.values[PreferencesKeys.appConfiguration] as? AppConfiguration, let data = appConfiguration.data, let hasAutoarchive = data["autoarchive_setting_available"] as? Bool {
             canAutoarchive = hasAutoarchive
@@ -949,7 +879,7 @@ public func privacyAndSecurityController(context: AccountContext, initialSetting
         
         let controllerState = ItemListControllerState(presentationData: ItemListPresentationData(presentationData), title: .text(presentationData.strings.PrivacySettings_Title), leftNavigationButton: nil, rightNavigationButton: rightNavigationButton, backNavigationButton: ItemListBackButton(title: presentationData.strings.Common_Back), animateChanges: false)
         
-        let listState = ItemListNodeState(presentationData: ItemListPresentationData(presentationData), entries: privacyAndSecurityControllerEntries(presentationData: presentationData, state: state, privacySettings: privacySettings, accessChallengeData: accessChallengeData.data, blockedPeerCount: blockedPeersState.totalCount, activeWebsitesCount: activeWebsitesState.sessions.count, hasTwoStepAuth: twoStepAuth.0, twoStepAuthData: twoStepAuth.1, canAutoarchive: canAutoarchive, doubleBottomDisplayTime: doubleBottomDisplayTime), style: .blocks, ensureVisibleItemTag: focusOnItemTag, crossfadeState: true)
+        let listState = ItemListNodeState(presentationData: ItemListPresentationData(presentationData), entries: privacyAndSecurityControllerEntries(presentationData: presentationData, state: state, privacySettings: privacySettings, accessChallengeData: accessChallengeData.data, blockedPeerCount: blockedPeersState.totalCount, activeWebsitesCount: activeWebsitesState.sessions.count, hasTwoStepAuth: twoStepAuth.0, twoStepAuthData: twoStepAuth.1, canAutoarchive: canAutoarchive), style: .blocks, ensureVisibleItemTag: focusOnItemTag, animateChanges: false)
         
         return (controllerState, (listState, arguments))
     }
